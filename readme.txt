@@ -9,21 +9,21 @@ Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Allow to Login or Share with social networks (specially in china) like QQ, Sina WeiBo, Baidu, Google, Live, DouBan, RenRen, KaiXin. NO 3rd-party!
+Allow to Login/Share with social networks (specially in china): QQ, Sina WeiBo, Baidu, Google, Live, DouBan, RenRen, KaiXin. NO 3rd-party, NO Registration!
 
 == Description ==
 
 **Open Social Login/Share for China 国内社交网站登陆及分享**
 
-Allow to Login or Share with social networks (specially in china) like QQ, Sina WeiBo, Baidu, Google, Live, DouBan, RenRen, KaiXin. NO 3rd-party! Show and Post should be Next.
+Allow to Login or Share with social networks (specially in china) like QQ, Sina WeiBo, Baidu, Google, Live, DouBan, RenRen, KaiXin. NO 3rd-party! NO Registration! **Show and Post** will be the Next.
 
-可用社交网站（特别是国内）如腾讯QQ、新浪微博、百度、谷歌、微软LIVE、豆瓣、人人网、开心网登录网站并绑定帐号的一个插件，无第三方平台、无接口文件冗余、带昵称网址头像等；设置简单，绿色低碳。分享功能可以定制，无需任何第三方或脚本加载，无需第三方脚本的极速加载。
+可用社交网站（特别是国内）如腾讯QQ、新浪微博、百度、谷歌、微软LIVE、豆瓣、人人网、开心网登录网站并绑定帐号的一个插件，无第三方平台、无接口文件冗余、带昵称网址头像等；设置简单，绿色低碳。分享功能可定制，无需任何第三方或脚本加载，无需第三方脚本的极速加载。
 
 适合 **不喜第三方平台接入、不喜任何一个多余脚本、不喜任何一行多余代码、有一定手动折腾能力** 的 WPer。
 
 More information please visit my site: [www.xiaomac.com](http://www.xiaomac.com/201311150.html).
 
-**Make it Socialize, Make it Simplicity, Make it NO 3RD-Party!**
+**Make it Socialize, Make it Simplicity, Make it NO 3RD-Party!, Make it NO Registration!**
 
 **简单流程说明：**
 
@@ -42,12 +42,12 @@ More information please visit my site: [www.xiaomac.com](http://www.xiaomac.com/
 
 1. Upload the plugin folder to the "/wp-content/plugins/" directory of your WordPress site,
 2. Activate the plugin through the 'Plugins' menu in WordPress,
-3. Visit the "Settings\Open Social Login" administration page to setup the plugin. 
+3. Visit the "Settings \ Open Social Setting" administration page to setup the plugin. 
 
 或者:
 
 1. 直接在 WorePress 后台搜索 open-social 在线安装，并启用。
-2. 然后在设置页面“登陆平台设置”配置几个平台的 APP ID、APP KEY 即可。
+2. 然后在设置页面“社交网站设置”配置几个平台的 APP ID、APP KEY 即可。
 3. 卸载也同样方便，直接删除即可，无任何数据库残留！
 
 == Frequently Asked Questions ==
@@ -71,7 +71,7 @@ More information please visit my site: [www.xiaomac.com](http://www.xiaomac.com/
 
 == Screenshots ==
 
-1. Front Page
+1. Sidebar
 2. Widgets
 3. Setting
 

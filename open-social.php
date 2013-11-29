@@ -5,7 +5,7 @@
  * Description: Allow to Login or Share with social networks (specially in china) like QQ, Sina WeiBo, Baidu, Google, Live, DouBan, RenRen, KaiXin. NO 3rd-party!
  * Author: Afly
  * Author URI: http://www.xiaomac.com/
- * Version: 1.0.2
+ * Version: 1.0.3
  * License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * Text Domain: open-social
  * Domain Path: /lang
@@ -593,7 +593,7 @@ function open_options_page() {
 
 //user avatar
 add_filter("get_avatar", "open_get_avatar",10,4);
-function open_get_avatar($avatar, $id_or_email='',$size='40') {
+function open_get_avatar($avatar, $id_or_email='',$size='44') {
 	global $comment;
 	if(is_object($comment)) $id_or_email = $comment->user_id;
 	if(is_object($id_or_email)) $id_or_email = $id_or_email->user_id;
@@ -608,6 +608,8 @@ function open_get_avatar($avatar, $id_or_email='',$size='40') {
 			$out = 'http://himg.bdimg.com/sys/portraitn/item/'.$open_id.'.jpg';
 		}elseif($open_type=='douban'){
 			$out = 'http://img3.douban.com/icon/u'.$open_id.'.jpg';
+		}elseif($open_type=='google'){
+			$out = 'https://profiles.google.com/s2/photos/profile/'.$open_id;
 		}elseif($open_type=='renren'||$open_type=='kaixin'){
 			$out = get_user_meta($id_or_email, 'open_img', true);
 		}
@@ -832,12 +834,12 @@ class open_social_share_widget extends WP_Widget {
 		if($google) open_share_button_show('google',$GLOBALS['open_str']['share_google'],"http://translate.google.com.hk/translate?hl=zh-CN&sl=en&tl=zh-CN&u=%URL%");
 		if($twitter) open_share_button_show('twitter',str_replace('%SHARE_TYPE%','Twitter',$GLOBALS['open_str']['share']),"http://twitter.com/home/?status=%TITLE%:%URL%");
 		if($facebook) open_share_button_show('facebook',str_replace('%SHARE_TYPE%','Facebook',$GLOBALS['open_str']['share']),"http://www.facebook.com/sharer.php?u=%URL%&amp;t=%TITLE%");
-		/*language switch. wp-lang.php needed
+		//language switch. wp-lang.php needed
 		if(WPLANG!='en_US'){
 			open_tool_button_show('en','User Language: English',"?lang=en_US");
 		}else{
 			open_tool_button_show('cn','&#30028;&#38754;&#35821;&#35328;&#65306;&#20013;&#25991;',"?lang=zh_CN");
-		}*/
+		}
 		echo '</div>';
 		echo $after_widget;
 	}

@@ -9,7 +9,7 @@ Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Login/Share with social networks (mainly in China): QQ, Sina WeiBo, Baidu, Google, Live, DouBan, RenRen, KaiXin. No API, NO Registration, NO 3rd-party!
+Login/Share with social networks (mainly in China): QQ, Sina, Baidu, Google, Live, DouBan, RenRen, KaiXin. No API, NO Registration, NO 3rd-Party!
 
 == Description ==
 
@@ -17,17 +17,11 @@ Login/Share with social networks (mainly in China): QQ, Sina WeiBo, Baidu, Googl
 
 Allow to Login or Share with social networks (mainly in china) like QQ, Sina WeiBo, Baidu, Google, Live, DouBan, RenRen, KaiXin. No API! NO Registration! NO 3rd-party! **Show and Post** will be the Next.
 
-可用社交网站（特别是国内）如腾讯QQ、新浪微博、百度、谷歌、微软LIVE、豆瓣、人人网、开心网登录网站并绑定帐号的一个插件，无第三方平台、无接口文件冗余、带昵称网址头像等；设置简单，绿色低碳。分享功能可定制，无需任何第三方或脚本加载，无需第三方脚本的极速加载。
-
-适合 **不喜第三方平台接入、不喜任何一个多余脚本、不喜任何一行多余代码、有一定手动折腾能力** 的 WPer。
-
 More information please visit my site: [www.xiaomac.com](http://www.xiaomac.com/201311150.html).
 
-**Make it Socialize, Make it Simplicity, Make it NO 3RD-Party!, Make it NO Registration!**
+可用社交网站（特别是国内）如腾讯QQ、新浪微博、百度、谷歌、微软LIVE、豆瓣、人人网、开心网登录网站并绑定帐号的一个插件，无第三方平台、无接口文件冗余、带昵称网址头像等；设置简单，绿色低碳。分享功能可定制，无需任何第三方或脚本加载，无需第三方脚本的极速加载。适合 **不喜第三方平台接入、不喜任何一个多余脚本、不喜任何一行多余代码、有一定手动折腾能力** 的 WPer。
 
-**简单流程说明：**
-
-*游客点击登陆按钮（如QQ），登陆并授权后————会自动在后台新建一个用户：*
+游客点击登陆按钮（如QQ），登陆并授权后————会自动在后台新建一个用户：
 
 *   用户名：QQ+OpenID（如：QQ123123123，用户唯一而且不会改变）
 *   密码：系统自动随机生成（理论上用户不会用到后台或密码，他们直接使用QQ号码登陆。目前可以进入资料页，后面打算屏蔽）
@@ -37,6 +31,8 @@ More information please visit my site: [www.xiaomac.com](http://www.xiaomac.com/
 *   主页：t.qq.com/WeiBoID（如果有开通腾讯微博的话，否则为空）
 *   头像：会自动沿用QQ的头像
 *   工具条：默认屏蔽（尽量不对用户提供后台，他们只是管理评论和有自己的真像而已）
+
+**Make it Socialize, Make it Simplicity, Make it NO 3RD-Party!, Make it NO Registration!**
 
 == Installation ==
 

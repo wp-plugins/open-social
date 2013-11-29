@@ -2,7 +2,7 @@
 
 Contributors: playes
 Donate link: https://me.alipay.com/playes
-Tags: china, chinese, afly, social, login, connect, qq, sina, weibo, baidu, google, live, douban, renren, kaixin001, openid, QQ登陆, 新浪微博, 百度, 谷歌, 豆瓣, 人人网, 开心网, 登录, 连接, 注册
+Tags: china, chinese, afly, social, login, connect, qq, sina, weibo, baidu, google, live, douban, renren, kaixin001, openid, QQ登陆, 新浪微博, 百度, 谷歌, 豆瓣, 人人网, 开心网, 登录, 连接, 注册, 分享
 Requires at least: 3.0
 Tested up to: 3.7.1
 Stable tag: 1.0.2
@@ -19,9 +19,11 @@ Allow to Login or Share with social networks (mainly in china) like QQ, Sina Wei
 
 More information please visit my site: [www.xiaomac.com](http://www.xiaomac.com/201311150.html).
 
-可用社交网站（特别是国内）如腾讯QQ、新浪微博、百度、谷歌、微软LIVE、豆瓣、人人网、开心网登录网站并绑定帐号的一个插件，无第三方平台、无接口文件冗余、带昵称网址头像等；设置简单，绿色低碳。分享功能可定制，无需任何第三方或脚本加载，无需第三方脚本的极速加载。适合 **不喜第三方平台接入、不喜任何一个多余脚本、不喜任何一行多余代码、有一定手动折腾能力** 的 WPer。
+可用社交网站（特别是国内）如腾讯QQ、新浪微博、百度、谷歌、微软LIVE、豆瓣、人人网、开心网绑定登录或分享的一个插件，无第三方平台、无接口文件冗余、无任何多余脚本加载、带昵称网址头像等、可设置右侧小工具；设置简单，绿色低碳。
 
-游客点击登陆按钮（如QQ），登陆并授权后————会自动在后台新建一个用户：
+适合人群：**不喜第三方平台接入、不喜任何一个多余脚本、不喜任何一行多余代码、有一定手动折腾能力**。
+
+游客点击登陆按钮（如QQ），登陆并授权后，系统会自动在后台新建一个用户：
 
 *   用户名：QQ+OpenID（如：QQ123123123，用户唯一而且不会改变）
 *   密码：系统自动随机生成（理论上用户不会用到后台或密码，他们直接使用QQ号码登陆。目前可以进入资料页，后面打算屏蔽）
@@ -32,7 +34,7 @@ More information please visit my site: [www.xiaomac.com](http://www.xiaomac.com/
 *   头像：会自动沿用QQ的头像
 *   工具条：默认屏蔽（尽量不对用户提供后台，他们只是管理评论和有自己的真像而已）
 
-**Make it Socialize, Make it Simplicity, Make it NO 3RD-Party!, Make it NO Registration!**
+更多信息可查看: [www.xiaomac.com](http://www.xiaomac.com/201311150.html).
 
 == Installation ==
 

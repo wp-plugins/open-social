@@ -660,10 +660,10 @@ function open_social_style() {
 	wp_enqueue_script( 'open_social_js');
 }
 function open_login_button_show($icon_type,$icon_title){
-	echo "<div class=\"login_button login_icon_$icon_type\" onclick=\"login_button_click('$login_icon')\" title=\"$icon_title\"></div>";
+	echo "<div class=\"login_button login_icon_$icon_type\" onclick=\"login_button_click('$icon_type')\" title=\"$icon_title\"></div>";
 }
 function open_share_button_show($icon_type,$icon_title,$icon_link){
-	echo "<div class=\"share_button share_icon_$icon_type\" onclick=\"share_button_click('$icon_link')\" title=\"$icon_title\"></div>";
+	echo "<div class=\"share_button share_icon_$icon_type\" onclick=\"share_button_click('$icon_type')\" title=\"$icon_title\"></div>";
 }
 function open_tool_button_show($icon_type,$icon_title,$icon_link){
 	echo "<div class=\"share_button share_icon_$icon_type\" onclick=\"location.href='$icon_link';\" title=\"$icon_title\"></div>";

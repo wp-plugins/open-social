@@ -9,5 +9,5 @@ function share_button_click(link){
 }
 
 jQuery(function() {
-    jQuery( document ).tooltip({ show: { effect: "blind", duration: 200 } });
+    jQuery( document ).tooltip({ position: { my: "left top+5", at: "left bottom" }, show: { effect: "blind", duration: 200 } });
 });

@@ -16,7 +16,7 @@ body .ui-tooltip {
 	/*width: 250px;*/
 }
 .login_button { 
-    background:url(login_button.png) no-repeat transparent; 
+    background:url(images/login_button.png) no-repeat transparent; 
 	width: 32px;
 	height: 32px;
 	line-height: 32px;
@@ -99,7 +99,7 @@ body .ui-tooltip {
 	width: 250px;
 }
 .share_button { 
-    background:url(share_button.png) no-repeat transparent; 
+    background:url(images/share_button.png) no-repeat transparent; 
 	width: 20px;
 	height: 20px;
 	line-height: 20px;
@@ -200,3 +200,15 @@ body .ui-tooltip {
 .share_icon_comment{
 	background-position: 0px -882px;
 }
+
+.lang_button { 
+	width: 20px;
+	height: 20px;
+	line-height: 20px;
+	padding-right: 5px;
+	cursor:pointer;
+	display:inline-block;
+	display:-moz-inline-stack;
+	zoom:1;
+	*display:inline;
+} 

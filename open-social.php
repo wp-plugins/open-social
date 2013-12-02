@@ -5,7 +5,7 @@
  * Description: Allow to Login or Share with social networks (specially in china) like QQ, Sina WeiBo, Baidu, Google, Live, DouBan, RenRen, KaiXin. NO 3rd-party!
  * Author: Afly
  * Author URI: http://www.xiaomac.com/
- * Version: 1.0.3
+ * Version: 1.0.4
  * License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * Text Domain: open-social
  * Domain Path: /lang
@@ -14,6 +14,7 @@
 include_once( 'setting.php' );
 if (!session_id()) session_start();
 
+//init
 add_action('init', 'open_init', 1);
 function open_init() {
 	load_plugin_textdomain( 'open-social', '', dirname( plugin_basename( __FILE__ ) ) . '/lang' );
@@ -39,6 +40,7 @@ function open_init() {
 		'share_google'	=> __('Google Translation','open-social'),
 		'setting_button'	=> __('Settings','open-social'),
 		'setting_menu'		=> __('Open Social Setting','open-social'),
+		'language_switch'	=> __('Language Switch','open-social'),
 		'callback'			=> __('CALLBACK','open-social'),
 		'widget_title'		=> __('Open Social Login', 'open-social'),
 		'widget_name'		=> __('Howdy', 'open-social'),
@@ -69,7 +71,7 @@ function open_init() {
 		}elseif(OPEN_TYPE=='kaixin'){
 			$os = new KAIXIN_CLASS();
 		}else{
-			return;
+			exit();
 		}
 		if ($_GET['action'] == 'login') {
 			$os -> open_login();
@@ -83,6 +85,31 @@ function open_init() {
 		}
 	} 
 } 
+
+//lang
+add_filter( 'locale', 'open_social_locale' );
+function open_social_locale( $lang ) {
+	if ( isset( $_GET['open_lang'] ) && strpos($_GET['open_lang'], "_") ) {
+		$_SESSION['WPLANG'] = $_GET['open_lang'];
+		header('Location:'.$_SERVER['PHP_SELF']);
+		exit();
+	} else {
+		if( isset($_SESSION['WPLANG']) && strpos($_SESSION['WPLANG'], "_") ) {
+			return $_SESSION['WPLANG'];
+		} else {
+			if ( isset( $_SERVER["HTTP_ACCEPT_LANGUAGE"] ) ) {
+				$languages = strtolower( $_SERVER["HTTP_ACCEPT_LANGUAGE"] );
+				$languages = explode( ",", $languages );
+				$languages = explode( "-", $languages[0] );
+				$_SESSION['WPLANG'] = $_SESSION['WPLANG_LOCALE'] = strtolower($languages[0]) . '_' . strtoupper($languages[1]);
+				return $_SESSION['WPLANG'];
+			} else {
+				$_SESSION['WPLANG'] = $lang;
+				return $lang;
+			}
+		}
+	} 
+}
 
 class QQ_CLASS {
 	function open_login() {
@@ -506,7 +533,11 @@ function open_settings_link($links) {
 //setting menu
 add_action('admin_menu', 'open_options_add_page');
 function open_options_add_page() {
-	add_options_page($GLOBALS['open_str']['setting_menu'], $GLOBALS['open_str']['setting_menu'], 'manage_options', plugin_basename(__FILE__), 'open_options_page');
+    if ( ! current_user_can( 'manage_options' ) ) {
+	    remove_menu_page( 'index.php' ); 
+    }else{
+		add_options_page($GLOBALS['open_str']['setting_menu'], $GLOBALS['open_str']['setting_menu'], 'manage_options', plugin_basename(__FILE__), 'open_options_page');
+	}
 }
 
 function open_options_page() {
@@ -665,13 +696,14 @@ function open_login_button_show($icon_type,$icon_title){
 	echo "<div class=\"login_button login_icon_$icon_type\" onclick=\"login_button_click('$icon_type')\" title=\"$icon_title\"></div>";
 }
 function open_share_button_show($icon_type,$icon_title,$icon_link){
-	echo "<div class=\"share_button share_icon_$icon_type\" onclick=\"share_button_click('$icon_type')\" title=\"$icon_title\"></div>";
+	echo "<div class=\"share_button share_icon_$icon_type\" onclick=\"share_button_click('$icon_link')\" title=\"$icon_title\"></div>";
 }
-function open_tool_button_show($icon_type,$icon_title,$icon_link){
+function open_tool_button_show($icon_type,$icon_title,$icon_link){//local
 	echo "<div class=\"share_button share_icon_$icon_type\" onclick=\"location.href='$icon_link';\" title=\"$icon_title\"></div>";
 }
-//add_action('wp_footer', 'open_script_footer');
-function open_script_footer(){}
+function open_lang_button_show($icon_type,$icon_title,$icon_link){//world
+	echo "<div class=\"lang_button\" onclick=\"location.href='$icon_link';\" title=\"$icon_title\"><img src=\"".plugins_url('images/lang_button/'.$icon_type.'.gif', __FILE__)."\" width=\"20\" height=\"20\" /></div>";
+}
 
 //widget
 add_action('widgets_init', create_function('', 'return register_widget("open_social_login_widget");'));
@@ -834,11 +866,14 @@ class open_social_share_widget extends WP_Widget {
 		if($google) open_share_button_show('google',$GLOBALS['open_str']['share_google'],"http://translate.google.com.hk/translate?hl=zh-CN&sl=en&tl=zh-CN&u=%URL%");
 		if($twitter) open_share_button_show('twitter',str_replace('%SHARE_TYPE%','Twitter',$GLOBALS['open_str']['share']),"http://twitter.com/home/?status=%TITLE%:%URL%");
 		if($facebook) open_share_button_show('facebook',str_replace('%SHARE_TYPE%','Facebook',$GLOBALS['open_str']['share']),"http://www.facebook.com/sharer.php?u=%URL%&amp;t=%TITLE%");
-		//language switch. wp-lang.php needed
-		if(WPLANG!='en_US'){
-			open_tool_button_show('en','User Language: English',"?lang=en_US");
-		}else{
-			open_tool_button_show('cn','&#30028;&#38754;&#35821;&#35328;&#65306;&#20013;&#25991;',"?lang=zh_CN");
+		if( isset($_SESSION['WPLANG']) && strpos($_SESSION['WPLANG'],'en')===false ){
+			open_tool_button_show('en','User Language: English',"?open_lang=en_US");
+		}else if(WPLANG=='zh_CN'){
+			open_tool_button_show('cn',$GLOBALS['language_switch'].' '.WPLANG,"?open_lang=".WPLANG);
+		}else if(WPLANG!=''){
+			open_lang_button_show(WPLANG,$GLOBALS['language_switch'].' '.WPLANG,"?open_lang=".WPLANG);			
+		}else if(isset($_SESSION['WPLANG_LOCALE'])){
+			open_lang_button_show($_SESSION['WPLANG_LOCALE'],$GLOBALS['language_switch'].' '.$_SESSION['WPLANG_LOCALE'],"?open_lang=".$_SESSION['WPLANG_LOCALE']);			
 		}
 		echo '</div>';
 		echo $after_widget;

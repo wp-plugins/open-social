@@ -5,7 +5,7 @@ Donate link: https://me.alipay.com/playes
 Tags: china, chinese, afly, social, login, connect, qq, sina, weibo, baidu, google, live, douban, renren, kaixin001, openid, QQ登陆, 新浪微博, 百度, 谷歌, 豆瓣, 人人网, 开心网, 登录, 连接, 注册, 分享
 Requires at least: 3.0
 Tested up to: 3.7.1
-Stable tag: 1.0.4
+Stable tag: 1.0.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -74,6 +74,11 @@ More information please visit my site: [www.xiaomac.com](http://www.xiaomac.com/
 3. Setting
 
 == Changelog ==
+
+= 1.0.5 =
+* 增加参数设置、优化设置页面
+* 增加入口，用户更容易修改邮箱
+* 修正头像BUG，细节优化
 
 = 1.0.4 =
 * add language switcher

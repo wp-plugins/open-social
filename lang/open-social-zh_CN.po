@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2013-12-07 17:17+0800\n"
+"PO-Revision-Date: 2013-12-07 17:20+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: zh_CN\n"
@@ -168,7 +168,7 @@ msgstr "或者帮我挂个链接"
 
 #: open-social.php:61
 msgid "Or give me Five"
-msgstr "给我投个票"
+msgstr "或者给我投个票"
 
 #: open-social.php:62
 msgid "Display Login Buttons"

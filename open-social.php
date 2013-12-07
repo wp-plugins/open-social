@@ -5,7 +5,7 @@
  * Description: Allow to Login or Share with social networks (specially in china) like QQ, Sina WeiBo, Baidu, Google, Live, DouBan, RenRen, KaiXin. NO 3rd-party!
  * Author: Afly
  * Author URI: http://www.xiaomac.com/
- * Version: 1.0.5
+ * Version: 1.0.6
  * License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * Text Domain: open-social
  * Domain Path: /lang
@@ -544,7 +544,7 @@ register_activation_hook( __FILE__, 'open_social_activation' );
 function open_social_activation(){
 	$osop = get_option('osop');
 	if(!$osop) update_option('osop', array(
-		'comment_form'		=> 2,
+		'comment_form'		=> 1,
 		'login_page'		=> 0,
 		'share_sina_user' 	=> '',
 		'share_qqt_appkey'	=> '',
@@ -763,8 +763,8 @@ function open_get_avatar($avatar, $id_or_email='',$size='44') {
 //login form
 $osop = get_option('osop');
 if($osop && $osop['login_page']==1) add_action('login_form', 'open_social_login_form');
-if($osop && $osop['comment_form']==1) add_action('comment_form_before', 'open_social_login_form');
-if($osop && $osop['comment_form']==2) add_action('comment_form_after', 'open_social_login_form');
+if($osop && $osop['comment_form']==1) add_action('comment_form_top', 'open_social_login_form');
+if($osop && $osop['comment_form']==2) add_action('comment_form', 'open_social_login_form');
 function open_social_login_form($login_type='guest') {
 	if (!is_user_logged_in() || $login_type=='bind'){
 		echo '<div class="login_box">';
@@ -898,7 +898,7 @@ class open_social_login_widget extends WP_Widget {
 		if(is_user_logged_in()){
 			$current_user = wp_get_current_user();
 			$m = $current_user->user_email;
-			echo '<a href="'.get_edit_user_link($current_user->ID).'">'.get_avatar($current_user->ID, 50).'</a><br/>';
+			echo '<a href="'.$current_user->user_url.'" target="_blank">'.get_avatar($current_user->ID, 50).'</a><br/>';
 			if(strpos($m,'@t.qq.com')||strpos($m,'@weibo.com')||strpos($m,'@baidu.com')||strpos($m,'@douban.com')||strpos($m,'@renren.com')||strpos($m,'@kaixin.com')) echo '<a href="'.get_edit_user_link($current_user->ID).'">'.$GLOBALS['open_str']['edit_fake_email'].'</a><br/>';
 			if(current_user_can('manage_options')) echo '<a href="'.admin_url().'">';
 			echo $current_user->display_name;
@@ -994,8 +994,8 @@ class open_social_share_widget extends WP_Widget {
 		if($qqt) open_share_button_show('qqt',str_replace('%SHARE_TYPE%',$GLOBALS['open_str']['share_qqt'],$GLOBALS['open_str']['share']),"http://share.v.t.qq.com/index.php?c=share&amp;a=index&url=%URL%&title=%TITLE%&appkey=".$osop['share_qqt_appkey']);
 		if($youdao) open_share_button_show('youdao',str_replace('%SHARE_TYPE%',$GLOBALS['open_str']['share_youdao'],$GLOBALS['open_str']['share']),"http://note.youdao.com/memory/?url=%URL%&title=%TITLE%&sumary=&pic=&product=");
 		if($weixin) open_share_button_show('weixin',str_replace('%SHARE_TYPE%',$GLOBALS['open_str']['share_weixin'],$GLOBALS['open_str']['share']),"http://chart.apis.google.com/chart?chs=400x400&cht=qr&chld=L|5&chl=%URL%");
-		if($email) open_share_button_show('email',$GLOBALS['open_str']['share_email'],"http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=".$osop['share_qq_email']);
-		if($qq) open_share_button_show('qq',$GLOBALS['open_str']['share_qq'],"http://sighttp.qq.com/authd?IDKEY=".$osop['share_qq_talk']);
+		if($email && $osop['share_qq_email']) open_share_button_show('email',$GLOBALS['open_str']['share_email'],"http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=".$osop['share_qq_email']);
+		if($qq && $osop['share_qq_talk']) open_share_button_show('qq',$GLOBALS['open_str']['share_qq'],"http://sighttp.qq.com/authd?IDKEY=".$osop['share_qq_talk']);
 		if($google) open_share_button_show('google',$GLOBALS['open_str']['share_google'],"http://translate.google.com.hk/translate?hl=zh-CN&sl=en&tl=zh-CN&u=%URL%");
 		if($twitter) open_share_button_show('twitter',str_replace('%SHARE_TYPE%',$GLOBALS['open_str']['share_twitter'],$GLOBALS['open_str']['share']),"http://twitter.com/home/?status=%TITLE%:%URL%");
 		if($facebook) open_share_button_show('facebook',str_replace('%SHARE_TYPE%',$GLOBALS['open_str']['share_facebook'],$GLOBALS['open_str']['share']),"http://www.facebook.com/sharer.php?u=%URL%&amp;t=%TITLE%");

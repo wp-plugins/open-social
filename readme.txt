@@ -5,7 +5,7 @@ Donate link: https://me.alipay.com/playes
 Tags: china, chinese, afly, social, login, connect, qq, sina, weibo, baidu, google, live, douban, renren, kaixin001, openid, QQ登陆, 新浪微博, 百度, 谷歌, 豆瓣, 人人网, 开心网, 登录, 连接, 注册, 分享
 Requires at least: 3.0
 Tested up to: 3.7.1
-Stable tag: 1.0.5
+Stable tag: 1.0.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -34,7 +34,7 @@ More information please visit my site: [www.xiaomac.com](http://www.xiaomac.com/
 *   头像：会自动沿用QQ的头像
 *   工具条：默认屏蔽（尽量不对用户提供后台，他们只是管理评论和有自己的真像而已）
 
-更多信息可查看: [www.xiaomac.com](http://www.xiaomac.com/201311150.html).
+更多信息可查看: [www.xiaomac.com](http://www.xiaomac.com/201311150.html)，小站刚起步，可以的话给我留个链接，谢谢了：）
 
 == Installation ==
 
@@ -74,6 +74,9 @@ More information please visit my site: [www.xiaomac.com](http://www.xiaomac.com/
 3. Setting
 
 == Changelog ==
+
+= 1.0.6 =
+* 更新了一下设定
 
 = 1.0.5 =
 * 增加参数设置、优化设置页面

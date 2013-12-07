@@ -84,15 +84,15 @@ More information please visit my site: [www.xiaomac.com](http://www.xiaomac.com/
 * 修正头像BUG，细节优化
 
 = 1.0.4 =
-* add language switcher
-* all png files go to images directory
-* a little bug fixed
+* 增加语言切换
+* 图片归类到一个目录
+* 一些小修正
 
 = 1.0.3 =
-* add photo of google user
+* 增加谷歌用户的头像
 
 = 1.0.2 =
-* become a brand new plugin, not only LOGIN thing.
+* 全新改版
 
 = 1.0.1 =
 * 增加多LIVE、豆瓣、人人网、开心网

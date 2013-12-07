@@ -55,9 +55,11 @@ function open_init() {
 		'err_other_email'		=> __('Your EMAIL has been registered by other user.','open-social'),
 		'setting_menu_adv'		=> __('Account Setting','open-social'),
 		'about_title'			=> __('About this plugin','open-social'),
+		'about_info'			=> __('if you like this plugin','open-social'),
 		'about_alipay'			=> __('Buy me a drink','open-social'),
 		'about_link'			=> __('Or leave me a link.','open-social'),
-		'login_button_position'	=> __('Display Login Buttons','open-social'),
+		'about_plugin'			=> __('Or give me Five','open-social'),
+		'login_button_position'		=> __('Display Login Buttons','open-social'),
 		'osop_comment_form_before'	=> __('Before Comment Form','open-social'),
 		'osop_comment_form_after'	=> __('After Comment Form','open-social'),
 		'osop_comment_form_none'	=> __('None','open-social'),
@@ -66,10 +68,10 @@ function open_init() {
 		'osop_share_sina_user'		=> __('Share SinaWeibo @UserID','open-social'),
 		'osop_share_qqt_appkey'		=> __('Share QQ Weibo AppKey','open-social'),
 		'osop_share_qq_email'		=> __('QQ EmailMe Code','open-social'),
-		'osop_share_qq_talk'		=> __('QQ TalkMe Code','open-social'),
+		'osop_share_qq_talk'		=> __('QQ ContactMe Link','open-social'),
 		'extra_setting'				=> __('Extra Setting','open-social'),
 		'osop_delete_setting'		=> __('Auto delete Configuration Above after Uninstallation. NOT RECOMMENDED!','open-social'),
-		'edit_fake_email'			=> __('UnFake Your Email','open-social')
+		'edit_fake_email'			=> __('UnFake Your Email','open-social'),
 	);
 	if (isset($_GET['connect'])) {
 		define('OPEN_TYPE',$_GET['connect']);
@@ -636,22 +638,22 @@ function open_options_page() {
 		<tr valign="top">
 		<th scope="row"><?php echo $GLOBALS['open_str']['share_button_account']?></th>
 		<td><input name="osop[share_sina_user]" id="osop[share_sina_user]" class="regular-text" value="<?php echo $osop['share_sina_user']?>" />
-			<?php echo $GLOBALS['open_str']['osop_share_sina_user']?><br/>
+			<a href="http://open.weibo.com/sharebutton" target="_blank"><?php echo $GLOBALS['open_str']['osop_share_sina_user']?></a><br/>
 			<input name="osop[share_qqt_appkey]" id="osop[share_qqt_appkey]" class="regular-text" value="<?php echo $osop['share_qqt_appkey']?>" />
-			<?php echo $GLOBALS['open_str']['osop_share_qqt_appkey']?> <br/>
+			<a href="http://dev.t.qq.com/websites/share/" target="_blank"><?php echo $GLOBALS['open_str']['osop_share_qqt_appkey']?></a> <br/>
 			<input name="osop[share_qq_email]" id="osop[share_qq_email]" class="regular-text" value="<?php echo $osop['share_qq_email']?>" />
-			<?php echo $GLOBALS['open_str']['osop_share_qq_email']?> <br/>
+			<a href="http://open.mail.qq.com/" target="_blank"><?php echo $GLOBALS['open_str']['osop_share_qq_email']?></a> <br/>
 			<input name="osop[share_qq_talk]" id="osop[share_qq_talk]" class="regular-text" value="<?php echo $osop['share_qq_talk']?>" />
-			<?php echo $GLOBALS['open_str']['osop_share_qq_talk']?> 
+			<a href="http://shang.qq.com/widget/set.php" target="_blank"><?php echo $GLOBALS['open_str']['osop_share_qq_talk']?></a> 
 		</td>
 		</tr>
 		<tr valign="top">
 		<th scope="row"><?php echo $GLOBALS['open_str']['extra_setting']?></th>
 		<td><label for="osop[delete_setting]"><input name="osop[delete_setting]" id="osop[delete_setting]" type="checkbox" value="1" <?php checked($osop['delete_setting'],1);?> /> <?php echo $GLOBALS['open_str']['osop_delete_setting']?></label>
+			<?php submit_button();?>
 		</td>
 		</tr>
 		</table>
-		<?php submit_button();?>
 		</form>
 	</div>
 
@@ -719,16 +721,19 @@ function open_options_page() {
 		<td><input name="KX_AKEY" value="<?php echo KX_AKEY?>" class="regular-text" /> API Key <br/>
 			<input name="KX_SKEY" value="<?php echo KX_SKEY?>" class="regular-text" /> Secret Key <br/>
 			<input name="KX_BACK" value="<?php echo KX_BACK?>" class="regular-text code" placeholder="<?php echo home_url('/')?>" />
-			<?php echo $GLOBALS['open_str']['callback']?> <br/></td>
+			<?php echo $GLOBALS['open_str']['callback']?> <br/>
+			<?php submit_button();?>
+		</td>
 		</tr>
 		</table>
-		<?php submit_button();?>
 		</form>
 	</div>
 	<div class="wrap">
 		<h2><?php echo $GLOBALS['open_str']['about_title']?></h2>
-		<p><a href="https://me.alipay.com/playes" target="_blank"><?php echo $GLOBALS['open_str']['about_alipay']?></a>:P 
-		<a href="http://www.xiaomac.com/" target="_blank"><?php echo $GLOBALS['open_str']['about_link']?></a>:)</p>
+		<p><?php echo $GLOBALS['open_str']['about_info']?>, 
+		<a href="https://me.alipay.com/playes" target="_blank"><?php echo $GLOBALS['open_str']['about_alipay']?></a>, 
+		<a href="http://www.xiaomac.com/" target="_blank"><?php echo $GLOBALS['open_str']['about_link']?></a>,  
+		<a href="http://wordpress.org/plugins/open-social/" target="_blank"><?php echo $GLOBALS['open_str']['about_plugin']?></a> :)</p>
 		<p><code>&lt;a href=&quot;http://www.xiaomac.com/&quot; target=&quot;_blank&quot;&gt;XiaoMac&lt;/a&gt;</code></p>
 	</div>
 	<?php
@@ -995,7 +1000,7 @@ class open_social_share_widget extends WP_Widget {
 		if($youdao) open_share_button_show('youdao',str_replace('%SHARE_TYPE%',$GLOBALS['open_str']['share_youdao'],$GLOBALS['open_str']['share']),"http://note.youdao.com/memory/?url=%URL%&title=%TITLE%&sumary=&pic=&product=");
 		if($weixin) open_share_button_show('weixin',str_replace('%SHARE_TYPE%',$GLOBALS['open_str']['share_weixin'],$GLOBALS['open_str']['share']),"http://chart.apis.google.com/chart?chs=400x400&cht=qr&chld=L|5&chl=%URL%");
 		if($email && $osop['share_qq_email']) open_share_button_show('email',$GLOBALS['open_str']['share_email'],"http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=".$osop['share_qq_email']);
-		if($qq && $osop['share_qq_talk']) open_share_button_show('qq',$GLOBALS['open_str']['share_qq'],"http://sighttp.qq.com/authd?IDKEY=".$osop['share_qq_talk']);
+		if($qq && $osop['share_qq_talk']) open_share_button_show('qq',$GLOBALS['open_str']['share_qq'],$osop['share_qq_talk']);
 		if($google) open_share_button_show('google',$GLOBALS['open_str']['share_google'],"http://translate.google.com.hk/translate?hl=zh-CN&sl=en&tl=zh-CN&u=%URL%");
 		if($twitter) open_share_button_show('twitter',str_replace('%SHARE_TYPE%',$GLOBALS['open_str']['share_twitter'],$GLOBALS['open_str']['share']),"http://twitter.com/home/?status=%TITLE%:%URL%");
 		if($facebook) open_share_button_show('facebook',str_replace('%SHARE_TYPE%',$GLOBALS['open_str']['share_facebook'],$GLOBALS['open_str']['share']),"http://www.facebook.com/sharer.php?u=%URL%&amp;t=%TITLE%");

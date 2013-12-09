@@ -5,7 +5,7 @@ function login_button_click(id){
 function share_button_click(link){
 	var url = encodeURIComponent(location.href);
 	var title = encodeURIComponent(document.title);
-	window.open(link.replace("%URL%",url).replace("%TITLE%",title),'xmOpenWindow','width=550,height=400,menubar=0,scrollbars=1,resizable=1,status=1,titlebar=0,toolbar=0,location=1');
+	window.open(link.replace("%URL%",url).replace("%TITLE%",title),'xmOpenWindow','width=600,height=480,menubar=0,scrollbars=1,resizable=1,status=1,titlebar=0,toolbar=0,location=1');
 }
 
 jQuery(function() {

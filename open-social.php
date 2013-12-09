@@ -5,7 +5,7 @@
  * Description: Allow to Login or Share with social networks (specially in china) like QQ, Sina WeiBo, Baidu, Google, Live, DouBan, RenRen, KaiXin. NO 3rd-party!
  * Author: Afly
  * Author URI: http://www.xiaomac.com/
- * Version: 1.0.6
+ * Version: 1.0.7
  * License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * Text Domain: open-social
  * Domain Path: /lang
@@ -174,7 +174,7 @@ class QQ_CLASS {
 			'nickname' => $nickname,
 			'display_name' => $nickname,
 			'user_url' => $name?'http://t.qq.com/'.$name:'',
-			'user_email' => ($name?$name:$_SESSION['open_id']).'@t.qq.com'//fake
+			'user_email' => ($name?$name:strtolower($_SESSION['open_id'])).'@t.qq.com'//fake
 		);
 	}
 } 
@@ -541,6 +541,15 @@ function open_connect_http($url, $postfields='', $method='GET', $headers=array()
 	return $json_r;
 }
 
+function open_check_url($url){
+	$headers = @get_headers($url);
+	if (!preg_match("|200|", $headers[0])) {
+		return FALSE;
+	} else {
+		return TRUE;
+	}
+}
+
 //activate
 register_activation_hook( __FILE__, 'open_social_activation' );
 function open_social_activation(){
@@ -741,24 +750,30 @@ function open_options_page() {
 
 //user avatar
 add_filter("get_avatar", "open_get_avatar",10,4);
-function open_get_avatar($avatar, $id_or_email='',$size='44') {
+function open_get_avatar($avatar, $id_or_email='',$size='80') {
 	global $comment;
-	if(!preg_match("/^\d+$/",$id_or_email) && is_object($comment)) $id_or_email = $comment->user_id;
+	if($id_or_email){
+		if(is_object($id_or_email)) $id_or_email = $id_or_email->user_id;
+	}else{
+		if(is_object($comment)) $id_or_email = $comment->user_id;
+	}
 	if($id_or_email) $open_type = get_user_meta($id_or_email, 'open_type', true);
-	if($open_type){
+	if(isset($open_type)){
 		$open_id = get_user_meta($id_or_email, 'open_id', true);
 		if($open_type=='qq'){
-			$out = 'http://q.qlogo.cn/qqapp/100599436/'.$open_id.'/40';
+			$out = 'http://q.qlogo.cn/qqapp/100599436/'.$open_id.'/100';//40
 		}elseif($open_type=='sina'){
-			$out = 'http://tp3.sinaimg.cn/'.$open_id.'/50/1.jpg';
+			$out = 'http://tp3.sinaimg.cn/'.$open_id.'/180/1.jpg';//50
 		}elseif($open_type=='baidu'){
-			$out = 'http://himg.bdimg.com/sys/portraitn/item/'.$open_id.'.jpg';
+			$out = 'http://himg.bdimg.com/sys/portrait/item/'.$open_id.'.jpg';//portraitn
 		}elseif($open_type=='douban'){
-			$out = 'http://img3.douban.com/icon/u'.$open_id.'.jpg';
+			$out = 'http://img3.douban.com/icon/ul'.$open_id.'.jpg';//u
 		}elseif($open_type=='google'){
-			$out = 'https://profiles.google.com/s2/photos/profile/'.$open_id;
+			$out = 'http://www.google.com/s2/photos/profile/'.$open_id.'?sz=100';
 		}elseif($open_type=='renren'||$open_type=='kaixin'){
 			$out = get_user_meta($id_or_email, 'open_img', true);
+			if($open_type=='kaixin') $out = str_replace('/50_','/120_',$out);
+			if($open_type=='renren') $out = str_replace('/tiny_','/head_',$out);
 		}
 		if(isset($open_id) && isset($out)) $avatar = "<img alt='' src='{$out}' class='avatar avatar-{$size}' height='{$size}' width='{$size}' />";
 	}
@@ -767,9 +782,9 @@ function open_get_avatar($avatar, $id_or_email='',$size='44') {
 
 //login form
 $osop = get_option('osop');
-if($osop && $osop['login_page']==1) add_action('login_form', 'open_social_login_form');
-if($osop && $osop['comment_form']==1) add_action('comment_form_top', 'open_social_login_form');
-if($osop && $osop['comment_form']==2) add_action('comment_form', 'open_social_login_form');
+if($osop && isset($osop['login_page']) && $osop['login_page']==1) add_action('login_form', 'open_social_login_form');
+if($osop && isset($osop['comment_form']) && $osop['comment_form']==1) add_action('comment_form_top', 'open_social_login_form');
+if($osop && isset($osop['comment_form']) && $osop['comment_form']==2) add_action('comment_form', 'open_social_login_form');
 function open_social_login_form($login_type='guest') {
 	if (!is_user_logged_in() || $login_type=='bind'){
 		echo '<div class="login_box">';
@@ -796,6 +811,7 @@ function open_social_hide_option(){
 				$('#screen-meta-links').hide();
 				$('h3:not(:eq(2))').hide();
 				$('table.form-table:not(:eq(2))').hide();
+				if(/updated=1/.test(window.location.href))setTimeout(function(){location.href='/';},1200);
 			});</script>";
 	}
 }
@@ -903,11 +919,9 @@ class open_social_login_widget extends WP_Widget {
 		if(is_user_logged_in()){
 			$current_user = wp_get_current_user();
 			$m = $current_user->user_email;
-			echo '<a href="'.$current_user->user_url.'" target="_blank">'.get_avatar($current_user->ID, 50).'</a><br/>';
+			echo '<a href="'.(current_user_can('manage_options')?admin_url():get_edit_user_link($current_user->ID)).'">'.get_avatar($current_user->ID).'</a><br/>';
 			if(strpos($m,'@t.qq.com')||strpos($m,'@weibo.com')||strpos($m,'@baidu.com')||strpos($m,'@douban.com')||strpos($m,'@renren.com')||strpos($m,'@kaixin.com')) echo '<a href="'.get_edit_user_link($current_user->ID).'">'.$GLOBALS['open_str']['edit_fake_email'].'</a><br/>';
-			if(current_user_can('manage_options')) echo '<a href="'.admin_url().'">';
-			echo $current_user->display_name;
-			if(current_user_can('manage_options')) echo '</a>';
+			echo '<a href="'.$current_user->user_url.'" target="_blank">'.$current_user->display_name.'</a>';
 			echo ' (<a href="'.wp_logout_url(get_permalink()).'">'.__('Log Out').'</a>)';
 		}else{
 			if($qq) open_login_button_show('qq',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['qq'],$GLOBALS['open_str']['login']));

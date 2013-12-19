@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Open Social for China package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Open Social for China 1.0.6\n"
+"Project-Id-Version: Open Social for China 1.0.8\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/open-social\n"
-"POT-Creation-Date: 2013-12-07 08:57:27+00:00\n"
+"POT-Creation-Date: 2013-12-19 07:50:49+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -92,7 +92,7 @@ msgstr ""
 msgid "Facebook"
 msgstr ""
 
-#: open-social.php:43 open-social.php:575
+#: open-social.php:43 open-social.php:602
 msgid "Settings"
 msgstr ""
 
@@ -169,7 +169,7 @@ msgid "Or give me Five"
 msgstr ""
 
 #: open-social.php:62
-msgid "Display Login Buttons"
+msgid "Login Buttons"
 msgstr ""
 
 #: open-social.php:63
@@ -189,27 +189,27 @@ msgid "Login Page"
 msgstr ""
 
 #: open-social.php:67
-msgid "Share Button Account"
+msgid "Share Button"
 msgstr ""
 
 #: open-social.php:68
-msgid "Share SinaWeibo @UserID"
+msgid "After Blog Content"
 msgstr ""
 
 #: open-social.php:69
-msgid "Share QQ Weibo AppKey"
+msgid "Sina Weibo related UserID"
 msgstr ""
 
 #: open-social.php:70
-msgid "QQ EmailMe Code"
+msgid "QQ Weibo Share AppKey"
 msgstr ""
 
 #: open-social.php:71
-msgid "QQ ContactMe Link"
+msgid "QQ EmailMe Code"
 msgstr ""
 
 #: open-social.php:72
-msgid "Extra Setting"
+msgid "QQ ContactMe Link"
 msgstr ""
 
 #: open-social.php:73
@@ -220,11 +220,15 @@ msgstr ""
 msgid "UnFake Your Email"
 msgstr ""
 
-#: open-social.php:863 open-social.php:949
+#: open-social.php:659 open-social.php:668
+msgid "Widgets"
+msgstr ""
+
+#: open-social.php:921 open-social.php:1005
 msgid "Title:"
 msgstr ""
 
-#: open-social.php:911
+#: open-social.php:967
 msgid "Log Out"
 msgstr ""
 

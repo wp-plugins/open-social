@@ -4,8 +4,8 @@ Contributors: playes
 Donate link: https://me.alipay.com/playes
 Tags: china, chinese, afly, social, login, connect, qq, sina, weibo, baidu, google, live, douban, renren, kaixin001, openid, QQ登陆, 新浪微博, 百度, 谷歌, 豆瓣, 人人网, 开心网, 登录, 连接, 注册, 分享
 Requires at least: 3.0
-Tested up to: 3.7.1
-Stable tag: 1.0.7
+Tested up to: 3.8
+Stable tag: 1.0.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -74,6 +74,14 @@ More information please visit my site: [www.xiaomac.com](http://www.xiaomac.com/
 3. Setting
 
 == Changelog ==
+
+= 1.0.8 =
+* 默认显示较清晰头像
+* 分享按钮可添加在文章后
+* 合并谷歌回调文件（旧文件可删）
+* 修正登陆页面登陆问题
+* 样式表和脚本放到图片目录下
+* 规范了一下配置的变量名
 
 = 1.0.7 =
 * 修正头像函数调试模式下会出现警告的问题

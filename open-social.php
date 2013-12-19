@@ -5,7 +5,7 @@
  * Description: Allow to Login or Share with social networks (specially in china) like QQ, Sina WeiBo, Baidu, Google, Live, DouBan, RenRen, KaiXin. NO 3rd-party!
  * Author: Afly
  * Author URI: http://www.xiaomac.com/
- * Version: 1.0.7
+ * Version: 1.0.8
  * License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * Text Domain: open-social
  * Domain Path: /lang
@@ -59,19 +59,19 @@ function open_init() {
 		'about_alipay'			=> __('Buy me a drink','open-social'),
 		'about_link'			=> __('Or leave me a link.','open-social'),
 		'about_plugin'			=> __('Or give me Five','open-social'),
-		'login_button_position'		=> __('Display Login Buttons','open-social'),
-		'osop_comment_form_before'	=> __('Before Comment Form','open-social'),
-		'osop_comment_form_after'	=> __('After Comment Form','open-social'),
-		'osop_comment_form_none'	=> __('None','open-social'),
-		'osop_login_page'			=> __('Login Page','open-social'),
-		'share_button_account'		=> __('Share Button Account','open-social'),
-		'osop_share_sina_user'		=> __('Share SinaWeibo @UserID','open-social'),
-		'osop_share_qqt_appkey'		=> __('Share QQ Weibo AppKey','open-social'),
+		'osop_login_button'			=> __('Login Buttons','open-social'),
+		'osop_show_login_form1'		=> __('Before Comment Form','open-social'),
+		'osop_show_login_form2'		=> __('After Comment Form','open-social'),
+		'osop_show_login_form0'		=> __('None','open-social'),
+		'osop_show_login_page'		=> __('Login Page','open-social'),
+		'osop_share_button'			=> __('Share Button','open-social'),
+		'osop_show_share_content'	=> __('After Blog Content','open-social'),
+		'osop_share_sina_user'		=> __('Sina Weibo related UserID','open-social'),
+		'osop_share_qqt_appkey'		=> __('QQ Weibo Share AppKey','open-social'),
 		'osop_share_qq_email'		=> __('QQ EmailMe Code','open-social'),
 		'osop_share_qq_talk'		=> __('QQ ContactMe Link','open-social'),
-		'extra_setting'				=> __('Extra Setting','open-social'),
 		'osop_delete_setting'		=> __('Auto delete Configuration Above after Uninstallation. NOT RECOMMENDED!','open-social'),
-		'edit_fake_email'			=> __('UnFake Your Email','open-social'),
+		'edit_fake_email'			=> __('UnFake Your Email','open-social')
 	);
 	if (isset($_GET['connect'])) {
 		define('OPEN_TYPE',$_GET['connect']);
@@ -97,12 +97,21 @@ function open_init() {
 		if ($_GET['action'] == 'login') {
 			$os -> open_login();
 		} else if ($_GET['action'] == 'callback') {
+			if(!isset($_GET['code'])){
+				echo '<script>opener.window.focus();window.close();</script>';
+				exit();
+			}
 			$os -> open_callback($_GET['code']);
 			open_action($os);
 		} else if ($_GET['action'] == 'unbind') {
 			open_unbind();
 		} else if ($_GET['action'] == 'update'){
 			if (OPEN_TYPE=='sina' && isset($_GET['text'])) open_update_test($_GET['text']);
+		}
+	}else{
+		if (isset($_GET['code']) && isset($_GET['state']) && $_GET['state']=='profile') {//for google
+			header('Location:?connect=google&action=callback&'.http_build_query($_GET));
+			exit();
 		}
 	} 
 } 
@@ -490,8 +499,16 @@ function open_action($os){
 	unset($_SESSION["access_token"]);
 	if(isset($_SESSION['open_img'])) unset($_SESSION['open_img']); 
 	if(isset($_SESSION['state'])) unset($_SESSION['state']); 
-	echo '<script>opener.window.focus();opener.window.location.reload();window.close();</script>';
-	exit;	
+	echo '<script>
+			opener.window.focus();
+			if(opener.window.location.href.indexOf("'.wp_login_url().'")==0){
+				opener.window.location.href="'.home_url().'";
+			}else{
+				opener.window.location.reload();
+			}
+			window.close();
+		</script>';
+	exit;
 }
 
 //post api (test for now)
@@ -555,8 +572,9 @@ register_activation_hook( __FILE__, 'open_social_activation' );
 function open_social_activation(){
 	$osop = get_option('osop');
 	if(!$osop) update_option('osop', array(
-		'comment_form'		=> 1,
-		'login_page'		=> 0,
+		'show_login_form'	=> 1,
+		'show_login_page'	=> 0,
+		'show_share_content'=> 0,
 		'share_sina_user' 	=> '',
 		'share_qqt_appkey'	=> '',
 		'share_qq_email'	=> '',
@@ -568,7 +586,7 @@ function open_social_activation(){
 register_uninstall_hook( __FILE__, 'open_social_uninstall' );
 function open_social_uninstall(){
 	$osop = get_option('osop');
-	if($osop && $osop['delete_setting']==1) delete_option('osop');
+	if($osop && isset($osop['delete_setting']) && $osop['delete_setting']==1) delete_option('osop');
 }
 
 //admin_init
@@ -637,16 +655,20 @@ function open_options_page() {
 		<?php $osop = get_option('osop'); ?>
 		<table class="form-table">
 		<tr valign="top">
-		<th scope="row"><?php echo $GLOBALS['open_str']['login_button_position']?></th>
-		<td><label for="osop[comment_form_before]"><input name="osop[comment_form]" id="osop[comment_form_before]" type="radio" value="1" <?php checked($osop['comment_form'],1);?> /> <?php echo $GLOBALS['open_str']['osop_comment_form_before']?>  
-		<label for="osop[comment_form_after]"><input name="osop[comment_form]" id="osop[comment_form_after]" type="radio" value="2" <?php checked($osop['comment_form'],2);?> /> <?php echo $GLOBALS['open_str']['osop_comment_form_after']?></label>  
-		<label for="osop[comment_form_none]"><input name="osop[comment_form]" id="osop[comment_form_none]" type="radio" value="0" <?php checked($osop['comment_form'],0);?> /> <?php echo $GLOBALS['open_str']['osop_comment_form_none']?></label><br/>
-		<label for="osop[login_page]"><input name="osop[login_page]" id="osop[login_page]" type="checkbox" value="1" <?php checked($osop['login_page'],1);?> /> <?php echo $GLOBALS['open_str']['osop_login_page']?></label>
+		<th scope="row"><?php echo $GLOBALS['open_str']['osop_login_button']?><br/>
+			<a href="<?php echo admin_url('widgets.php');?>"><?php echo __('Widgets');?></a></th>
+		<td><label for="osop[show_login_form1]"><input name="osop[show_login_form]" id="osop[show_login_form1]" type="radio" value="1" <?php checked($osop['show_login_form'],1);?> /> <?php echo $GLOBALS['open_str']['osop_show_login_form1']?>  
+		<label for="osop[show_login_form2]"><input name="osop[show_login_form]" id="osop[show_login_form2]" type="radio" value="2" <?php checked($osop['show_login_form'],2);?> /> <?php echo $GLOBALS['open_str']['osop_show_login_form2']?></label>  
+		<label for="osop[show_login_form0]"><input name="osop[show_login_form]" id="osop[show_login_form0]" type="radio" value="0" <?php checked($osop['show_login_form'],0);?> /> <?php echo $GLOBALS['open_str']['osop_show_login_form0']?></label><br/>
+		<label for="osop[show_login_page]"><input name="osop[show_login_page]" id="osop[show_login_page]" type="checkbox" value="1" <?php checked($osop['show_login_page'],1);?> /> <?php echo $GLOBALS['open_str']['osop_show_login_page']?></label>
 		</td>
 		</tr>
 		<tr valign="top">
-		<th scope="row"><?php echo $GLOBALS['open_str']['share_button_account']?></th>
-		<td><input name="osop[share_sina_user]" id="osop[share_sina_user]" class="regular-text" value="<?php echo $osop['share_sina_user']?>" />
+		<th scope="row"><?php echo $GLOBALS['open_str']['osop_share_button']?><br/>
+			<a href="<?php echo admin_url('widgets.php');?>"><?php echo __('Widgets');?></a></th>
+		<td><label for="osop[show_share_content]"><input name="osop[show_share_content]" id="osop[show_share_content]" type="checkbox" value="1" <?php checked($osop['show_share_content'],1);?> />
+			<?php echo $GLOBALS['open_str']['osop_show_share_content']?></label><br />
+			<input name="osop[share_sina_user]" id="osop[share_sina_user]" class="regular-text" value="<?php echo $osop['share_sina_user']?>" />
 			<a href="http://open.weibo.com/sharebutton" target="_blank"><?php echo $GLOBALS['open_str']['osop_share_sina_user']?></a><br/>
 			<input name="osop[share_qqt_appkey]" id="osop[share_qqt_appkey]" class="regular-text" value="<?php echo $osop['share_qqt_appkey']?>" />
 			<a href="http://dev.t.qq.com/websites/share/" target="_blank"><?php echo $GLOBALS['open_str']['osop_share_qqt_appkey']?></a> <br/>
@@ -657,7 +679,7 @@ function open_options_page() {
 		</td>
 		</tr>
 		<tr valign="top">
-		<th scope="row"><?php echo $GLOBALS['open_str']['extra_setting']?></th>
+		<th scope="row"></th>
 		<td><label for="osop[delete_setting]"><input name="osop[delete_setting]" id="osop[delete_setting]" type="checkbox" value="1" <?php checked($osop['delete_setting'],1);?> /> <?php echo $GLOBALS['open_str']['osop_delete_setting']?></label>
 			<?php submit_button();?>
 		</td>
@@ -675,7 +697,8 @@ function open_options_page() {
 			<a href="http://wiki.connect.qq.com/" target="_blank">?</a></th>
 		<td><input name="QQ_AKEY" value="<?php echo QQ_AKEY?>" class="regular-text" /> APP ID <br/>
 			<input name="QQ_SKEY" value="<?php echo QQ_SKEY?>" class="regular-text" /> APP KEY <br/>
-			<input name="QQ_BACK" value="<?php echo WB_BACK?>" class="regular-text code" placeholder="<?php echo home_url('/')?>" /> <?php echo $GLOBALS['open_str']['callback']?> </td>
+			<input name="QQ_BACK" value="<?php echo WB_BACK?>" class="regular-text code" placeholder="<?php echo home_url('/')?>" />
+			<?php echo $GLOBALS['open_str']['callback']?> </td>
 		</tr>
 		<tr valign="top">
 		<th scope="row"><a href="http://open.weibo.com/" target="_blank"><?php echo $GLOBALS['open_str']['sina']?></a>
@@ -698,7 +721,7 @@ function open_options_page() {
 			<a href="https://developers.google.com/accounts/docs/OAuth2WebServer" target="_blank">?</a></th>
 		<td><input name="GG_AKEY" value="<?php echo GG_AKEY?>" class="regular-text" /> CLIENT ID <br/>
 			<input name="GG_SKEY" value="<?php echo GG_SKEY?>" class="regular-text" /> CLIENT SECRET <br/>
-			<input name="GG_BACK" value="<?php echo GG_BACK?>" class="code" placeholder="<?php echo plugins_url('/google.php', __FILE__)?>" size=80 /> 
+			<input name="GG_BACK" value="<?php echo GG_BACK?>" class="regular-text code" placeholder="<?php echo home_url('/')?>" /> 
 			REDIRECT URI </td>
 		</tr>
 		<tr valign="top">
@@ -782,22 +805,41 @@ function open_get_avatar($avatar, $id_or_email='',$size='80') {
 
 //login form
 $osop = get_option('osop');
-if($osop && isset($osop['login_page']) && $osop['login_page']==1) add_action('login_form', 'open_social_login_form');
-if($osop && isset($osop['comment_form']) && $osop['comment_form']==1) add_action('comment_form_top', 'open_social_login_form');
-if($osop && isset($osop['comment_form']) && $osop['comment_form']==2) add_action('comment_form', 'open_social_login_form');
-function open_social_login_form($login_type='guest') {
+if($osop && isset($osop['show_login_page']) && $osop['show_login_page']==1) add_action('login_form', 'open_social_login_form');
+if($osop && isset($osop['show_login_form']) && $osop['show_login_form']==1) add_action('comment_form_top', 'open_social_login_form');
+if($osop && isset($osop['show_login_form']) && $osop['show_login_form']==2) add_action('comment_form', 'open_social_login_form');
+function open_social_login_form($login_type='') {
 	if (!is_user_logged_in() || $login_type=='bind'){
-		echo '<div class="login_box">';
-		if(QQ_AKEY) open_login_button_show('qq',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['qq'],$GLOBALS['open_str']['login']));
-		if(WB_AKEY) open_login_button_show('sina',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['sina'],$GLOBALS['open_str']['login']));
-		if(BD_AKEY) open_login_button_show('baidu',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['baidu'],$GLOBALS['open_str']['login']));
-		if(GG_AKEY) open_login_button_show('google',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['google'],$GLOBALS['open_str']['login']));
-		if(WL_AKEY) open_login_button_show('live',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['live'],$GLOBALS['open_str']['login']));
-		if(DB_AKEY) open_login_button_show('douban',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['douban'],$GLOBALS['open_str']['login']));
-		if(RR_AKEY) open_login_button_show('renren',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['renren'],$GLOBALS['open_str']['login']));
-		if(KX_AKEY) open_login_button_show('kaixin',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['kaixin'],$GLOBALS['open_str']['login']));
-		echo '</div>';
+		$html = '<div class="login_box">';
+		if(QQ_AKEY) $html .= open_login_button_show('qq',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['qq'],$GLOBALS['open_str']['login']));
+		if(WB_AKEY) $html .= open_login_button_show('sina',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['sina'],$GLOBALS['open_str']['login']));
+		if(BD_AKEY) $html .= open_login_button_show('baidu',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['baidu'],$GLOBALS['open_str']['login']));
+		if(GG_AKEY) $html .= open_login_button_show('google',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['google'],$GLOBALS['open_str']['login']));
+		if(WL_AKEY) $html .= open_login_button_show('live',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['live'],$GLOBALS['open_str']['login']));
+		if(DB_AKEY) $html .= open_login_button_show('douban',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['douban'],$GLOBALS['open_str']['login']));
+		if(RR_AKEY) $html .= open_login_button_show('renren',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['renren'],$GLOBALS['open_str']['login']));
+		if(KX_AKEY) $html .= open_login_button_show('kaixin',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['kaixin'],$GLOBALS['open_str']['login']));
+		$html .= '</div>';
+		if($login_type=='bind') return $html;
+		echo $html;
 	}
+} 
+
+if($osop && isset($osop['show_share_content']) && $osop['show_share_content']==1) add_filter('the_content', 'open_social_share_form');
+function open_social_share_form($content) {
+	if(is_single()) {
+		$osop = get_option('osop');
+		$content .= '<div class="share_box">';
+		$content .= open_share_button_show('weibo',str_replace('%SHARE_TYPE%',$GLOBALS['open_str']['share_weibo'],$GLOBALS['open_str']['share']),"http://v.t.sina.com.cn/share/share.php?url=%URL%&title=%TITLE%&appkey=".WB_AKEY."&ralateUid=".$osop['share_sina_user']."&language=zh_cn&searchPic=true");
+		$content .= open_share_button_show('qzone',str_replace('%SHARE_TYPE%',$GLOBALS['open_str']['share_qzone'],$GLOBALS['open_str']['share']),"http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=%URL%&title=%TITLE%&desc=&summary=&site=");
+		$content .= open_share_button_show('qqt',str_replace('%SHARE_TYPE%',$GLOBALS['open_str']['share_qqt'],$GLOBALS['open_str']['share']),"http://share.v.t.qq.com/index.php?c=share&amp;a=index&url=%URL%&title=%TITLE%&appkey=".$osop['share_qqt_appkey']);
+		$content .= open_share_button_show('youdao',str_replace('%SHARE_TYPE%',$GLOBALS['open_str']['share_youdao'],$GLOBALS['open_str']['share']),"http://note.youdao.com/memory/?url=%URL%&title=%TITLE%&sumary=&pic=&product=");
+		$content .= open_share_button_show('weixin',str_replace('%SHARE_TYPE%',$GLOBALS['open_str']['share_weixin'],$GLOBALS['open_str']['share']),"http://chart.apis.google.com/chart?chs=400x400&cht=qr&chld=L|5&chl=%URL%");
+		$content .= open_share_button_show('twitter',str_replace('%SHARE_TYPE%',$GLOBALS['open_str']['share_twitter'],$GLOBALS['open_str']['share']),"http://twitter.com/home/?status=%TITLE%:%URL%");
+		$content .= open_share_button_show('facebook',str_replace('%SHARE_TYPE%',$GLOBALS['open_str']['share_facebook'],$GLOBALS['open_str']['share']),"http://www.facebook.com/sharer.php?u=%URL%&amp;t=%TITLE%");
+		$content .= '</div>';
+	}
+	return $content;
 } 
 
 //hide user option
@@ -826,7 +868,7 @@ function open_social_bind_options() {
 	if ($open_type) {
 		echo '<input class="button-primary" type="button" onclick=\'window.open("'.home_url('/').'?connect='.$open_type.'&action=unbind", "xmOpenWindow","width=500,height=350,menubar=0,scrollbars=1,resizable=1,status=1,titlebar=0,toolbar=0,location=0");return false;\' value="'.str_replace('%OPEN_TYPE%',strtoupper($open_type),$GLOBALS['open_str']['unbind']).'"/> ';
 	} else {
-		open_social_login_form('bind');
+		echo open_social_login_form('bind');
 	} 
 	echo '</td></tr>';
 } 
@@ -835,22 +877,22 @@ function open_social_bind_options() {
 add_action( 'wp_enqueue_scripts', 'open_social_style' );
 add_action( 'login_enqueue_scripts', 'open_social_style' );
 function open_social_style() {
-	wp_register_style( 'open_social_css', plugins_url('/os.css', __FILE__) );
+	wp_register_style( 'open_social_css', plugins_url('/images/os.css', __FILE__) );
 	wp_enqueue_style( 'open_social_css' );
-	wp_register_script( 'open_social_js', plugins_url('/os.js', __FILE__) );
+	wp_register_script( 'open_social_js', plugins_url('/images/os.js', __FILE__), array( 'jquery','jquery-ui-tooltip' ), true );
 	wp_enqueue_script( 'open_social_js');
 }
 function open_login_button_show($icon_type,$icon_title){
-	echo "<div class=\"login_button login_icon_$icon_type\" onclick=\"login_button_click('$icon_type')\" title=\"$icon_title\"></div>";
+	return "<div class=\"login_button login_icon_$icon_type\" onclick=\"login_button_click('$icon_type')\" title=\"$icon_title\"></div>";
 }
 function open_share_button_show($icon_type,$icon_title,$icon_link){
-	echo "<div class=\"share_button share_icon_$icon_type\" onclick=\"share_button_click('$icon_link')\" title=\"$icon_title\"></div>";
+	return "<div class=\"share_button share_icon_$icon_type\" onclick=\"share_button_click('$icon_link')\" title=\"$icon_title\"></div>";
 }
 function open_tool_button_show($icon_type,$icon_title,$icon_link){//local
-	echo "<div class=\"share_button share_icon_$icon_type\" onclick=\"location.href='$icon_link';\" title=\"$icon_title\"></div>";
+	return "<div class=\"share_button share_icon_$icon_type\" onclick=\"location.href='$icon_link';\" title=\"$icon_title\"></div>";
 }
 function open_lang_button_show($icon_type,$icon_title,$icon_link){//world
-	echo "<div class=\"lang_button\" onclick=\"location.href='$icon_link';\" title=\"$icon_title\"><img src=\"".plugins_url('images/lang_button/'.$icon_type.'.gif', __FILE__)."\" width=\"20\" height=\"20\" /></div>";
+	return "<div class=\"lang_button\" onclick=\"location.href='$icon_link';\" title=\"$icon_title\"><img src=\"".plugins_url('images/lang_button/'.$icon_type.'.gif', __FILE__)."\" width=\"20\" height=\"20\" /></div>";
 }
 
 //widget
@@ -924,14 +966,14 @@ class open_social_login_widget extends WP_Widget {
 			echo '<a href="'.$current_user->user_url.'" target="_blank">'.$current_user->display_name.'</a>';
 			echo ' (<a href="'.wp_logout_url(get_permalink()).'">'.__('Log Out').'</a>)';
 		}else{
-			if($qq) open_login_button_show('qq',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['qq'],$GLOBALS['open_str']['login']));
-			if($sina) open_login_button_show('sina',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['sina'],$GLOBALS['open_str']['login']));
-			if($baidu) open_login_button_show('baidu',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['baidu'],$GLOBALS['open_str']['login']));
-			if($google) open_login_button_show('google',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['google'],$GLOBALS['open_str']['login']));
-			if($live) open_login_button_show('live',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['live'],$GLOBALS['open_str']['login']));
-			if($douban) open_login_button_show('douban',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['douban'],$GLOBALS['open_str']['login']));
-			if($renren) open_login_button_show('renren',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['renren'],$GLOBALS['open_str']['login']));
-			if($kaixin) open_login_button_show('kaixin',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['kaixin'],$GLOBALS['open_str']['login']));
+			if($qq) echo open_login_button_show('qq',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['qq'],$GLOBALS['open_str']['login']));
+			if($sina) echo open_login_button_show('sina',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['sina'],$GLOBALS['open_str']['login']));
+			if($baidu) echo open_login_button_show('baidu',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['baidu'],$GLOBALS['open_str']['login']));
+			if($google) echo open_login_button_show('google',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['google'],$GLOBALS['open_str']['login']));
+			if($live) echo open_login_button_show('live',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['live'],$GLOBALS['open_str']['login']));
+			if($douban) echo open_login_button_show('douban',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['douban'],$GLOBALS['open_str']['login']));
+			if($renren) echo open_login_button_show('renren',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['renren'],$GLOBALS['open_str']['login']));
+			if($kaixin) echo open_login_button_show('kaixin',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['kaixin'],$GLOBALS['open_str']['login']));
 		}
 		echo '</div>';
 		echo $after_widget;
@@ -1008,25 +1050,25 @@ class open_social_share_widget extends WP_Widget {
 		echo $before_widget;
 		if ( $title ) echo '<h3 class="widget-title">'.$title.'</h3>';
 		echo '<div class="textwidget">';
-		if($weibo) open_share_button_show('weibo',str_replace('%SHARE_TYPE%',$GLOBALS['open_str']['share_weibo'],$GLOBALS['open_str']['share']),"http://v.t.sina.com.cn/share/share.php?url=%URL%&title=%TITLE%&appkey=".WB_AKEY."&ralateUid=".$osop['share_sina_user']."&language=zh_cn&searchPic=true");
-		if($qzone) open_share_button_show('qzone',str_replace('%SHARE_TYPE%',$GLOBALS['open_str']['share_qzone'],$GLOBALS['open_str']['share']),"http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=%URL%&title=%TITLE%&desc=&summary=&site=");
-		if($qqt) open_share_button_show('qqt',str_replace('%SHARE_TYPE%',$GLOBALS['open_str']['share_qqt'],$GLOBALS['open_str']['share']),"http://share.v.t.qq.com/index.php?c=share&amp;a=index&url=%URL%&title=%TITLE%&appkey=".$osop['share_qqt_appkey']);
-		if($youdao) open_share_button_show('youdao',str_replace('%SHARE_TYPE%',$GLOBALS['open_str']['share_youdao'],$GLOBALS['open_str']['share']),"http://note.youdao.com/memory/?url=%URL%&title=%TITLE%&sumary=&pic=&product=");
-		if($weixin) open_share_button_show('weixin',str_replace('%SHARE_TYPE%',$GLOBALS['open_str']['share_weixin'],$GLOBALS['open_str']['share']),"http://chart.apis.google.com/chart?chs=400x400&cht=qr&chld=L|5&chl=%URL%");
-		if($email && $osop['share_qq_email']) open_share_button_show('email',$GLOBALS['open_str']['share_email'],"http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=".$osop['share_qq_email']);
-		if($qq && $osop['share_qq_talk']) open_share_button_show('qq',$GLOBALS['open_str']['share_qq'],$osop['share_qq_talk']);
-		if($google) open_share_button_show('google',$GLOBALS['open_str']['share_google'],"http://translate.google.com.hk/translate?hl=zh-CN&sl=en&tl=zh-CN&u=%URL%");
-		if($twitter) open_share_button_show('twitter',str_replace('%SHARE_TYPE%',$GLOBALS['open_str']['share_twitter'],$GLOBALS['open_str']['share']),"http://twitter.com/home/?status=%TITLE%:%URL%");
-		if($facebook) open_share_button_show('facebook',str_replace('%SHARE_TYPE%',$GLOBALS['open_str']['share_facebook'],$GLOBALS['open_str']['share']),"http://www.facebook.com/sharer.php?u=%URL%&amp;t=%TITLE%");
+		if($weibo) echo open_share_button_show('weibo',str_replace('%SHARE_TYPE%',$GLOBALS['open_str']['share_weibo'],$GLOBALS['open_str']['share']),"http://v.t.sina.com.cn/share/share.php?url=%URL%&title=%TITLE%&appkey=".WB_AKEY."&ralateUid=".$osop['share_sina_user']."&language=zh_cn&searchPic=true");
+		if($qzone) echo open_share_button_show('qzone',str_replace('%SHARE_TYPE%',$GLOBALS['open_str']['share_qzone'],$GLOBALS['open_str']['share']),"http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=%URL%&title=%TITLE%&desc=&summary=&site=");
+		if($qqt) echo open_share_button_show('qqt',str_replace('%SHARE_TYPE%',$GLOBALS['open_str']['share_qqt'],$GLOBALS['open_str']['share']),"http://share.v.t.qq.com/index.php?c=share&amp;a=index&url=%URL%&title=%TITLE%&appkey=".$osop['share_qqt_appkey']);
+		if($youdao) echo open_share_button_show('youdao',str_replace('%SHARE_TYPE%',$GLOBALS['open_str']['share_youdao'],$GLOBALS['open_str']['share']),"http://note.youdao.com/memory/?url=%URL%&title=%TITLE%&sumary=&pic=&product=");
+		if($weixin) echo open_share_button_show('weixin',str_replace('%SHARE_TYPE%',$GLOBALS['open_str']['share_weixin'],$GLOBALS['open_str']['share']),"http://chart.apis.google.com/chart?chs=400x400&cht=qr&chld=L|5&chl=%URL%");
+		if($email && $osop['share_qq_email']) echo open_share_button_show('email',$GLOBALS['open_str']['share_email'],"http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=".$osop['share_qq_email']);
+		if($qq && $osop['share_qq_talk']) echo open_share_button_show('qq',$GLOBALS['open_str']['share_qq'],$osop['share_qq_talk']);
+		if($google) echo open_share_button_show('google',$GLOBALS['open_str']['share_google'],"http://translate.google.com.hk/translate?hl=zh-CN&sl=en&tl=zh-CN&u=%URL%");
+		if($twitter) echo open_share_button_show('twitter',str_replace('%SHARE_TYPE%',$GLOBALS['open_str']['share_twitter'],$GLOBALS['open_str']['share']),"http://twitter.com/home/?status=%TITLE%:%URL%");
+		if($facebook) echo open_share_button_show('facebook',str_replace('%SHARE_TYPE%',$GLOBALS['open_str']['share_facebook'],$GLOBALS['open_str']['share']),"http://www.facebook.com/sharer.php?u=%URL%&amp;t=%TITLE%");
 		if($switcher){
 			if( get_locale() != 'en_US' ){
-				open_tool_button_show('en','User Language: English',"?open_lang=en_US");
+				echo open_tool_button_show('en','User Language: English',"?open_lang=en_US");
 			}else if(WPLANG=='zh_CN'){
-				open_tool_button_show('cn',$GLOBALS['open_str']['language_switch'].' '.WPLANG,"?open_lang=".WPLANG);
+				echo open_tool_button_show('cn',$GLOBALS['open_str']['language_switch'].' '.WPLANG,"?open_lang=".WPLANG);
 			}else if(WPLANG!=''){
-				open_lang_button_show(WPLANG,$GLOBALS['open_str']['language_switch'].' '.WPLANG,"?open_lang=".WPLANG);			
+				echo open_lang_button_show(WPLANG,$GLOBALS['open_str']['language_switch'].' '.WPLANG,"?open_lang=".WPLANG);			
 			}else if(isset($_SESSION['WPLANG_LOCALE'])){
-				open_lang_button_show($_SESSION['WPLANG_LOCALE'],$GLOBALS['open_str']['language_switch'].' '.$_SESSION['WPLANG_LOCALE'],"?open_lang=".$_SESSION['WPLANG_LOCALE']);			
+				echo open_lang_button_show($_SESSION['WPLANG_LOCALE'],$GLOBALS['open_str']['language_switch'].' '.$_SESSION['WPLANG_LOCALE'],"?open_lang=".$_SESSION['WPLANG_LOCALE']);			
 			}
 		}
 		echo '</div>';

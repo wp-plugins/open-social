@@ -5,13 +5,13 @@
  * Description: Allow to Login or Share with social networks (specially in china) like QQ, Sina WeiBo, Baidu, Google, Live, DouBan, RenRen, KaiXin. NO 3rd-party!
  * Author: Afly
  * Author URI: http://www.xiaomac.com/
- * Version: 1.0.8
+ * Version: 1.0.9
  * License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * Text Domain: open-social
  * Domain Path: /lang
  */
 
-include_once( 'setting.php' );
+if(file_exists(dirname(__FILE__).'/setting.php')) include_once( 'setting.php' );
 if (!session_id()) session_start();
 
 //init
@@ -91,6 +91,8 @@ function open_init() {
 			$os = new RENREN_CLASS();
 		}elseif(OPEN_TYPE=='kaixin'){
 			$os = new KAIXIN_CLASS();
+		//}elseif(OPEN_TYPE=='test'){
+			//exit();
 		}else{
 			exit();
 		}
@@ -695,64 +697,64 @@ function open_options_page() {
 		<tr valign="top">
 		<th scope="row"><a href="http://connect.qq.com/" target="_blank"><?php echo $GLOBALS['open_str']['qq']?></a>
 			<a href="http://wiki.connect.qq.com/" target="_blank">?</a></th>
-		<td><input name="QQ_AKEY" value="<?php echo QQ_AKEY?>" class="regular-text" /> APP ID <br/>
-			<input name="QQ_SKEY" value="<?php echo QQ_SKEY?>" class="regular-text" /> APP KEY <br/>
-			<input name="QQ_BACK" value="<?php echo WB_BACK?>" class="regular-text code" placeholder="<?php echo home_url('/')?>" />
+		<td><input name="QQ_AKEY" value="<?php echo (defined("QQ_AKEY")?QQ_AKEY:'');?>" class="regular-text" /> APP ID <br/>
+			<input name="QQ_SKEY" value="<?php echo (defined("QQ_SKEY")?QQ_SKEY:'');?>" class="regular-text" /> APP KEY <br/>
+			<input name="QQ_BACK" value="<?php echo (defined("QQ_BACK")?QQ_BACK:'');?>" class="regular-text code" placeholder="<?php echo home_url('/')?>" />
 			<?php echo $GLOBALS['open_str']['callback']?> </td>
 		</tr>
 		<tr valign="top">
 		<th scope="row"><a href="http://open.weibo.com/" target="_blank"><?php echo $GLOBALS['open_str']['sina']?></a>
 			<a href="http://open.weibo.com/wiki/" target="_blank">?</a></th>
-		<td><input name="WB_AKEY" value="<?php echo WB_AKEY?>" class="regular-text" /> App Key <br/>
-			<input name="WB_SKEY" value="<?php echo WB_SKEY?>" class="regular-text" /> App Secret<br/>
-			<input name="WB_BACK" value="<?php echo WB_BACK?>" class="regular-text code" placeholder="<?php echo home_url('/')?>" />
+		<td><input name="WB_AKEY" value="<?php echo (defined("WB_AKEY")?WB_AKEY:'');?>" class="regular-text" /> App Key <br/>
+			<input name="WB_SKEY" value="<?php echo (defined("WB_SKEY")?WB_SKEY:'');?>" class="regular-text" /> App Secret<br/>
+			<input name="WB_BACK" value="<?php echo (defined("WB_BACK")?WB_BACK:'');?>" class="regular-text code" placeholder="<?php echo home_url('/')?>" />
 			<?php echo $GLOBALS['open_str']['callback']?></td>
 		</tr>
 		<tr valign="top">
 		<th scope="row"><a href="http://developer.baidu.com/console" target="_blank"><?php echo $GLOBALS['open_str']['baidu']?></a>
 			<a href="http://developer.baidu.com/wiki/index.php?title=docs/oauth" target="_blank">?</a></th>
-		<td><input name="BD_AKEY" value="<?php echo BD_AKEY?>" class="regular-text" /> API Key <br/>
-			<input name="BD_SKEY" value="<?php echo BD_SKEY?>" class="regular-text" /> Secret Key <br/>
-			<input name="BD_BACK" value="<?php echo BD_BACK?>" class="regular-text code" placeholder="<?php echo home_url('/')?>" />
+		<td><input name="BD_AKEY" value="<?php echo (defined("BD_AKEY")?BD_AKEY:'');?>" class="regular-text" /> API Key <br/>
+			<input name="BD_SKEY" value="<?php echo (defined("BD_SKEY")?BD_SKEY:'');?>" class="regular-text" /> Secret Key <br/>
+			<input name="BD_BACK" value="<?php echo (defined("BD_BACK")?BD_BACK:'');?>" class="regular-text code" placeholder="<?php echo home_url('/')?>" />
 			<?php echo $GLOBALS['open_str']['callback']?> </td>
 		</tr>
 		<tr valign="top">
 		<th scope="row"><a href="https://cloud.google.com/console" target="_blank"><?php echo $GLOBALS['open_str']['google']?></a>
 			<a href="https://developers.google.com/accounts/docs/OAuth2WebServer" target="_blank">?</a></th>
-		<td><input name="GG_AKEY" value="<?php echo GG_AKEY?>" class="regular-text" /> CLIENT ID <br/>
-			<input name="GG_SKEY" value="<?php echo GG_SKEY?>" class="regular-text" /> CLIENT SECRET <br/>
-			<input name="GG_BACK" value="<?php echo GG_BACK?>" class="regular-text code" placeholder="<?php echo home_url('/')?>" /> 
+		<td><input name="GG_AKEY" value="<?php echo (defined("GG_AKEY")?GG_AKEY:'');?>" class="regular-text" /> CLIENT ID <br/>
+			<input name="GG_SKEY" value="<?php echo (defined("GG_SKEY")?GG_SKEY:'');?>" class="regular-text" /> CLIENT SECRET <br/>
+			<input name="GG_BACK" value="<?php echo (defined("GG_BACK")?GG_BACK:'');?>" class="regular-text code" placeholder="<?php echo home_url('/')?>" /> 
 			REDIRECT URI </td>
 		</tr>
 		<tr valign="top">
 		<th scope="row"><a href="https://account.live.com/developers/applications" target="_blank"><?php echo $GLOBALS['open_str']['live']?></a>
 			<a href="http://msdn.microsoft.com/en-us/library/live/ff621314.aspx" target="_blank">?</a></th>
-		<td><input name="WL_AKEY" value="<?php echo WL_AKEY?>" class="regular-text" /> Client ID <br/>
-			<input name="WL_SKEY" value="<?php echo WL_SKEY?>" class="regular-text" /> Client secret <br/>
-			<input name="WL_BACK" value="<?php echo WL_BACK?>" class="regular-text code" placeholder="<?php echo home_url('/')?>" /> Redirect domain <br/></td>
+		<td><input name="WL_AKEY" value="<?php echo (defined("WL_AKEY")?WL_AKEY:'');?>" class="regular-text" /> Client ID <br/>
+			<input name="WL_SKEY" value="<?php echo (defined("WL_SKEY")?WL_SKEY:'');?>" class="regular-text" /> Client secret <br/>
+			<input name="WL_BACK" value="<?php echo (defined("WL_BACK")?WL_BACK:'');?>" class="regular-text code" placeholder="<?php echo home_url('/')?>" /> Redirect domain <br/></td>
 		</tr>
 		<tr valign="top">
 		<th scope="row"><a href="http://developers.douban.com/" target="_blank"><?php echo $GLOBALS['open_str']['douban']?></a>
 			<a href="http://developers.douban.com/wiki/?title=oauth2" target="_blank">?</a></th>
-		<td><input name="DB_AKEY" value="<?php echo DB_AKEY?>" class="regular-text" /> API Key <br/>
-			<input name="DB_SKEY" value="<?php echo DB_SKEY?>" class="regular-text" /> Secret <br/>
-			<input name="DB_BACK" value="<?php echo DB_BACK?>" class="regular-text code" placeholder="<?php echo home_url('/')?>" />
+		<td><input name="DB_AKEY" value="<?php echo (defined("DB_AKEY")?DB_AKEY:'');?>" class="regular-text" /> API Key <br/>
+			<input name="DB_SKEY" value="<?php echo (defined("DB_SKEY")?DB_SKEY:'');?>" class="regular-text" /> Secret <br/>
+			<input name="DB_BACK" value="<?php echo (defined("DB_BACK")?DB_BACK:'');?>" class="regular-text code" placeholder="<?php echo home_url('/')?>" />
 			<?php echo $GLOBALS['open_str']['callback']?> <br/></td>
 		</tr>
 		<tr valign="top">
 		<th scope="row"><a href="http://dev.renren.com/" target="_blank"><?php echo $GLOBALS['open_str']['renren']?></a>
 			<a target="_blank" href="http://wiki.dev.renren.com/wiki/Authentication">?</a></th>
-		<td><input name="RR_AKEY" value="<?php echo RR_AKEY?>" class="regular-text" /> APP KEY <br/>
-			<input name="RR_SKEY" value="<?php echo RR_SKEY?>" class="regular-text" /> Secret Key <br/>
-			<input name="RR_BACK" value="<?php echo RR_BACK?>" class="regular-text code" placeholder="<?php echo home_url('/')?>" />
+		<td><input name="RR_AKEY" value="<?php echo (defined("RR_AKEY")?RR_AKEY:'');?>" class="regular-text" /> APP KEY <br/>
+			<input name="RR_SKEY" value="<?php echo (defined("RR_SKEY")?RR_SKEY:'');?>" class="regular-text" /> Secret Key <br/>
+			<input name="RR_BACK" value="<?php echo (defined("RR_BACK")?RR_BACK:'');?>" class="regular-text code" placeholder="<?php echo home_url('/')?>" />
 			<?php echo $GLOBALS['open_str']['callback']?> <br/></td>
 		</tr>
 		<tr valign="top">
 		<th scope="row"><a href="http://open.kaixin001.com/" target="_blank"><?php echo $GLOBALS['open_str']['kaixin']?></a>
 			<a href="http://open.kaixin001.com/document.php" target="_blank">?</a></th>
-		<td><input name="KX_AKEY" value="<?php echo KX_AKEY?>" class="regular-text" /> API Key <br/>
-			<input name="KX_SKEY" value="<?php echo KX_SKEY?>" class="regular-text" /> Secret Key <br/>
-			<input name="KX_BACK" value="<?php echo KX_BACK?>" class="regular-text code" placeholder="<?php echo home_url('/')?>" />
+		<td><input name="KX_AKEY" value="<?php echo (defined("KX_AKEY")?KX_AKEY:'');?>" class="regular-text" /> API Key <br/>
+			<input name="KX_SKEY" value="<?php echo (defined("KX_SKEY")?KX_SKEY:'');?>" class="regular-text" /> Secret Key <br/>
+			<input name="KX_BACK" value="<?php echo (defined("KX_BACK")?KX_BACK:'');?>" class="regular-text code" placeholder="<?php echo home_url('/')?>" />
 			<?php echo $GLOBALS['open_str']['callback']?> <br/>
 			<?php submit_button();?>
 		</td>
@@ -811,14 +813,14 @@ if($osop && isset($osop['show_login_form']) && $osop['show_login_form']==2) add_
 function open_social_login_form($login_type='') {
 	if (!is_user_logged_in() || $login_type=='bind'){
 		$html = '<div class="login_box">';
-		if(QQ_AKEY) $html .= open_login_button_show('qq',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['qq'],$GLOBALS['open_str']['login']));
-		if(WB_AKEY) $html .= open_login_button_show('sina',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['sina'],$GLOBALS['open_str']['login']));
-		if(BD_AKEY) $html .= open_login_button_show('baidu',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['baidu'],$GLOBALS['open_str']['login']));
-		if(GG_AKEY) $html .= open_login_button_show('google',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['google'],$GLOBALS['open_str']['login']));
-		if(WL_AKEY) $html .= open_login_button_show('live',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['live'],$GLOBALS['open_str']['login']));
-		if(DB_AKEY) $html .= open_login_button_show('douban',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['douban'],$GLOBALS['open_str']['login']));
-		if(RR_AKEY) $html .= open_login_button_show('renren',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['renren'],$GLOBALS['open_str']['login']));
-		if(KX_AKEY) $html .= open_login_button_show('kaixin',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['kaixin'],$GLOBALS['open_str']['login']));
+		if(defined("QQ_AKEY")) $html .= open_login_button_show('qq',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['qq'],$GLOBALS['open_str']['login']));
+		if(defined("WB_AKEY")) $html .= open_login_button_show('sina',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['sina'],$GLOBALS['open_str']['login']));
+		if(defined("BD_AKEY")) $html .= open_login_button_show('baidu',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['baidu'],$GLOBALS['open_str']['login']));
+		if(defined("GG_AKEY")) $html .= open_login_button_show('google',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['google'],$GLOBALS['open_str']['login']));
+		if(defined("WL_AKEY")) $html .= open_login_button_show('live',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['live'],$GLOBALS['open_str']['login']));
+		if(defined("DB_AKEY")) $html .= open_login_button_show('douban',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['douban'],$GLOBALS['open_str']['login']));
+		if(defined("RR_AKEY")) $html .= open_login_button_show('renren',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['renren'],$GLOBALS['open_str']['login']));
+		if(defined("KX_AKEY")) $html .= open_login_button_show('kaixin',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['kaixin'],$GLOBALS['open_str']['login']));
 		$html .= '</div>';
 		if($login_type=='bind') return $html;
 		echo $html;
@@ -954,9 +956,7 @@ class open_social_login_widget extends WP_Widget {
 		$renren = $instance['renren'];
 		$kaixin= $instance['kaixin'];
 		echo $before_widget;
-		if ( $title ) {
-			echo '<h3 class="widget-title">'.$title.'</h3>';
-		}
+		if ( $title ) echo '<h3 class="widget-title">'.$title.'</h3>';
 		echo '<div class="textwidget">';
 		if(is_user_logged_in()){
 			$current_user = wp_get_current_user();
@@ -966,14 +966,14 @@ class open_social_login_widget extends WP_Widget {
 			echo '<a href="'.$current_user->user_url.'" target="_blank">'.$current_user->display_name.'</a>';
 			echo ' (<a href="'.wp_logout_url(get_permalink()).'">'.__('Log Out').'</a>)';
 		}else{
-			if($qq) echo open_login_button_show('qq',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['qq'],$GLOBALS['open_str']['login']));
-			if($sina) echo open_login_button_show('sina',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['sina'],$GLOBALS['open_str']['login']));
-			if($baidu) echo open_login_button_show('baidu',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['baidu'],$GLOBALS['open_str']['login']));
-			if($google) echo open_login_button_show('google',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['google'],$GLOBALS['open_str']['login']));
-			if($live) echo open_login_button_show('live',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['live'],$GLOBALS['open_str']['login']));
-			if($douban) echo open_login_button_show('douban',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['douban'],$GLOBALS['open_str']['login']));
-			if($renren) echo open_login_button_show('renren',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['renren'],$GLOBALS['open_str']['login']));
-			if($kaixin) echo open_login_button_show('kaixin',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['kaixin'],$GLOBALS['open_str']['login']));
+			if(defined("QQ_AKEY") && $qq) echo open_login_button_show('qq',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['qq'],$GLOBALS['open_str']['login']));
+			if(defined("WB_AKEY") && $sina) echo open_login_button_show('sina',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['sina'],$GLOBALS['open_str']['login']));
+			if(defined("BD_AKEY") && $baidu) echo open_login_button_show('baidu',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['baidu'],$GLOBALS['open_str']['login']));
+			if(defined("GG_AKEY") && $google) echo open_login_button_show('google',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['google'],$GLOBALS['open_str']['login']));
+			if(defined("WL_AKEY") && $live) echo open_login_button_show('live',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['live'],$GLOBALS['open_str']['login']));
+			if(defined("DB_AKEY") && $douban) echo open_login_button_show('douban',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['douban'],$GLOBALS['open_str']['login']));
+			if(defined("RR_AKEY") && $renren) echo open_login_button_show('renren',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['renren'],$GLOBALS['open_str']['login']));
+			if(defined("KX_AKEY") && $kaixin) echo open_login_button_show('kaixin',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['kaixin'],$GLOBALS['open_str']['login']));
 		}
 		echo '</div>';
 		echo $after_widget;

@@ -5,7 +5,7 @@ Donate link: https://me.alipay.com/playes
 Tags: china, chinese, afly, social, login, connect, qq, sina, weibo, baidu, google, live, douban, renren, kaixin001, openid, QQ登陆, 新浪微博, 百度, 谷歌, 豆瓣, 人人网, 开心网, 登录, 连接, 注册, 分享
 Requires at least: 3.0
 Tested up to: 3.8
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -74,6 +74,9 @@ More information please visit my site: [www.xiaomac.com](http://www.xiaomac.com/
 3. Setting
 
 == Changelog ==
+
+= 1.1.1 =
+* 解决绑定功能定位不清晰的问题
 
 = 1.1.0 =
 * 解决豆瓣回调地址要完全匹配不能带参数的问题

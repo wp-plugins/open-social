@@ -5,7 +5,7 @@
  * Description: Allow to Login or Share with social networks (specially in china) like QQ, Sina WeiBo, Baidu, Google, Live, DouBan, RenRen, KaiXin. NO 3rd-party!
  * Author: Afly
  * Author URI: http://www.xiaomac.com/
- * Version: 1.1.0
+ * Version: 1.1.1
  * License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * Text Domain: open-social
  * Domain Path: /lang
@@ -823,7 +823,7 @@ function open_social_login_form($login_type='') {
 		if(defined("RR_AKEY")) $html .= open_login_button_show('renren',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['renren'],$GLOBALS['open_str']['login']));
 		if(defined("KX_AKEY")) $html .= open_login_button_show('kaixin',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['kaixin'],$GLOBALS['open_str']['login']));
 		$html .= '</div>';
-		if($login_type=='bind') return $html;
+		//if($login_type=='bind') return $html;
 		echo $html;
 	}
 } 
@@ -848,7 +848,12 @@ function open_social_share_form($content) {
 //hide user option
 add_action('admin_head','open_social_hide_option');
 function open_social_hide_option(){
-	if(!current_user_can('manage_options')){
+	if(!is_user_logged_in()) return;
+	$current_user = wp_get_current_user();
+	$m = $current_user->user_email;
+	$open_type = get_user_meta($current_user -> ID, 'open_type', true);
+	if(!current_user_can('manage_options') && $open_type && (strpos($m,'@t.qq.com')||strpos($m,'@weibo.com')||strpos($m,'@baidu.com')||strpos($m,'@douban.com')||strpos($m,'@renren.com')||strpos($m,'@kaixin.com')) ){
+		//not admin, had bound, have fake email
 		echo "<script>jQuery(document).ready(function($){
 				$('#wpfooter').hide();
 				$('#wp-admin-bar-wp-logo').hide();
@@ -856,7 +861,7 @@ function open_social_hide_option(){
 				$('#screen-meta-links').hide();
 				$('h3:not(:eq(2))').hide();
 				$('table.form-table:not(:eq(2))').hide();
-				if(/updated=1/.test(window.location.href))setTimeout(function(){location.href='/';},1200);
+				//if(/updated=1/.test(window.location.href))setTimeout(function(){location.href='/';},1200);
 			});</script>";
 	}
 }
@@ -871,7 +876,7 @@ function open_social_bind_options() {
 	if ($open_type) {
 		echo '<input class="button-primary" type="button" onclick=\'window.open("'.home_url('/').'?connect='.$open_type.'&action=unbind", "xmOpenWindow","width=500,height=350,menubar=0,scrollbars=1,resizable=1,status=1,titlebar=0,toolbar=0,location=0");return false;\' value="'.str_replace('%OPEN_TYPE%',strtoupper($open_type),$GLOBALS['open_str']['unbind']).'"/> ';
 	} else {
-		echo open_social_login_form('bind');
+		open_social_login_form('bind');
 	} 
 	echo '</td></tr>';
 } 
@@ -879,6 +884,7 @@ function open_social_bind_options() {
 //script & style
 add_action( 'wp_enqueue_scripts', 'open_social_style' );
 add_action( 'login_enqueue_scripts', 'open_social_style' );
+add_action( 'admin_enqueue_scripts', 'open_social_style' );
 function open_social_style() {
 	wp_register_style( 'open_social_css', plugins_url('/images/os.css', __FILE__) );
 	wp_enqueue_style( 'open_social_css' );

@@ -5,7 +5,7 @@
  * Description: Allow to Login or Share with social networks (specially in china) like QQ, Sina WeiBo, Baidu, Google, Live, DouBan, RenRen, KaiXin. NO 3rd-party!
  * Author: Afly
  * Author URI: http://www.xiaomac.com/
- * Version: 1.0.9
+ * Version: 1.1.0
  * License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * Text Domain: open-social
  * Domain Path: /lang
@@ -91,8 +91,6 @@ function open_init() {
 			$os = new RENREN_CLASS();
 		}elseif(OPEN_TYPE=='kaixin'){
 			$os = new KAIXIN_CLASS();
-		//}elseif(OPEN_TYPE=='test'){
-			//exit();
 		}else{
 			exit();
 		}
@@ -111,8 +109,9 @@ function open_init() {
 			if (OPEN_TYPE=='sina' && isset($_GET['text'])) open_update_test($_GET['text']);
 		}
 	}else{
-		if (isset($_GET['code']) && isset($_GET['state']) && $_GET['state']=='profile') {//for google
-			header('Location:?connect=google&action=callback&'.http_build_query($_GET));
+		if (isset($_GET['code']) && isset($_GET['state'])) {
+			if($_GET['state']=='profile') header('Location:'.GG_BACK.'?connect=google&action=callback&'.http_build_query($_GET));//for google
+			if(strlen($_GET['state'])==32) header('Location:'.DB_BACK.'?connect=douban&action=callback&'.http_build_query($_GET));//for douban
 			exit();
 		}
 	} 
@@ -336,7 +335,7 @@ class DOUBAN_CLASS {
 		$params=array(
 			'response_type'=>'code',
 			'client_id'=>DB_AKEY,
-			'redirect_uri'=>DB_BACK.'?connect=douban&action=callback',
+			'redirect_uri'=>DB_BACK,
 			'scope'=>'shuo_basic_r,shuo_basic_w,douban_basic_common',
 			'state'=>md5(time())
 		);
@@ -349,7 +348,7 @@ class DOUBAN_CLASS {
 			'code'=>$code,
 			'client_id'=>DB_AKEY,
 			'client_secret'=>DB_SKEY,
-			'redirect_uri'=>DB_BACK.'?connect=douban&action=callback'
+			'redirect_uri'=>DB_BACK
 		);
 		$str = open_connect_http('https://www.douban.com/service/auth2/token', http_build_query($params), 'POST');
 		$_SESSION["access_token"] = $str["access_token"];
@@ -504,7 +503,8 @@ function open_action($os){
 	echo '<script>
 			opener.window.focus();
 			if(opener.window.location.href.indexOf("'.wp_login_url().'")==0){
-				opener.window.location.href="'.home_url().'";
+				var r = opener.window.document.loginform.redirect_to.value;
+				opener.window.location.href=r?r:"'.home_url().'";
 			}else{
 				opener.window.location.reload();
 			}
@@ -810,9 +810,10 @@ $osop = get_option('osop');
 if($osop && isset($osop['show_login_page']) && $osop['show_login_page']==1) add_action('login_form', 'open_social_login_form');
 if($osop && isset($osop['show_login_form']) && $osop['show_login_form']==1) add_action('comment_form_top', 'open_social_login_form');
 if($osop && isset($osop['show_login_form']) && $osop['show_login_form']==2) add_action('comment_form', 'open_social_login_form');
+add_action('comment_form_must_log_in_after', 'open_social_login_form');
 function open_social_login_form($login_type='') {
 	if (!is_user_logged_in() || $login_type=='bind'){
-		$html = '<div class="login_box">';
+		$html = '<div id="open_social_login" class="login_box">';
 		if(defined("QQ_AKEY")) $html .= open_login_button_show('qq',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['qq'],$GLOBALS['open_str']['login']));
 		if(defined("WB_AKEY")) $html .= open_login_button_show('sina',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['sina'],$GLOBALS['open_str']['login']));
 		if(defined("BD_AKEY")) $html .= open_login_button_show('baidu',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['baidu'],$GLOBALS['open_str']['login']));

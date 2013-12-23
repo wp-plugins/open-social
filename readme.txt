@@ -76,7 +76,7 @@ More information please visit my site: [www.xiaomac.com](http://www.xiaomac.com/
 == Changelog ==
 
 = 1.1.1 =
-* 解决绑定功能定位不清晰的问题
+* 解决绑定功能逻辑不清晰的问题
 
 = 1.1.0 =
 * 解决豆瓣回调地址要完全匹配不能带参数的问题

@@ -34,7 +34,7 @@ More information please visit my site: [www.xiaomac.com](http://www.xiaomac.com/
 *   头像：会自动沿用QQ的头像
 *   工具条：默认屏蔽（尽量不对用户提供后台，他们只是管理评论和有自己的真像而已）
 
-更多信息可查看: [www.xiaomac.com](http://www.xiaomac.com/201311150.html)，小站刚起步，可以的话给我留个链接，谢谢了：）
+更多信息可查看: [www.xiaomac.com](http://www.xiaomac.com/)，小站刚起步，可以的话给我留个链接，谢谢了：）
 
 == Installation ==
 

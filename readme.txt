@@ -17,7 +17,7 @@ Login/Share with social networks (mainly in China): QQ, Sina, Baidu, Google, Liv
 
 Allow to Login or Share with social networks (mainly in china) like QQ, Sina WeiBo, Baidu, Google, Live, DouBan, RenRen, KaiXin. No API! NO Registration! NO 3rd-party! **Show and Post** will be the Next.
 
-More information please visit my site: [www.xiaomac.com](http://www.xiaomac.com/201311150.html).
+More information please visit my site: [www.xiaomac.com](http://www.xiaomac.com/).
 
 可用社交网站（特别是国内）如腾讯QQ、新浪微博、百度、谷歌、微软LIVE、豆瓣、人人网、开心网绑定登录或分享的一个插件，无第三方平台、无接口文件冗余、无任何多余脚本加载、带昵称网址头像等、可设置右侧小工具；设置简单，绿色低碳。
 

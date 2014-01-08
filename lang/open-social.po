@@ -1,14 +1,14 @@
-# Copyright (C) 2013 Open Social for China
+# Copyright (C) 2014 Open Social for China
 # This file is distributed under the same license as the Open Social for China package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Open Social for China 1.0.8\n"
+"Project-Id-Version: Open Social for China 1.1.2\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/open-social\n"
-"POT-Creation-Date: 2013-12-19 07:50:49+00:00\n"
+"POT-Creation-Date: 2014-01-08 03:27:47+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2013-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2014-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
@@ -92,7 +92,7 @@ msgstr ""
 msgid "Facebook"
 msgstr ""
 
-#: open-social.php:43 open-social.php:602
+#: open-social.php:43 open-social.php:656
 msgid "Settings"
 msgstr ""
 
@@ -220,15 +220,23 @@ msgstr ""
 msgid "UnFake Your Email"
 msgstr ""
 
-#: open-social.php:659 open-social.php:668
+#: open-social.php:75
+msgid "XiaoMi"
+msgstr ""
+
+#: open-social.php:76
+msgid "Login to Display"
+msgstr ""
+
+#: open-social.php:716 open-social.php:725
 msgid "Widgets"
 msgstr ""
 
-#: open-social.php:921 open-social.php:1005
+#: open-social.php:1009 open-social.php:1095
 msgid "Title:"
 msgstr ""
 
-#: open-social.php:967
+#: open-social.php:1056
 msgid "Log Out"
 msgstr ""
 

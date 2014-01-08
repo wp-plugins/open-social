@@ -5,7 +5,7 @@
  * Description: Allow to Login or Share with social networks (specially in china) like QQ, Sina WeiBo, Baidu, Google, Live, DouBan, RenRen, KaiXin. NO 3rd-party!
  * Author: Afly
  * Author URI: http://www.xiaomac.com/
- * Version: 1.1.1
+ * Version: 1.1.2
  * License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * Text Domain: open-social
  * Domain Path: /lang
@@ -71,7 +71,9 @@ function open_init() {
 		'osop_share_qq_email'		=> __('QQ EmailMe Code','open-social'),
 		'osop_share_qq_talk'		=> __('QQ ContactMe Link','open-social'),
 		'osop_delete_setting'		=> __('Auto delete Configuration Above after Uninstallation. NOT RECOMMENDED!','open-social'),
-		'edit_fake_email'			=> __('UnFake Your Email','open-social')
+		'edit_fake_email'			=> __('UnFake Your Email','open-social'),
+		'xiaomi'					=> __('XiaoMi','open-social'),
+		'open_social_hide_text'		=> __('Login to Display','open-social'),
 	);
 	if (isset($_GET['connect'])) {
 		define('OPEN_TYPE',$_GET['connect']);
@@ -91,6 +93,8 @@ function open_init() {
 			$os = new RENREN_CLASS();
 		}elseif(OPEN_TYPE=='kaixin'){
 			$os = new KAIXIN_CLASS();
+		}elseif(OPEN_TYPE=='xiaomi'){
+			$os = new XIAOMI_CLASS();
 		}else{
 			exit();
 		}
@@ -102,7 +106,7 @@ function open_init() {
 				exit();
 			}
 			$os -> open_callback($_GET['code']);
-			open_action($os);
+			open_action( $os );
 		} else if ($_GET['action'] == 'unbind') {
 			open_unbind();
 		} else if ($_GET['action'] == 'update'){
@@ -244,11 +248,10 @@ class BAIDU_CLASS {
 		);
 		$str = open_connect_http('https://openapi.baidu.com/oauth/2.0/token', http_build_query($params), 'POST');
 		$_SESSION["access_token"] = $str["access_token"];
-		$user = open_connect_http("https://openapi.baidu.com/rest/2.0/passport/users/getLoggedInUser?access_token=".$_SESSION["access_token"]);
-		$_SESSION['open_id'] = $user['portrait'];//for avatar
 	}
 	function open_new_user(){
 		$user = open_connect_http("https://openapi.baidu.com/rest/2.0/passport/users/getLoggedInUser?access_token=".$_SESSION["access_token"]);
+		$_SESSION['open_id'] = $user['portrait'];//for avatar
 		return array(
 			'nickname' => $user["uname"],
 			'display_name' => $user["uname"],
@@ -281,11 +284,10 @@ class GOOGLE_CLASS {
 		);
 		$str = open_connect_http('https://accounts.google.com/o/oauth2/token', http_build_query($params), 'POST');
 		$_SESSION["access_token"] = $str["access_token"];
-		$user = open_connect_http("https://www.googleapis.com/oauth2/v1/userinfo?access_token=".$_SESSION["access_token"]);
-		$_SESSION['open_id'] = $user["id"];
 	}
 	function open_new_user(){
 		$user = open_connect_http("https://www.googleapis.com/oauth2/v1/userinfo?access_token=".$_SESSION["access_token"]);
+		$_SESSION['open_id'] = $user["id"];
 		return array(
 			'nickname' => $user['name'],
 			'display_name' => $user['name'],
@@ -316,11 +318,10 @@ class LIVE_CLASS {
 		);
 		$str = open_connect_http('https://login.live.com/oauth20_token.srf', http_build_query($params), 'POST');
 		$_SESSION["access_token"] = $str["access_token"];
-		$user = open_connect_http("https://apis.live.net/v5.0/me");//?access_token=".$_SESSION["access_token"]
-		$_SESSION['open_id'] = $user["id"];
 	}
 	function open_new_user(){
 		$user = open_connect_http("https://apis.live.net/v5.0/me");
+		$_SESSION['open_id'] = $user["id"];
 		return array(
 			'nickname' => $user["name"],
 			'display_name' => $user["name"],
@@ -390,11 +391,11 @@ class RENREN_CLASS {
 	}
 	function open_new_user(){
 		$user = open_connect_http("https://api.renren.com/v2/user/login/get?access_token=".$_SESSION["access_token"]);
-		$_SESSION['open_img'] = $user['response']["avatar"][0]['url'];
+		$_SESSION['open_img'] = $user['response']["avatar"][1]['url'];
 		return array(
 			'nickname' => $user['response']['name'],
 			'display_name' => $user['response']['name'],
-			'user_url' => 'http://www.renren.com/home?id='.$_SESSION['open_id'],
+			'user_url' => 'http://www.renren.com/'.$_SESSION['open_id'].'/profile',
 			'user_email' => $_SESSION['open_id'].'@renren.com'//fake
 		);
 	}
@@ -421,17 +422,62 @@ class KAIXIN_CLASS {
 		);
 		$str = open_connect_http('https://api.kaixin001.com/oauth2/access_token', http_build_query($params), 'POST');
 		$_SESSION["access_token"] = $str["access_token"];
-		$user = open_connect_http("https://api.kaixin001.com/users/me?access_token=".$_SESSION["access_token"]);
-		$_SESSION['open_id'] = $user["uid"];
 	}
 	function open_new_user(){
 		$user = open_connect_http("https://api.kaixin001.com/users/me?access_token=".$_SESSION["access_token"]);
+		$_SESSION['open_id'] = $user["uid"];
 		$_SESSION['open_img'] = $user['logo50'];
 		return array(
 			'nickname' => $user['name'],
 			'display_name' => $user['name'],
 			'user_url' => 'http://www.kaixin001.com/home/'.$_SESSION['open_id'].'.html',
 			'user_email' => $_SESSION['open_id'].'@kaixin.com'//fake
+		);
+	}
+} 
+
+class XIAOMI_CLASS {
+	function open_login() {
+		$params=array(
+			'response_type'=>'code',
+			'client_id'=>XM_AKEY,
+			'redirect_uri'=>XM_BACK.'?connect=xiaomi&action=callback',
+			'state'=>'state',
+			'scope'=>''
+		);
+		header('Location:https://account.xiaomi.com/oauth2/authorize?'.http_build_query($params));
+		exit();
+	} 
+	function open_callback($code) {
+		$params=array(
+			'grant_type'=>'authorization_code',
+			'code'=>$code,
+			'client_id'=>XM_AKEY,
+			'client_secret'=>XM_SKEY,
+			'redirect_uri'=>XM_BACK.'?connect=xiaomi&action=callback',
+			'token_type'=>'mac'
+		);
+		$str = open_connect_http('https://account.xiaomi.com/oauth2/token?'.http_build_query($params));
+		$_SESSION["access_token"] = $str["access_token"];
+		$_SESSION["mac_key"] = $str["mac_key"];
+	}
+	function open_new_user(){
+        list($usec, $sec) = explode(' ', microtime());
+        $nonce = (float)mt_rand();
+        $minutes = (int)($sec / 60);
+        $nonce = $nonce.":".$minutes;
+        $signString = $nonce."\nGET\nopen.account.xiaomi.com\n/user/profile\nclientId=".XM_AKEY."&token=".$_SESSION["access_token"]."\n";
+		$sign = urlencode(base64_encode(hash_hmac('sha1', $signString, $_SESSION["mac_key"], true)));
+        $head = array('Authorization:MAC access_token="'.$_SESSION["access_token"].'", nonce="'.$nonce.'",mac="'.$sign.'"');
+		$user = open_connect_http("https://open.account.xiaomi.com/user/profile?clientId=".XM_AKEY."&token=".$_SESSION["access_token"],'','GET',$head);
+		$_SESSION['open_id'] = $user['data']['userId'];
+		//$_SESSION['open_img'] = $user['data']['miliaoIcon'];
+		unset($_SESSION["mac_key"]);
+		return array(
+			'nickname' => $user['data']['aliasNick'],
+			'display_name' => $user['data']['miliaoNick'],
+			'user_url' => 'http://www.miui.com/space-uid-'.$_SESSION['open_id'].'.html',
+			'user_email' => $_SESSION['open_id'].'@xiaomi.com'//fake
 		);
 	}
 } 
@@ -460,6 +506,7 @@ function open_unbind(){
 }
 
 function open_action($os){
+	if (!isset($_SESSION['open_id'])) $newuser = $os -> open_new_user();
 	if (!$_SESSION['open_id'] || !OPEN_TYPE) return;
 	if (is_user_logged_in()) {
 		$wpuid = get_current_user_id();
@@ -479,7 +526,8 @@ function open_action($os){
 					'user_login' => strtoupper(OPEN_TYPE).$_SESSION['open_id'],
 					'show_admin_bar_front' => 'false'
 				);
-				$userdata = array_merge($userdata, $os -> open_new_user());
+				if(!isset($newuser)) $newuser = $os -> open_new_user();
+				$userdata = array_merge($userdata, $newuser);
 				if(email_exists($userdata['user_email'])) open_close($GLOBALS['open_str']['err_other_email']);//Google,Live
 				if(!function_exists('wp_insert_user')){
 					include_once( ABSPATH . WPINC . '/registration.php' );
@@ -539,23 +587,27 @@ function open_connect_api($url, $params=array(), $method='GET'){
 
 function open_connect_http($url, $postfields='', $method='GET', $headers=array()){
 	$ci=curl_init();
-	curl_setopt($ci, CURLOPT_SSL_VERIFYPEER, FALSE); 
-	curl_setopt($ci, CURLOPT_RETURNTRANSFER, 1);
+	curl_setopt($ci, CURLOPT_SSL_VERIFYPEER, false); 
+    curl_setopt($ci, CURLOPT_SSL_VERIFYHOST, false);
+	curl_setopt($ci, CURLOPT_HEADER, false);
+	curl_setopt($ci, CURLOPT_RETURNTRANSFER, true);
 	curl_setopt($ci, CURLOPT_CONNECTTIMEOUT, 30);
 	curl_setopt($ci, CURLOPT_TIMEOUT, 30);
 	if($method=='POST'){
 		curl_setopt($ci, CURLOPT_POST, TRUE);
 		if($postfields!='')curl_setopt($ci, CURLOPT_POSTFIELDS, $postfields);
 	}
-	$headers[]='User-Agent: Open Social Login for China(xiaomac.com)';
-	if(isset($_SESSION["access_token"])){
+	if(!$headers && isset($_SESSION["access_token"])){
 		$headers[]='Authorization: Bearer '.$_SESSION["access_token"];
 	}
+	$headers[] = 'User-Agent: Open Social Login for China(xiaomac.com)';
+	$headers[] = 'Expect:';
 	curl_setopt($ci, CURLOPT_HTTPHEADER, $headers);
 	curl_setopt($ci, CURLOPT_URL, $url);
 	$response=curl_exec($ci);
 	curl_close($ci);
 	$json_r=array();
+	if(strpos($response,'&&&START&&&')===0)$response = str_replace("&&&START&&&","",$response);
 	if($response!='')$json_r=json_decode($response, true);
 	return $json_r;
 }
@@ -645,6 +697,9 @@ function open_options_page() {
 		$s .= "define('KX_AKEY','".esc_attr($_POST['KX_AKEY'])."');\n";
 		$s .= "define('KX_SKEY','".esc_attr($_POST['KX_SKEY'])."');\n";
 		$s .= "define('KX_BACK','".esc_attr($_POST['KX_BACK'])."');\n";
+		$s .= "define('XM_AKEY','".esc_attr($_POST['XM_AKEY'])."');\n";
+		$s .= "define('XM_SKEY','".esc_attr($_POST['XM_SKEY'])."');\n";
+		$s .= "define('XM_BACK','".esc_attr($_POST['XM_BACK'])."');\n";
 		$s .= "?>\n";
 		fwrite($fp, $s);
 		fclose($fp);
@@ -756,6 +811,15 @@ function open_options_page() {
 			<input name="KX_SKEY" value="<?php echo (defined("KX_SKEY")?KX_SKEY:'');?>" class="regular-text" /> Secret Key <br/>
 			<input name="KX_BACK" value="<?php echo (defined("KX_BACK")?KX_BACK:'');?>" class="regular-text code" placeholder="<?php echo home_url('/')?>" />
 			<?php echo $GLOBALS['open_str']['callback']?> <br/>
+		</td>
+		</tr>
+		<tr valign="top">
+		<th scope="row"><a href="http://dev.xiaomi.com/" target="_blank"><?php echo $GLOBALS['open_str']['xiaomi']?></a>
+			<a href="http://dev.xiaomi.com/doc/" target="_blank">?</a></th>
+		<td><input name="XM_AKEY" value="<?php echo (defined("XM_AKEY")?XM_AKEY:'');?>" class="regular-text" /> AppID <br/>
+			<input name="XM_SKEY" value="<?php echo (defined("XM_SKEY")?XM_SKEY:'');?>" class="regular-text" /> AppSecret <br/>
+			<input name="XM_BACK" value="<?php echo (defined("XM_BACK")?XM_BACK:'');?>" class="regular-text code" placeholder="<?php echo home_url('/')?>" />
+			<?php echo $GLOBALS['open_str']['callback']?> 
 			<?php submit_button();?>
 		</td>
 		</tr>
@@ -795,12 +859,14 @@ function open_get_avatar($avatar, $id_or_email='',$size='80') {
 			$out = 'http://img3.douban.com/icon/ul'.$open_id.'.jpg';//u
 		}elseif($open_type=='google'){
 			$out = 'http://www.google.com/s2/photos/profile/'.$open_id.'?sz=100';
+		}elseif($open_type=='xiaomi'){
+			$out = 'http://avatar.bbs.miui.com/data/avatar/'.substr((strlen($open_id)<=8?'0'.$open_id:$open_id),0,-6).'/'.substr($open_id,-6,-4).'/'.substr($open_id,-4,-2).'/'.substr($open_id,-2).'_avatar_middle.jpg';
 		}elseif($open_type=='renren'||$open_type=='kaixin'){
 			$out = get_user_meta($id_or_email, 'open_img', true);
 			if($open_type=='kaixin') $out = str_replace('/50_','/120_',$out);
 			if($open_type=='renren') $out = str_replace('/tiny_','/head_',$out);
 		}
-		if(isset($open_id) && isset($out)) $avatar = "<img alt='' src='{$out}' class='avatar avatar-{$size}' height='{$size}' width='{$size}' />";
+		if(isset($open_id) && isset($out)) $avatar = "<img alt='' src='{$out}' class='avatar avatar-{$size}' width='{$size}' />";
 	}
 	return $avatar;
 }
@@ -814,16 +880,16 @@ add_action('comment_form_must_log_in_after', 'open_social_login_form');
 function open_social_login_form($login_type='') {
 	if (!is_user_logged_in() || $login_type=='bind'){
 		$html = '<div id="open_social_login" class="login_box">';
-		if(defined("QQ_AKEY")) $html .= open_login_button_show('qq',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['qq'],$GLOBALS['open_str']['login']));
-		if(defined("WB_AKEY")) $html .= open_login_button_show('sina',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['sina'],$GLOBALS['open_str']['login']));
-		if(defined("BD_AKEY")) $html .= open_login_button_show('baidu',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['baidu'],$GLOBALS['open_str']['login']));
-		if(defined("GG_AKEY")) $html .= open_login_button_show('google',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['google'],$GLOBALS['open_str']['login']));
-		if(defined("WL_AKEY")) $html .= open_login_button_show('live',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['live'],$GLOBALS['open_str']['login']));
-		if(defined("DB_AKEY")) $html .= open_login_button_show('douban',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['douban'],$GLOBALS['open_str']['login']));
-		if(defined("RR_AKEY")) $html .= open_login_button_show('renren',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['renren'],$GLOBALS['open_str']['login']));
-		if(defined("KX_AKEY")) $html .= open_login_button_show('kaixin',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['kaixin'],$GLOBALS['open_str']['login']));
+		if(defined("QQ_AKEY")&&QQ_AKEY) $html .= open_login_button_show('qq',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['qq'],$GLOBALS['open_str']['login']));
+		if(defined("WB_AKEY")&&WB_AKEY) $html .= open_login_button_show('sina',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['sina'],$GLOBALS['open_str']['login']));
+		if(defined("BD_AKEY")&&BD_AKEY) $html .= open_login_button_show('baidu',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['baidu'],$GLOBALS['open_str']['login']));
+		if(defined("GG_AKEY")&&GG_AKEY) $html .= open_login_button_show('google',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['google'],$GLOBALS['open_str']['login']));
+		if(defined("WL_AKEY")&&WL_AKEY) $html .= open_login_button_show('live',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['live'],$GLOBALS['open_str']['login']));
+		if(defined("DB_AKEY")&&DB_AKEY) $html .= open_login_button_show('douban',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['douban'],$GLOBALS['open_str']['login']));
+		if(defined("RR_AKEY")&&RR_AKEY) $html .= open_login_button_show('renren',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['renren'],$GLOBALS['open_str']['login']));
+		if(defined("KX_AKEY")&&KX_AKEY) $html .= open_login_button_show('kaixin',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['kaixin'],$GLOBALS['open_str']['login']));
+		if(defined("XM_AKEY")&&XM_AKEY) $html .= open_login_button_show('xiaomi',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['xiaomi'],$GLOBALS['open_str']['login']));
 		$html .= '</div>';
-		//if($login_type=='bind') return $html;
 		echo $html;
 	}
 } 
@@ -852,7 +918,7 @@ function open_social_hide_option(){
 	$current_user = wp_get_current_user();
 	$m = $current_user->user_email;
 	$open_type = get_user_meta($current_user -> ID, 'open_type', true);
-	if(!current_user_can('manage_options') && $open_type && (strpos($m,'@t.qq.com')||strpos($m,'@weibo.com')||strpos($m,'@baidu.com')||strpos($m,'@douban.com')||strpos($m,'@renren.com')||strpos($m,'@kaixin.com')) ){
+	if(!current_user_can('manage_options') && $open_type && (strpos($m,'@t.qq.com')||strpos($m,'@weibo.com')||strpos($m,'@baidu.com')||strpos($m,'@douban.com')||strpos($m,'@renren.com')||strpos($m,'@kaixin.com')||strpos($m,'@xiaomi.com')) ){
 		//not admin, had bound, have fake email
 		echo "<script>jQuery(document).ready(function($){
 				$('#wpfooter').hide();
@@ -904,6 +970,18 @@ function open_lang_button_show($icon_type,$icon_title,$icon_link){//world
 	return "<div class=\"lang_button\" onclick=\"location.href='$icon_link';\" title=\"$icon_title\"><img src=\"".plugins_url('images/lang_button/'.$icon_type.'.gif', __FILE__)."\" width=\"20\" height=\"20\" /></div>";
 }
 
+//shortcode
+add_shortcode('os_hide', 'open_social_hide');
+function open_social_hide($atts, $content=""){
+	$output = '';
+	if(is_user_logged_in()){
+		$output .= '<span class=os_show>'.trim($content).'</span>';
+	}else{
+		$output .= '<p class=os_hide>'.$GLOBALS['open_str']['open_social_hide_text'].'</p>';
+	}
+	return $output;
+}
+
 //widget
 add_action('widgets_init', create_function('', 'return register_widget("open_social_login_widget");'));
 add_action('widgets_init', create_function('', 'return register_widget("open_social_share_widget");'));
@@ -923,19 +1001,21 @@ class open_social_login_widget extends WP_Widget {
 			$douban = esc_attr($instance['douban']);
 			$renren = esc_attr($instance['renren']);
 			$kaixin = esc_attr($instance['kaixin']);
+			$xiaomi = esc_attr($instance['xiaomi']);
 		} else {
 			$title = '';
-		    $qq = $sina = $baidu = $google = $live = $douban = $renren = $kaixin = 1;
+		    $qq = $sina = $baidu = $google = $live = $douban = $renren = $kaixin = $xiaomi = 1;
 		}
 		echo '<p><label for="'.$this->get_field_id( 'title' ).'">'.__( 'Title:' ).'</label><input class="widefat" id="'.$this->get_field_id( 'title' ).'" name="'.$this->get_field_name( 'title' ).'" type="text" value="'.esc_attr( $title ).'" /></p>';
 		echo '<p><input id="'.$this->get_field_id('qq').'" name="'.$this->get_field_name('qq').'" type="checkbox" value="1" '.checked( '1', $qq, false).' /> <label for="'.$this->get_field_id('qq').'">'.$GLOBALS['open_str']['qq'].'</label> ';
 		echo '<input id="'.$this->get_field_id('sina').'" name="'.$this->get_field_name('sina').'" type="checkbox" value="1" '.checked( '1', $sina, false).' /> <label for="'.$this->get_field_id('sina').'">'.$GLOBALS['open_str']['sina'].'</label> ';
-		echo '<input id="'.$this->get_field_id('baidu').'" name="'.$this->get_field_name('baidu').'" type="checkbox" value="1" '.checked( '1', $baidu, false).' /> <label for="'.$this->get_field_id('baidu').'">'.$GLOBALS['open_str']['baidu'].'</label> ';
-		echo '<input id="'.$this->get_field_id('google').'" name="'.$this->get_field_name('google').'" type="checkbox" value="1" '.checked( '1', $google, false).' /> <label for="'.$this->get_field_id('google').'">'.$GLOBALS['open_str']['google'].'</label></p>';
-		echo '<p><input id="'.$this->get_field_id('live').'" name="'.$this->get_field_name('live').'" type="checkbox" value="1" '.checked( '1', $live, false).' /> <label for="'.$this->get_field_id('live').'">'.$GLOBALS['open_str']['live'].'</label> ';
-		echo '<input id="'.$this->get_field_id('douban').'" name="'.$this->get_field_name('douban').'" type="checkbox" value="1" '.checked( '1', $douban, false).' /> <label for="'.$this->get_field_id('douban').'">'.$GLOBALS['open_str']['douban'].'</label> ';
-		echo '<input id="'.$this->get_field_id('renren').'" name="'.$this->get_field_name('renren').'" type="checkbox" value="1" '.checked( '1', $renren, false).' /> <label for="'.$this->get_field_id('renren').'">'.$GLOBALS['open_str']['renren'].'</label> ';
-		echo '<input id="'.$this->get_field_id('kaixin').'" name="'.$this->get_field_name('kaixin').'" type="checkbox" value="1" '.checked( '1', $kaixin, false).' /> <label for="'.$this->get_field_id('kaixin').'">'.$GLOBALS['open_str']['kaixin'].'</label></p>';
+		echo '<input id="'.$this->get_field_id('baidu').'" name="'.$this->get_field_name('baidu').'" type="checkbox" value="1" '.checked( '1', $baidu, false).' /> <label for="'.$this->get_field_id('baidu').'">'.$GLOBALS['open_str']['baidu'].'</label></p>';
+		echo '<p><input id="'.$this->get_field_id('google').'" name="'.$this->get_field_name('google').'" type="checkbox" value="1" '.checked( '1', $google, false).' /> <label for="'.$this->get_field_id('google').'">'.$GLOBALS['open_str']['google'].'</label> ';
+		echo '<input id="'.$this->get_field_id('live').'" name="'.$this->get_field_name('live').'" type="checkbox" value="1" '.checked( '1', $live, false).' /> <label for="'.$this->get_field_id('live').'">'.$GLOBALS['open_str']['live'].'</label> ';
+		echo '<input id="'.$this->get_field_id('douban').'" name="'.$this->get_field_name('douban').'" type="checkbox" value="1" '.checked( '1', $douban, false).' /> <label for="'.$this->get_field_id('douban').'">'.$GLOBALS['open_str']['douban'].'</label></p>';
+		echo '<p><input id="'.$this->get_field_id('renren').'" name="'.$this->get_field_name('renren').'" type="checkbox" value="1" '.checked( '1', $renren, false).' /> <label for="'.$this->get_field_id('renren').'">'.$GLOBALS['open_str']['renren'].'</label> ';
+		echo '<input id="'.$this->get_field_id('kaixin').'" name="'.$this->get_field_name('kaixin').'" type="checkbox" value="1" '.checked( '1', $kaixin, false).' /> <label for="'.$this->get_field_id('kaixin').'">'.$GLOBALS['open_str']['kaixin'].'</label> ';
+		echo '<input id="'.$this->get_field_id('xiaomi').'" name="'.$this->get_field_name('xiaomi').'" type="checkbox" value="1" '.checked( '1', $xiaomi, false).' /> <label for="'.$this->get_field_id('xiaomi').'">'.$GLOBALS['open_str']['xiaomi'].'</label></p>';
 	}
 	function update($new_instance, $old_instance) {
         $instance = $old_instance;
@@ -948,6 +1028,7 @@ class open_social_login_widget extends WP_Widget {
         $instance['douban'] = strip_tags($new_instance['douban']);
         $instance['renren'] = strip_tags($new_instance['renren']);
         $instance['kaixin'] = strip_tags($new_instance['kaixin']);
+        $instance['xiaomi'] = strip_tags($new_instance['xiaomi']);
         return $instance;
 	}
 	function widget($args, $instance) {
@@ -962,6 +1043,7 @@ class open_social_login_widget extends WP_Widget {
 		$douban = $instance['douban'];
 		$renren = $instance['renren'];
 		$kaixin= $instance['kaixin'];
+		$xiaomi= $instance['xiaomi'];
 		echo $before_widget;
 		if ( $title ) echo '<h3 class="widget-title">'.$title.'</h3>';
 		echo '<div class="textwidget">';
@@ -969,18 +1051,19 @@ class open_social_login_widget extends WP_Widget {
 			$current_user = wp_get_current_user();
 			$m = $current_user->user_email;
 			echo '<a href="'.(current_user_can('manage_options')?admin_url():get_edit_user_link($current_user->ID)).'">'.get_avatar($current_user->ID).'</a><br/>';
-			if(strpos($m,'@t.qq.com')||strpos($m,'@weibo.com')||strpos($m,'@baidu.com')||strpos($m,'@douban.com')||strpos($m,'@renren.com')||strpos($m,'@kaixin.com')) echo '<a href="'.get_edit_user_link($current_user->ID).'">'.$GLOBALS['open_str']['edit_fake_email'].'</a><br/>';
+			if(strpos($m,'@t.qq.com')||strpos($m,'@weibo.com')||strpos($m,'@baidu.com')||strpos($m,'@douban.com')||strpos($m,'@renren.com')||strpos($m,'@kaixin.com')||strpos($m,'@xiaomi.com')) echo '<a href="'.get_edit_user_link($current_user->ID).'">'.$GLOBALS['open_str']['edit_fake_email'].'</a><br/>';
 			echo '<a href="'.$current_user->user_url.'" target="_blank">'.$current_user->display_name.'</a>';
-			echo ' (<a href="'.wp_logout_url(get_permalink()).'">'.__('Log Out').'</a>)';
+			echo ' (<a href="'.wp_logout_url($_SERVER['REQUEST_URI']).'">'.__('Log Out').'</a>)';
 		}else{
-			if(defined("QQ_AKEY") && $qq) echo open_login_button_show('qq',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['qq'],$GLOBALS['open_str']['login']));
-			if(defined("WB_AKEY") && $sina) echo open_login_button_show('sina',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['sina'],$GLOBALS['open_str']['login']));
-			if(defined("BD_AKEY") && $baidu) echo open_login_button_show('baidu',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['baidu'],$GLOBALS['open_str']['login']));
-			if(defined("GG_AKEY") && $google) echo open_login_button_show('google',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['google'],$GLOBALS['open_str']['login']));
-			if(defined("WL_AKEY") && $live) echo open_login_button_show('live',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['live'],$GLOBALS['open_str']['login']));
-			if(defined("DB_AKEY") && $douban) echo open_login_button_show('douban',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['douban'],$GLOBALS['open_str']['login']));
-			if(defined("RR_AKEY") && $renren) echo open_login_button_show('renren',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['renren'],$GLOBALS['open_str']['login']));
-			if(defined("KX_AKEY") && $kaixin) echo open_login_button_show('kaixin',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['kaixin'],$GLOBALS['open_str']['login']));
+			if(defined("QQ_AKEY") && QQ_AKEY && $qq) echo open_login_button_show('qq',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['qq'],$GLOBALS['open_str']['login']));
+			if(defined("WB_AKEY") && WB_AKEY && $sina) echo open_login_button_show('sina',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['sina'],$GLOBALS['open_str']['login']));
+			if(defined("BD_AKEY") && BD_AKEY && $baidu) echo open_login_button_show('baidu',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['baidu'],$GLOBALS['open_str']['login']));
+			if(defined("GG_AKEY") && GG_AKEY && $google) echo open_login_button_show('google',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['google'],$GLOBALS['open_str']['login']));
+			if(defined("WL_AKEY") && WL_AKEY && $live) echo open_login_button_show('live',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['live'],$GLOBALS['open_str']['login']));
+			if(defined("DB_AKEY") && DB_AKEY && $douban) echo open_login_button_show('douban',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['douban'],$GLOBALS['open_str']['login']));
+			if(defined("RR_AKEY") && RR_AKEY && $renren) echo open_login_button_show('renren',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['renren'],$GLOBALS['open_str']['login']));
+			if(defined("KX_AKEY") && KX_AKEY && $kaixin) echo open_login_button_show('kaixin',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['kaixin'],$GLOBALS['open_str']['login']));
+			if(defined("XM_AKEY") && XM_AKEY && $xiaomi) echo open_login_button_show('xiaomi',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['xiaomi'],$GLOBALS['open_str']['login']));
 		}
 		echo '</div>';
 		echo $after_widget;

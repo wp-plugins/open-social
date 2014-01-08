@@ -2,24 +2,24 @@
 
 Contributors: playes
 Donate link: https://me.alipay.com/playes
-Tags: china, chinese, afly, social, login, connect, qq, sina, weibo, baidu, google, live, douban, renren, kaixin001, openid, QQ登陆, 新浪微博, 百度, 谷歌, 豆瓣, 人人网, 开心网, 登录, 连接, 注册, 分享
+Tags: china, chinese, afly, social, login, connect, qq, sina, weibo, baidu, google, live, douban, renren, kaixin001, openid, xiaomi, QQ登陆, 新浪微博, 百度, 谷歌, 豆瓣, 人人网, 开心网, 登录, 连接, 注册, 分享, 小米
 Requires at least: 3.0
 Tested up to: 3.8
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Login/Share with social networks (mainly in China): QQ, Sina, Baidu, Google, Live, DouBan, RenRen, KaiXin. No API, NO Registration, NO 3rd-Party!
+Login/Share with social networks (mainly in China): QQ, Sina, Baidu, Google, Live, DouBan, RenRen, KaiXin, XiaoMi. No API, NO Registration, NO 3rd-Party!
 
 == Description ==
 
 **Open Social Login/Share for China 国内社交网站登陆及分享**
 
-Allow to Login or Share with social networks (mainly in china) like QQ, Sina WeiBo, Baidu, Google, Live, DouBan, RenRen, KaiXin. No API! NO Registration! NO 3rd-party! **Show and Post** will be the Next.
+Allow to Login or Share with social networks (mainly in china) like QQ, Sina WeiBo, Baidu, Google, Live, DouBan, RenRen, KaiXin, XiaoMi. No API! NO Registration! NO 3rd-party! **Show and Post** will be the Next.
 
 More information please visit my site: [www.xiaomac.com](http://www.xiaomac.com/).
 
-可用社交网站（特别是国内）如腾讯QQ、新浪微博、百度、谷歌、微软LIVE、豆瓣、人人网、开心网绑定登录或分享的一个插件，无第三方平台、无接口文件冗余、无任何多余脚本加载、带昵称网址头像等、可设置右侧小工具；设置简单，绿色低碳。
+可用社交网站（特别是国内）如腾讯QQ、新浪微博、百度、谷歌、微软LIVE、豆瓣、人人网、开心网、小米绑定登录或分享的一个插件，无第三方平台、无接口文件冗余、无任何多余脚本加载、带昵称网址头像等、可设置右侧小工具；设置简单，绿色低碳。
 
 适合人群：**不喜第三方平台接入、不喜任何一个多余脚本、不喜任何一行多余代码、有一定手动折腾能力**。
 
@@ -74,6 +74,10 @@ More information please visit my site: [www.xiaomac.com](http://www.xiaomac.com/
 3. Setting
 
 == Changelog ==
+
+= 1.1.2 =
+* 增加以小米帐号登陆
+* 增加短代码[os_hide]，登陆用户可见
 
 = 1.1.1 =
 * 解决绑定功能逻辑不清晰的问题

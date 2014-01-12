@@ -217,3 +217,11 @@ body .ui-tooltip {
 	zoom:1;
 	*display:inline;
 } 
+
+.os_show {
+	display: block;
+	padding-left: 10px;
+	margin-bottom: 20px;
+	margin-left: 5px;
+	border-left: 2px solid gray;
+}

@@ -976,7 +976,7 @@ add_shortcode('os_hide', 'open_social_hide');
 function open_social_hide($atts, $content=""){
 	$output = '';
 	if(is_user_logged_in()){
-		$output .= '<span class=os_show>'.trim($content).'</span>';
+		$output .= '<span class=os_show><p>'.trim($content).'</p></span>';
 	}else{
 		$output .= '<p class=os_hide>'.$GLOBALS['open_str']['open_social_hide_text'].'</p>';
 	}

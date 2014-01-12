@@ -186,8 +186,8 @@ class QQ_CLASS {
 		$str = open_connect_http('https://graph.qq.com/user/get_info?access_token='.$_SESSION['access_token'].'&oauth_consumer_key='.QQ_AKEY.'&openid='.$_SESSION['open_id']);
 		$name = $str['data']['name'];//t.qq.com/***
 		return array(
-			'nickname' => $nickname,
-			'display_name' => $nickname,
+			'nickname' => $nickname?$nickname:'QQ'.time(),
+			'display_name' => $nickname?$nickname:'QQ'.time(),
 			'user_url' => $name?'http://t.qq.com/'.$name:'',
 			'user_email' => ($name?$name:strtolower($_SESSION['open_id'])).'@t.qq.com'//fake
 		);

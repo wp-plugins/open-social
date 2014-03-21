@@ -5,7 +5,7 @@
  * Description: Allow to Login or Share with social networks (specially in china) like QQ, Sina WeiBo, Baidu, Google, Live, DouBan, RenRen, KaiXin. NO 3rd-party!
  * Author: Afly
  * Author URI: http://www.xiaomac.com/
- * Version: 1.1.4
+ * Version: 1.1.5
  * License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * Text Domain: open-social
  * Domain Path: /lang
@@ -103,7 +103,7 @@ function open_init() {
 			$os -> open_login();
 		} else if ($_GET['action'] == 'callback') {
 			if(!isset($_GET['code'])){
-				echo '<script>opener.window.focus();window.close();</script>';
+				echo '<script>try{opener.window.focus();}catch(e){};window.close();</script>';
 				exit();
 			}
 			$os -> open_callback($_GET['code']);
@@ -552,10 +552,10 @@ function open_action($os){
 	if(!isset($_SESSION['back'])) $_SESSION['back'] = home_url(); 
 	echo '<script>
 			if(/iPhone/.test(navigator.userAgent)){
-				location.href="'.$_SESSION['back'].'";
+				location.replace("'.$_SESSION['back'].'");
 			}else{
 				opener.window.focus();
-				opener.window.location.href="'.$_SESSION['back'].'";
+				opener.window.location.reload();
 				window.close();
 			}
 		</script>';
@@ -880,16 +880,16 @@ if($osop && isset($osop['show_login_form']) && $osop['show_login_form']==2) add_
 add_action('comment_form_must_log_in_after', 'open_social_login_form');
 function open_social_login_form($login_type='') {
 	if (!is_user_logged_in() || $login_type=='bind'){
-		$html = '<div id="open_social_login" class="login_box">';
-		if(defined("QQ_AKEY")&&QQ_AKEY) $html .= open_login_button_show('qq',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['qq'],$GLOBALS['open_str']['login']));
-		if(defined("WB_AKEY")&&WB_AKEY) $html .= open_login_button_show('sina',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['sina'],$GLOBALS['open_str']['login']));
-		if(defined("BD_AKEY")&&BD_AKEY) $html .= open_login_button_show('baidu',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['baidu'],$GLOBALS['open_str']['login']));
-		if(defined("GG_AKEY")&&GG_AKEY) $html .= open_login_button_show('google',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['google'],$GLOBALS['open_str']['login']));
-		if(defined("WL_AKEY")&&WL_AKEY) $html .= open_login_button_show('live',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['live'],$GLOBALS['open_str']['login']));
-		if(defined("DB_AKEY")&&DB_AKEY) $html .= open_login_button_show('douban',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['douban'],$GLOBALS['open_str']['login']));
-		if(defined("RR_AKEY")&&RR_AKEY) $html .= open_login_button_show('renren',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['renren'],$GLOBALS['open_str']['login']));
-		if(defined("KX_AKEY")&&KX_AKEY) $html .= open_login_button_show('kaixin',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['kaixin'],$GLOBALS['open_str']['login']));
-		if(defined("XM_AKEY")&&XM_AKEY) $html .= open_login_button_show('xiaomi',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['xiaomi'],$GLOBALS['open_str']['login']));
+		$html = '<div id="open_social_login" class="open_social_box login_box">';
+		if(defined("QQ_AKEY")&&QQ_AKEY) $html .= open_login_button_show('qq',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['qq'],$GLOBALS['open_str']['login']),QQ_BACK);
+		if(defined("WB_AKEY")&&WB_AKEY) $html .= open_login_button_show('sina',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['sina'],$GLOBALS['open_str']['login']),WB_BACK);
+		if(defined("BD_AKEY")&&BD_AKEY) $html .= open_login_button_show('baidu',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['baidu'],$GLOBALS['open_str']['login']),BD_BACK);
+		if(defined("GG_AKEY")&&GG_AKEY) $html .= open_login_button_show('google',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['google'],$GLOBALS['open_str']['login']),GG_BACK);
+		if(defined("WL_AKEY")&&WL_AKEY) $html .= open_login_button_show('live',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['live'],$GLOBALS['open_str']['login']),WL_BACK);
+		if(defined("DB_AKEY")&&DB_AKEY) $html .= open_login_button_show('douban',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['douban'],$GLOBALS['open_str']['login']),DB_BACK);
+		if(defined("RR_AKEY")&&RR_AKEY) $html .= open_login_button_show('renren',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['renren'],$GLOBALS['open_str']['login']),RR_BACK);
+		if(defined("KX_AKEY")&&KX_AKEY) $html .= open_login_button_show('kaixin',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['kaixin'],$GLOBALS['open_str']['login']),KX_BACK);
+		if(defined("XM_AKEY")&&XM_AKEY) $html .= open_login_button_show('xiaomi',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['xiaomi'],$GLOBALS['open_str']['login']),XM_BACK);
 		$html .= '</div>';
 		echo $html;
 	}
@@ -899,7 +899,7 @@ if($osop && isset($osop['show_share_content']) && $osop['show_share_content']==1
 function open_social_share_form($content) {
 	if(is_single()) {
 		$osop = get_option('osop');
-		$content .= '<div class="share_box">';
+		$content .= '<div class="open_social_box share_box">';
 		$content .= open_share_button_show('weibo',str_replace('%SHARE_TYPE%',$GLOBALS['open_str']['share_weibo'],$GLOBALS['open_str']['share']),"http://v.t.sina.com.cn/share/share.php?url=%URL%&title=%TITLE%&appkey=".WB_AKEY."&ralateUid=".$osop['share_sina_user']."&language=zh_cn&searchPic=true");
 		$content .= open_share_button_show('qzone',str_replace('%SHARE_TYPE%',$GLOBALS['open_str']['share_qzone'],$GLOBALS['open_str']['share']),"http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=%URL%&title=%TITLE%&desc=&summary=&site=");
 		$content .= open_share_button_show('qqt',str_replace('%SHARE_TYPE%',$GLOBALS['open_str']['share_qqt'],$GLOBALS['open_str']['share']),"http://share.v.t.qq.com/index.php?c=share&amp;a=index&url=%URL%&title=%TITLE%&appkey=".$osop['share_qqt_appkey']);
@@ -958,8 +958,8 @@ function open_social_style() {
 	wp_register_script( 'open_social_js', plugins_url('/images/os.js', __FILE__), array( 'jquery','jquery-ui-tooltip' ), true );
 	wp_enqueue_script( 'open_social_js');
 }
-function open_login_button_show($icon_type,$icon_title){
-	return "<div class=\"login_button login_icon_$icon_type\" onclick=\"login_button_click('$icon_type')\" title=\"$icon_title\"></div>";
+function open_login_button_show($icon_type,$icon_title,$icon_link){
+	return "<div class=\"login_button login_icon_$icon_type\" onclick=\"login_button_click('$icon_type','$icon_link')\" title=\"$icon_title\"></div>";
 }
 function open_share_button_show($icon_type,$icon_title,$icon_link){
 	return "<div class=\"share_button share_icon_$icon_type\" onclick=\"share_button_click('$icon_link')\" title=\"$icon_title\"></div>";
@@ -976,9 +976,9 @@ add_shortcode('os_hide', 'open_social_hide');
 function open_social_hide($atts, $content=""){
 	$output = '';
 	if(is_user_logged_in()){
-		$output .= '<span class=os_show><p>'.trim($content).'</p></span>';
+		$output .= '<span class="os_show"><p>'.trim($content).'</p></span>';
 	}else{
-		$output .= '<p class=os_hide>'.$GLOBALS['open_str']['open_social_hide_text'].'</p>';
+		$output .= '<p class="os_hide">'.$GLOBALS['open_str']['open_social_hide_text'].'</p>';
 	}
 	return $output;
 }
@@ -1056,15 +1056,17 @@ class open_social_login_widget extends WP_Widget {
 			echo '<a href="'.$current_user->user_url.'" target="_blank">'.$current_user->display_name.'</a>';
 			echo ' (<a href="'.wp_logout_url($_SERVER['REQUEST_URI']).'">'.__('Log Out').'</a>)';
 		}else{
-			if(defined("QQ_AKEY") && QQ_AKEY && $qq) echo open_login_button_show('qq',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['qq'],$GLOBALS['open_str']['login']));
-			if(defined("WB_AKEY") && WB_AKEY && $sina) echo open_login_button_show('sina',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['sina'],$GLOBALS['open_str']['login']));
-			if(defined("BD_AKEY") && BD_AKEY && $baidu) echo open_login_button_show('baidu',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['baidu'],$GLOBALS['open_str']['login']));
-			if(defined("GG_AKEY") && GG_AKEY && $google) echo open_login_button_show('google',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['google'],$GLOBALS['open_str']['login']));
-			if(defined("WL_AKEY") && WL_AKEY && $live) echo open_login_button_show('live',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['live'],$GLOBALS['open_str']['login']));
-			if(defined("DB_AKEY") && DB_AKEY && $douban) echo open_login_button_show('douban',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['douban'],$GLOBALS['open_str']['login']));
-			if(defined("RR_AKEY") && RR_AKEY && $renren) echo open_login_button_show('renren',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['renren'],$GLOBALS['open_str']['login']));
-			if(defined("KX_AKEY") && KX_AKEY && $kaixin) echo open_login_button_show('kaixin',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['kaixin'],$GLOBALS['open_str']['login']));
-			if(defined("XM_AKEY") && XM_AKEY && $xiaomi) echo open_login_button_show('xiaomi',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['xiaomi'],$GLOBALS['open_str']['login']));
+			echo '<div class="open_social_box">';
+			if(defined("QQ_AKEY") && QQ_AKEY && $qq) echo open_login_button_show('qq',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['qq'],$GLOBALS['open_str']['login']),QQ_BACK);
+			if(defined("WB_AKEY") && WB_AKEY && $sina) echo open_login_button_show('sina',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['sina'],$GLOBALS['open_str']['login']),WB_BACK);
+			if(defined("BD_AKEY") && BD_AKEY && $baidu) echo open_login_button_show('baidu',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['baidu'],$GLOBALS['open_str']['login']),BD_BACK);
+			if(defined("GG_AKEY") && GG_AKEY && $google) echo open_login_button_show('google',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['google'],$GLOBALS['open_str']['login']),GG_BACK);
+			if(defined("WL_AKEY") && WL_AKEY && $live) echo open_login_button_show('live',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['live'],$GLOBALS['open_str']['login']),WL_BACK);
+			if(defined("DB_AKEY") && DB_AKEY && $douban) echo open_login_button_show('douban',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['douban'],$GLOBALS['open_str']['login']),DB_BACK);
+			if(defined("RR_AKEY") && RR_AKEY && $renren) echo open_login_button_show('renren',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['renren'],$GLOBALS['open_str']['login']),RR_BACK);
+			if(defined("KX_AKEY") && KX_AKEY && $kaixin) echo open_login_button_show('kaixin',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['kaixin'],$GLOBALS['open_str']['login']),KX_BACK);
+			if(defined("XM_AKEY") && XM_AKEY && $xiaomi) echo open_login_button_show('xiaomi',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['xiaomi'],$GLOBALS['open_str']['login']),XM_BACK);
+			echo '</div>';
 		}
 		echo '</div>';
 		echo $after_widget;
@@ -1141,6 +1143,7 @@ class open_social_share_widget extends WP_Widget {
 		echo $before_widget;
 		if ( $title ) echo '<h3 class="widget-title">'.$title.'</h3>';
 		echo '<div class="textwidget">';
+		echo '<div class="open_social_box">';
 		if($weibo) echo open_share_button_show('weibo',str_replace('%SHARE_TYPE%',$GLOBALS['open_str']['share_weibo'],$GLOBALS['open_str']['share']),"http://v.t.sina.com.cn/share/share.php?url=%URL%&title=%TITLE%&appkey=".WB_AKEY."&ralateUid=".$osop['share_sina_user']."&language=zh_cn&searchPic=true");
 		if($qzone) echo open_share_button_show('qzone',str_replace('%SHARE_TYPE%',$GLOBALS['open_str']['share_qzone'],$GLOBALS['open_str']['share']),"http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=%URL%&title=%TITLE%&desc=&summary=&site=");
 		if($qqt) echo open_share_button_show('qqt',str_replace('%SHARE_TYPE%',$GLOBALS['open_str']['share_qqt'],$GLOBALS['open_str']['share']),"http://share.v.t.qq.com/index.php?c=share&amp;a=index&url=%URL%&title=%TITLE%&appkey=".$osop['share_qqt_appkey']);
@@ -1162,6 +1165,7 @@ class open_social_share_widget extends WP_Widget {
 				echo open_lang_button_show($_SESSION['WPLANG_LOCALE'],$GLOBALS['open_str']['language_switch'].' '.$_SESSION['WPLANG_LOCALE'],"?open_lang=".$_SESSION['WPLANG_LOCALE']);			
 			}
 		}
+		echo '</div>';
 		echo '</div>';
 		echo $after_widget;
 	}

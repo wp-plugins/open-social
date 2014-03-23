@@ -9,7 +9,7 @@ Stable tag: 1.1.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Login/Share with social networks (mainly in China): QQ, Sina, Baidu, Google, Live, DouBan, RenRen, KaiXin, XiaoMi. No API, NO Registration, NO 3rd-Party!
+Login/Share with social networks (mainly in China): QQ, Sina, Baidu, Google, Live, DouBan, RenRen, KaiXin, XiaoMi. No API, NO Register, NO 3rd-Party!
 
 == Description ==
 

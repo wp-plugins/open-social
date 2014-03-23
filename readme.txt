@@ -42,11 +42,12 @@ More information please visit my site: [www.xiaomac.com](http://www.xiaomac.com/
 2. Activate the plugin through the 'Plugins' menu in WordPress,
 3. Visit the "Settings \ Open Social Setting" administration page to setup the plugin. 
 
-或者:
+also:
 
-1. 直接在 WorePress 后台搜索 open-social 在线安装，并启用。
+1. 直接在 WordPress 后台搜索 open social 在线安装，并启用。
 2. 然后在设置页面“社交网站设置”配置几个平台的 APP ID、APP KEY 即可。
-3. 卸载也同样方便，直接删除即可，无任何数据库残留！
+3. 选择显示位置，或拖入小工具 widget。
+4. 卸载也同样方便，直接删除即可，无任何数据库残留！
 
 == Frequently Asked Questions ==
 

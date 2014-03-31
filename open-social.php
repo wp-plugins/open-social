@@ -27,6 +27,17 @@ function open_init() {
 		'douban'	=> __('Douban','open-social'),
 		'renren'	=> __('RenRen','open-social'),
 		'kaixin'	=> __('Kaixin001','open-social'),
+		'xiaomi'	=> __('XiaoMi','open-social'),
+		'csdn'		=> __('CSDN','open-social'),
+		'oschina'	=> __('OSChina','open-social'),
+		'163'		=> __('163','open-social'),
+		'360'		=> __('360','open-social'),
+		'taobao'	=> __('Taobao','open-social'),
+		'facebook'	=> __('Facebook','open-social'),
+		'twitter'	=> __('Twitter','open-social'),
+		'instagram'	=> __('Instagram','open-social'),
+		'github'	=> __('Github','open-social'),
+		'callback'	=> __('CALLBACK','open-social'),
 		'login' 	=> __('Login with %OPEN_TYPE%','open-social'),
 		'unbind'	=> __('Unbind with %OPEN_TYPE%','open-social'),
 		'share'		=> __('Share with %SHARE_TYPE%','open-social'),
@@ -40,40 +51,46 @@ function open_init() {
 		'share_google'	=> __('Google Translation','open-social'),
 		'share_twitter'	=> __('Twitter','open-social'),
 		'share_facebook'	=> __('Facebook','open-social'),
-		'setting_button'	=> __('Settings','open-social'),
-		'setting_menu'		=> __('Open Social Setting','open-social'),
+		'setting_menu'		=> __('Open Social','open-social'),
+		'setting_menu_adv'	=> __('Account Setting','open-social'),
 		'language_switch'	=> __('Language Switcher','open-social'),
-		'callback'			=> __('CALLBACK','open-social'),
-		'widget_title'		=> __('Open Social Login', 'open-social'),
-		'widget_name'		=> __('Howdy', 'open-social'),
-		'widget_desc'		=> __('Display your Open Social login button', 'open-social'),
-		'widget_share_title'	=> __('Open Social Share', 'open-social'),
-		'widget_share_name'		=> __('Connect', 'open-social'),
-		'widget_share_desc'		=> __('Display your Open Social share button', 'open-social'),
-		'err_other_openid'		=> __('This account has been bound by other user.','open-social'),
-		'err_other_user'		=> __('You can only bind to one account at a time.','open-social'),
-		'err_other_email'		=> __('Your EMAIL has been registered by other user.','open-social'),
-		'setting_menu_adv'		=> __('Account Setting','open-social'),
 		'about_title'			=> __('About this plugin','open-social'),
 		'about_info'			=> __('if you like this plugin','open-social'),
 		'about_alipay'			=> __('Buy me a drink','open-social'),
-		'about_link'			=> __('Or leave me a link.','open-social'),
+		'about_link'			=> __('Or leave me a link','open-social'),
 		'about_plugin'			=> __('Or give me Five','open-social'),
+		'widget_title'			=> __('Open Social Login', 'open-social'),
+		'widget_name'			=> __('Howdy', 'open-social'),
+		'widget_desc'			=> __('Display your Open Social login button', 'open-social'),
+		'widget_share_title'	=> __('Open Social Share', 'open-social'),
+		'widget_share_name'		=> __('Connect', 'open-social'),
+		'widget_share_desc'		=> __('Display your Open Social share button', 'open-social'),
+		'widget_float_title'	=> __('Floating Button', 'open-social'),
+		'widget_float_desc'		=> __('Some floating useful buttons', 'open-social'),
+		'err_other_openid'		=> __('This account has been bound by other user.','open-social'),
+		'err_other_user'		=> __('You can only bind to one account at a time.','open-social'),
+		'err_other_email'		=> __('Your EMAIL has been registered by other user.','open-social'),
 		'osop_login_button'			=> __('Login Buttons','open-social'),
-		'osop_show_login_form1'		=> __('Before Comment Form','open-social'),
-		'osop_show_login_form2'		=> __('After Comment Form','open-social'),
+		'osop_show_login_form1'		=> __('Before comment form','open-social'),
+		'osop_show_login_form2'		=> __('After comment form','open-social'),
 		'osop_show_login_form0'		=> __('None','open-social'),
-		'osop_show_login_page'		=> __('Login Page','open-social'),
+		'osop_show_login_page'		=> __('Login page','open-social'),
 		'osop_share_button'			=> __('Share Button','open-social'),
-		'osop_show_share_content'	=> __('After Blog Content','open-social'),
-		'osop_share_sina_user'		=> __('Sina Weibo related UserID','open-social'),
-		'osop_share_qqt_appkey'		=> __('QQ Weibo Share AppKey','open-social'),
-		'osop_share_qq_email'		=> __('QQ EmailMe Code','open-social'),
-		'osop_share_qq_talk'		=> __('QQ ContactMe Link','open-social'),
-		'osop_delete_setting'		=> __('Auto delete Configuration Above after Uninstallation. NOT RECOMMENDED!','open-social'),
-		'edit_fake_email'			=> __('UnFake Your Email','open-social'),
-		'xiaomi'					=> __('XiaoMi','open-social'),
-		'open_social_hide_text'		=> __('Login to Display','open-social'),
+		'osop_show_share_content'	=> __('After post content','open-social'),
+		'osop_share_sina_user'		=> __('Sina weibo related UserID','open-social'),
+		'osop_share_qqt_appkey'		=> __('QQ weibo share AppKey','open-social'),
+		'osop_share_qq_email'		=> __('QQ EmailMe code','open-social'),
+		'osop_share_qq_talk'		=> __('QQ ContactMe link','open-social'),
+		'osop_delete_setting'		=> __('Delete configuration above after plugin deleted','open-social'),
+		'open_social_hide_text'		=> __('Login to check this hidden content out','open-social'),
+		'open_social_email_hello'	=> __('Hello','open-social'),
+		'open_social_email_title'	=> __('New reply to your comment','open-social'),
+		'open_social_email_text1'	=> __('Go check it out','open-social'),
+		'open_social_email_text2'	=> __('Receive reply email notification','open-social'),
+		'osop_extend_function'		=> __('Extensions','open-social'),
+		'osop_extend_color_tag'		=> __('Colorful tagcloud links','open-social'),
+		'osop_extend_show_nickname'	=> __('Show nickname in users list','open-social'),
+		'open_social_edit_profile'	=> __('Please update your profile before posting a comment, thx.','open-social'),
 	);
 	if (isset($_GET['connect'])) {
 		define('OPEN_TYPE',$_GET['connect']);
@@ -93,8 +110,12 @@ function open_init() {
 			$os = new RENREN_CLASS();
 		}elseif(OPEN_TYPE=='kaixin'){
 			$os = new KAIXIN_CLASS();
-		}elseif(OPEN_TYPE=='xiaomi'){
-			$os = new XIAOMI_CLASS();
+		}elseif(OPEN_TYPE=='csdn'){
+			$os = new CSDN_CLASS();
+		}elseif(OPEN_TYPE=='oschina'){
+			$os = new OSCHINA_CLASS();
+		}elseif(OPEN_TYPE=='facebook'){
+			$os = new FACEBOOK_CLASS();
 		}else{
 			exit();
 		}
@@ -102,8 +123,8 @@ function open_init() {
 			if($_GET['back']) $_SESSION['back'] = $_GET['back'];
 			$os -> open_login();
 		} else if ($_GET['action'] == 'callback') {
-			if(!isset($_GET['code'])){
-				echo '<script>try{opener.window.focus();}catch(e){};window.close();</script>';
+			if(!isset($_GET['code']) || isset($_GET['error'])){
+				header('Location:'.home_url());
 				exit();
 			}
 			$os -> open_callback($_GET['code']);
@@ -121,29 +142,6 @@ function open_init() {
 		}
 	} 
 } 
-
-//lang
-add_filter( 'locale', 'open_social_locale' );
-function open_social_locale( $lang ) {
-	if ( isset($_SERVER["HTTP_ACCEPT_LANGUAGE"]) && !isset($_SESSION['WPLANG_LOCALE']) ) {
-		$languages = strtolower( $_SERVER["HTTP_ACCEPT_LANGUAGE"] );
-		$languages = explode( ",", $languages );
-		$languages = explode( "-", $languages[0] );
-		$_SESSION['WPLANG_LOCALE'] = strtolower($languages[0]) . '_' . strtoupper($languages[1]);
-	}
-	if ( isset( $_GET['open_lang'] ) && strpos($_GET['open_lang'], "_") ) {
-		$_SESSION['WPLANG'] = $_GET['open_lang'];
-		header('Location:'.$_SERVER['PHP_SELF']);
-		exit();
-	} else {
-		if( isset($_SESSION['WPLANG']) && strpos($_SESSION['WPLANG'], "_") ) {
-			return $_SESSION['WPLANG'];
-		} else {
-			$_SESSION['WPLANG'] = $lang;
-			return $lang;
-		}
-	} 
-}
 
 class QQ_CLASS {
 	function open_login() {
@@ -186,8 +184,8 @@ class QQ_CLASS {
 		$str = open_connect_http('https://graph.qq.com/user/get_info?access_token='.$_SESSION['access_token'].'&oauth_consumer_key='.QQ_AKEY.'&openid='.$_SESSION['open_id']);
 		$name = $str['data']['name'];//t.qq.com/***
 		return array(
-			'nickname' => $nickname?$nickname:'QQ'.time(),
-			'display_name' => $nickname?$nickname:'QQ'.time(),
+			'nickname' => $nickname?$nickname:'Q'.time(),
+			'display_name' => $nickname?$nickname:'Q'.time(),
 			'user_url' => $name?'http://t.qq.com/'.$name:'',
 			'user_email' => ($name?$name:strtolower($_SESSION['open_id'])).'@t.qq.com'//fake
 		);
@@ -483,6 +481,116 @@ class XIAOMI_CLASS {
 	}
 } 
 
+class CSDN_CLASS {
+	function open_login() {
+		$params=array(
+			'response_type'=>'code',
+			'client_id'=>CD_AKEY,
+			'redirect_uri'=>CD_BACK.'?connect=csdn&action=callback'
+		);
+		header('Location:http://api.csdn.net/oauth2/authorize?'.http_build_query($params));
+		exit();
+	} 
+	function open_callback($code) {
+		$params=array(
+			'grant_type'=>'authorization_code',
+			'code'=>$code,
+			'client_id'=>CD_AKEY,
+			'client_secret'=>CD_SKEY,
+			'redirect_uri'=>CD_BACK.'?connect=csdn&action=callback'
+		);
+		$str = open_connect_http('http://api.csdn.net/oauth2/access_token', http_build_query($params), 'POST');
+		$_SESSION["access_token"] = $str["access_token"];
+		$_SESSION['open_id'] = $str["username"];//not id
+	}
+	function open_new_user(){
+		$user_avatar = open_connect_http("http://api.csdn.net/user/getavatar?access_token=".$_SESSION["access_token"]."&users=".$_SESSION['open_id']);
+		$_SESSION['open_img'] = $user_avatar[0]['avatar'];
+		$user = open_connect_http("http://api.csdn.net/user/getinfo?access_token=".$_SESSION["access_token"]);
+		return array(
+			'nickname' => $user['nickname']?$user['nickname']:$user['username'],
+			'display_name' => $user['username'],
+			'user_url' => 'http://my.csdn.net/'.$user['username'],
+			'user_email' => $_SESSION['open_id'].'@csdn.net'//fake
+		);
+	} 
+} 
+
+class OSCHINA_CLASS {
+	function open_login() {
+		$params=array(
+			'response_type'=>'code',
+			'client_id'=>OC_AKEY,
+			'redirect_uri'=>OC_BACK.'?connect=oschina&action=callback'
+		);
+		header('Location:https://www.oschina.net/action/oauth2/authorize?'.http_build_query($params));
+		exit();
+	} 
+	function open_callback($code) {
+		$params=array(
+			'grant_type'=>'authorization_code',
+			'code'=>$code,
+			'client_id'=>OC_AKEY,
+			'client_secret'=>OC_SKEY,
+			'redirect_uri'=>OC_BACK.'?connect=oschina&action=callback',
+			'dataType'=>'json'
+		);
+		$str = open_connect_http('https://www.oschina.net/action/openapi/token', http_build_query($params), 'POST');
+		$_SESSION["access_token"] = $str["access_token"];
+	}
+	function open_new_user(){
+		$user = open_connect_http("https://www.oschina.net/action/openapi/user?access_token=".$_SESSION["access_token"]);
+		$_SESSION['open_id'] = $user["id"];
+		$_SESSION['open_img'] = $user['avatar'];
+		return array(
+			'nickname' => $user['name'],
+			'display_name' => $user['name'],
+			'user_url' => $user['url'],
+			'user_email' => $user['email']//real one
+		);
+	} 
+} 
+
+class FACEBOOK_CLASS {
+	function open_login() {
+		$_SESSION['state'] = md5(uniqid(rand(), true));
+		$params=array(
+			'response_type'=>'code',
+			'client_id'=>FB_AKEY,
+			'redirect_uri'=>FB_BACK.'?connect=facebook&action=callback',
+			'state'=>$_SESSION['state'],
+			'display'=>'page',
+			'scope'=>'basic_info,email'
+		);
+		header('Location:https://www.facebook.com/dialog/oauth?'.http_build_query($params));
+		exit();
+	} 
+	function open_callback($code) {
+		$params=array(
+			'code'=>$code,
+			'client_id'=>FB_AKEY,
+			'client_secret'=>FB_SKEY,
+			'redirect_uri'=>FB_BACK.'?connect=facebook&action=callback'
+		);		
+		$str = file_get_contents('https://graph.facebook.com/oauth/access_token?'.http_build_query($params));
+        $token = array();
+        parse_str($str, $token);
+		$_SESSION['access_token'] = $token['access_token'];
+	}
+	function open_new_user(){
+		$user_img = open_connect_http("https://graph.facebook.com/me/picture?redirect=false&height=100&type=small&width=100");
+		$_SESSION['open_img'] = $user_img['data']['url'];	
+		$user = open_connect_http("https://graph.facebook.com/me?access_token=".$_SESSION['access_token']);
+		$_SESSION['open_id'] = $user['id'];
+		return array(
+			'nickname' => $user['username'],
+			'display_name' => $user['name'],
+			'user_url' => $user['link'],
+			'user_email' => $user['email']//real one
+		);
+	} 
+} 
+
 function open_close($open_info){
 	wp_die($open_info);
 	exit();
@@ -498,11 +606,12 @@ function open_unbind(){
 	if (is_user_logged_in()) {
 		$user = wp_get_current_user();
 		delete_user_meta($user -> ID, 'open_type');
+		delete_user_meta($user -> ID, 'open_email');
 		delete_user_meta($user -> ID, 'open_img');
 		delete_user_meta($user -> ID, 'open_id');
 		delete_user_meta($user -> ID, 'open_access_token');
 	}
-	echo '<script>opener.window.focus();opener.window.location.reload();window.close();</script>';
+	header('Location:'.get_edit_user_link($user -> ID));
 	exit;
 }
 
@@ -548,17 +657,10 @@ function open_action($os){
 	unset($_SESSION['open_id']);
 	unset($_SESSION["access_token"]);
 	if(isset($_SESSION['open_img'])) unset($_SESSION['open_img']); 
-	if(isset($_SESSION['state'])) unset($_SESSION['state']); 
-	if(!isset($_SESSION['back'])) $_SESSION['back'] = home_url(); 
-	echo '<script>
-			if(/iPhone/.test(navigator.userAgent)){
-				location.replace("'.$_SESSION['back'].'");
-			}else{
-				opener.window.focus();
-				opener.window.location.reload();
-				window.close();
-			}
-		</script>';
+	if(isset($_SESSION['state'])) unset($_SESSION['state']);
+	$back = isset($_SESSION['back']) ? $_SESSION['back'] : home_url();
+	if(isset($_SESSION['back'])) unset($_SESSION['back']); 
+	header('Location:'.$back);
 	exit;
 }
 
@@ -634,7 +736,11 @@ function open_social_activation(){
 		'share_qqt_appkey'	=> '',
 		'share_qq_email'	=> '',
 		'share_qq_talk'		=> '',
-		'delete_setting'	=> 0
+		'delete_setting'	=> 0,
+		'extend_color_tag'	=> 0,
+		'extend_show_nickname'	=> 1,
+		'extend_lang_switcher'	=> 1,
+		'extend_comment_email'	=> 1
 	));
 }
 //uninstall
@@ -644,6 +750,32 @@ function open_social_uninstall(){
 	if($osop && isset($osop['delete_setting']) && $osop['delete_setting']==1) delete_option('osop');
 }
 
+$osop = get_option('osop');
+
+//lang
+if($osop && isset($osop['extend_lang_switcher']) && $osop['extend_lang_switcher']==1) add_filter( 'locale', 'open_social_locale' );
+function open_social_locale( $lang ) {
+	if ( isset($_SERVER["HTTP_ACCEPT_LANGUAGE"]) && !isset($_SESSION['WPLANG_LOCALE']) ) {
+		$languages = strtolower( $_SERVER["HTTP_ACCEPT_LANGUAGE"] );
+		$languages = explode( ",", $languages );
+		$languages = explode( "-", $languages[0] );
+		$_SESSION['WPLANG_LOCALE'] = strtolower($languages[0]) . '_' . strtoupper($languages[1]);
+	}
+	if ( isset( $_GET['open_lang'] ) && strpos($_GET['open_lang'], "_") ) {
+		$_SESSION['WPLANG'] = $_GET['open_lang'];
+		$back = isset($_SERVER["HTTP_REFERER"]) ? $_SERVER["HTTP_REFERER"] : home_url('/');
+		header('Location:'.$back);
+		exit();
+	} else {
+		if( isset($_SESSION['WPLANG']) && strpos($_SESSION['WPLANG'], "_") ) {
+			return $_SESSION['WPLANG'];
+		} else {
+			$_SESSION['WPLANG'] = $lang;
+			return $lang;
+		}
+	} 
+}
+
 //admin_init
 add_action( 'admin_init', 'open_social_admin_init' );
 function open_social_admin_init() {
@@ -651,8 +783,7 @@ function open_social_admin_init() {
 }
 
 //setting link 
-$plugin = plugin_basename(__FILE__);
-add_filter("plugin_action_links_$plugin", 'open_settings_link' );
+add_filter("plugin_action_links_".plugin_basename(__FILE__), 'open_settings_link' );
 function open_settings_link($links) {
 	array_unshift($links, '<a href="options-general.php?page='.plugin_basename(__FILE__).'">'.__('Settings').'</a>');
 	return $links;
@@ -701,6 +832,15 @@ function open_options_page() {
 		$s .= "define('XM_AKEY','".esc_attr($_POST['XM_AKEY'])."');\n";
 		$s .= "define('XM_SKEY','".esc_attr($_POST['XM_SKEY'])."');\n";
 		$s .= "define('XM_BACK','".esc_attr($_POST['XM_BACK'])."');\n";
+		$s .= "define('CD_AKEY','".esc_attr($_POST['CD_AKEY'])."');\n";
+		$s .= "define('CD_SKEY','".esc_attr($_POST['CD_SKEY'])."');\n";
+		$s .= "define('CD_BACK','".esc_attr($_POST['CD_BACK'])."');\n";
+		$s .= "define('OC_AKEY','".esc_attr($_POST['OC_AKEY'])."');\n";
+		$s .= "define('OC_SKEY','".esc_attr($_POST['OC_SKEY'])."');\n";
+		$s .= "define('OC_BACK','".esc_attr($_POST['OC_BACK'])."');\n";
+		$s .= "define('FB_AKEY','".esc_attr($_POST['FB_AKEY'])."');\n";
+		$s .= "define('FB_SKEY','".esc_attr($_POST['FB_SKEY'])."');\n";
+		$s .= "define('FB_BACK','".esc_attr($_POST['FB_BACK'])."');\n";
 		$s .= "?>\n";
 		fwrite($fp, $s);
 		fclose($fp);
@@ -715,17 +855,18 @@ function open_options_page() {
 		<tr valign="top">
 		<th scope="row"><?php echo $GLOBALS['open_str']['osop_login_button']?><br/>
 			<a href="<?php echo admin_url('widgets.php');?>"><?php echo __('Widgets');?></a></th>
-		<td><label for="osop[show_login_form1]"><input name="osop[show_login_form]" id="osop[show_login_form1]" type="radio" value="1" <?php checked($osop['show_login_form'],1);?> /> <?php echo $GLOBALS['open_str']['osop_show_login_form1']?>  
-		<label for="osop[show_login_form2]"><input name="osop[show_login_form]" id="osop[show_login_form2]" type="radio" value="2" <?php checked($osop['show_login_form'],2);?> /> <?php echo $GLOBALS['open_str']['osop_show_login_form2']?></label>  
-		<label for="osop[show_login_form0]"><input name="osop[show_login_form]" id="osop[show_login_form0]" type="radio" value="0" <?php checked($osop['show_login_form'],0);?> /> <?php echo $GLOBALS['open_str']['osop_show_login_form0']?></label><br/>
-		<label for="osop[show_login_page]"><input name="osop[show_login_page]" id="osop[show_login_page]" type="checkbox" value="1" <?php checked($osop['show_login_page'],1);?> /> <?php echo $GLOBALS['open_str']['osop_show_login_page']?></label>
+		<td><fieldset>
+			<label for="osop[show_login_page]"><input name="osop[show_login_page]" id="osop[show_login_page]" type="checkbox" value="1" <?php checked($osop['show_login_page'],1);?> /> <?php echo $GLOBALS['open_str']['osop_show_login_page']?></label><br/>
+			<label for="osop[show_login_form1]"><input name="osop[show_login_form]" id="osop[show_login_form1]" type="radio" value="1" <?php checked($osop['show_login_form'],1);?> /><?php echo $GLOBALS['open_str']['osop_show_login_form1']?>  
+		<label for="osop[show_login_form2]"><input name="osop[show_login_form]" id="osop[show_login_form2]" type="radio" value="2" <?php checked($osop['show_login_form'],2);?> /><?php echo $GLOBALS['open_str']['osop_show_login_form2']?></label>  
+		<label for="osop[show_login_form0]"><input name="osop[show_login_form]" id="osop[show_login_form0]" type="radio" value="0" <?php checked($osop['show_login_form'],0);?> /><?php echo $GLOBALS['open_str']['osop_show_login_form0']?></label>
+		</fieldset>
 		</td>
 		</tr>
 		<tr valign="top">
 		<th scope="row"><?php echo $GLOBALS['open_str']['osop_share_button']?><br/>
 			<a href="<?php echo admin_url('widgets.php');?>"><?php echo __('Widgets');?></a></th>
-		<td><label for="osop[show_share_content]"><input name="osop[show_share_content]" id="osop[show_share_content]" type="checkbox" value="1" <?php checked($osop['show_share_content'],1);?> />
-			<?php echo $GLOBALS['open_str']['osop_show_share_content']?></label><br />
+		<td><fieldset>
 			<input name="osop[share_sina_user]" id="osop[share_sina_user]" class="regular-text" value="<?php echo $osop['share_sina_user']?>" />
 			<a href="http://open.weibo.com/sharebutton" target="_blank"><?php echo $GLOBALS['open_str']['osop_share_sina_user']?></a><br/>
 			<input name="osop[share_qqt_appkey]" id="osop[share_qqt_appkey]" class="regular-text" value="<?php echo $osop['share_qqt_appkey']?>" />
@@ -733,13 +874,21 @@ function open_options_page() {
 			<input name="osop[share_qq_email]" id="osop[share_qq_email]" class="regular-text" value="<?php echo $osop['share_qq_email']?>" />
 			<a href="http://open.mail.qq.com/" target="_blank"><?php echo $GLOBALS['open_str']['osop_share_qq_email']?></a> <br/>
 			<input name="osop[share_qq_talk]" id="osop[share_qq_talk]" class="regular-text" value="<?php echo $osop['share_qq_talk']?>" />
-			<a href="http://shang.qq.com/widget/set.php" target="_blank"><?php echo $GLOBALS['open_str']['osop_share_qq_talk']?></a> 
+			<a href="http://shang.qq.com/widget/set.php" target="_blank"><?php echo $GLOBALS['open_str']['osop_share_qq_talk']?></a> <br/>
+			<label for="osop[show_share_content]"><input name="osop[show_share_content]" id="osop[show_share_content]" type="checkbox" value="1" <?php checked($osop['show_share_content'],1);?> /> <?php echo $GLOBALS['open_str']['osop_show_share_content']?></label>
+		</fieldset>
 		</td>
 		</tr>
 		<tr valign="top">
-		<th scope="row"></th>
-		<td><label for="osop[delete_setting]"><input name="osop[delete_setting]" id="osop[delete_setting]" type="checkbox" value="1" <?php checked($osop['delete_setting'],1);?> /> <?php echo $GLOBALS['open_str']['osop_delete_setting']?></label>
+			<th scope="row"><?php echo $GLOBALS['open_str']['osop_extend_function']?></th>
+		<td><fieldset>
+			<label for="osop[extend_lang_switcher]"><input name="osop[extend_lang_switcher]" id="osop[extend_lang_switcher]" type="checkbox" value="1" <?php checked($osop['extend_lang_switcher'],1);?> /> <?php echo $GLOBALS['open_str']['language_switch']?></label> <br/>
+			<label for="osop[extend_comment_email]"><input name="osop[extend_comment_email]" id="osop[extend_comment_email]" type="checkbox" value="1" <?php checked($osop['extend_comment_email'],1);?> /> <?php echo $GLOBALS['open_str']['open_social_email_text2']?></label> <br/>
+			<label for="osop[extend_color_tag]"><input name="osop[extend_color_tag]" id="osop[extend_color_tag]" type="checkbox" value="1" <?php checked($osop['extend_color_tag'],1);?> /> <?php echo $GLOBALS['open_str']['osop_extend_color_tag']?></label> <br/>
+			<label for="osop[extend_show_nickname]"><input name="osop[extend_show_nickname]" id="osop[extend_show_nickname]" type="checkbox" value="1" <?php checked($osop['extend_show_nickname'],1);?> /> <?php echo $GLOBALS['open_str']['osop_extend_show_nickname']?></label> <br/>
+			<label for="osop[delete_setting]"><input name="osop[delete_setting]" id="osop[delete_setting]" type="checkbox" value="1" <?php checked($osop['delete_setting'],1);?> /> <?php echo $GLOBALS['open_str']['osop_delete_setting']?></label> <br/>
 			<?php submit_button();?>
+		</fieldset>
 		</td>
 		</tr>
 		</table>
@@ -821,6 +970,32 @@ function open_options_page() {
 			<input name="XM_SKEY" value="<?php echo (defined("XM_SKEY")?XM_SKEY:'');?>" class="regular-text" /> AppSecret <br/>
 			<input name="XM_BACK" value="<?php echo (defined("XM_BACK")?XM_BACK:'');?>" class="regular-text code" placeholder="<?php echo home_url('/')?>" />
 			<?php echo $GLOBALS['open_str']['callback']?> 
+		</td>
+		</tr>
+		<tr valign="top">
+		<th scope="row"><a href="http://open.csdn.net/" target="_blank"><?php echo $GLOBALS['open_str']['csdn']?></a>
+			<a target="_blank" href="http://open.csdn.net/wiki">?</a></th>
+		<td><input name="CD_AKEY" value="<?php echo (defined("CD_AKEY")?CD_AKEY:'');?>" class="regular-text" /> App Key <br/>
+			<input name="CD_SKEY" value="<?php echo (defined("CD_SKEY")?CD_SKEY:'');?>" class="regular-text" /> App Secret <br/>
+			<input name="CD_BACK" value="<?php echo (defined("CD_BACK")?CD_BACK:'');?>" class="regular-text code" placeholder="<?php echo home_url('/')?>" />
+			<?php echo $GLOBALS['open_str']['callback']?> <br/></td>
+		</tr>
+		<tr valign="top">
+		<th scope="row"><a href="http://www.oschina.net/openapi/" target="_blank"><?php echo $GLOBALS['open_str']['oschina']?></a>
+			<a href="http://www.oschina.net/openapi/docs" target="_blank">?</a></th>
+		<td><input name="OC_AKEY" value="<?php echo (defined("OC_AKEY")?OC_AKEY:'');?>" class="regular-text" /> API Key <br/>
+			<input name="OC_SKEY" value="<?php echo (defined("OC_SKEY")?OC_SKEY:'');?>" class="regular-text" /> Secret Key <br/>
+			<input name="OC_BACK" value="<?php echo (defined("OC_BACK")?OC_BACK:'');?>" class="regular-text code" placeholder="<?php echo home_url('/')?>" />
+			<?php echo $GLOBALS['open_str']['callback']?> <br/>
+		</td>
+		</tr>
+		<tr valign="top">
+		<th scope="row"><a href="https://developers.facebook.com/" target="_blank"><?php echo $GLOBALS['open_str']['facebook']?></a>
+			<a href="https://developers.facebook.com/docs/facebook-login/permissions" target="_blank">?</a></th>
+		<td><input name="FB_AKEY" value="<?php echo (defined("FB_AKEY")?FB_AKEY:'');?>" class="regular-text" /> AppID <br/>
+			<input name="FB_SKEY" value="<?php echo (defined("FB_SKEY")?FB_SKEY:'');?>" class="regular-text" /> AppSecret <br/>
+			<input name="FB_BACK" value="<?php echo (defined("FB_BACK")?FB_BACK:'');?>" class="regular-text code" placeholder="<?php echo home_url('/')?>" />
+			<?php echo $GLOBALS['open_str']['callback']?> 
 			<?php submit_button();?>
 		</td>
 		</tr>
@@ -842,8 +1017,12 @@ function open_options_page() {
 add_filter("get_avatar", "open_get_avatar",10,4);
 function open_get_avatar($avatar, $id_or_email='',$size='80') {
 	global $comment;
+	$comment_ip = '';
 	if($id_or_email){
-		if(is_object($id_or_email)) $id_or_email = $id_or_email->user_id;
+		if(is_object($id_or_email)){
+			$id_or_email = $id_or_email->user_id;
+			if(is_user_logged_in() && current_user_can('manage_options')) $comment_ip = get_comment_author_IP();
+		}
 	}else{
 		if(is_object($comment)) $id_or_email = $comment->user_id;
 	}
@@ -851,7 +1030,7 @@ function open_get_avatar($avatar, $id_or_email='',$size='80') {
 	if(isset($open_type)){
 		$open_id = get_user_meta($id_or_email, 'open_id', true);
 		if($open_type=='qq'){
-			$out = 'http://q.qlogo.cn/qqapp/'.QQ_AKEY.'/'.$open_id.'/100';//40
+			if(defined("QQ_AKEY")&&QQ_AKEY) $out = 'http://q.qlogo.cn/qqapp/'.QQ_AKEY.'/'.$open_id.'/100';//40
 		}elseif($open_type=='sina'){
 			$out = 'http://tp3.sinaimg.cn/'.$open_id.'/180/1.jpg';//50
 		}elseif($open_type=='baidu'){
@@ -866,14 +1045,44 @@ function open_get_avatar($avatar, $id_or_email='',$size='80') {
 			$out = get_user_meta($id_or_email, 'open_img', true);
 			if($open_type=='kaixin') $out = str_replace('/50_','/120_',$out);
 			if($open_type=='renren') $out = str_replace('/tiny_','/head_',$out);
+		}else{
+			$out = get_user_meta($id_or_email, 'open_img', true);
 		}
-		if(isset($open_id) && isset($out)) $avatar = "<img alt='' src='{$out}' class='avatar avatar-{$size}' width='{$size}' />";
+		if(isset($open_id) && isset($out)) $avatar = "<img alt='' ip='{$comment_ip}' src='{$out}' class='avatar avatar-{$size}' width='{$size}' />";
 	}
 	return $avatar;
 }
 
+add_filter('comment_form_defaults','open_social_comment_note');
+function open_social_comment_note($fields) {
+	if(is_user_logged_in()){
+		$user = wp_get_current_user();
+	    $open_email = get_user_meta($user->ID, 'open_email', true);
+		$fields['logged_in_as'] .= '<p class="comment-form-email"><input class="disabled" id="email" name="email" title="'.__( 'Email' ).'" value="'.esc_attr( $user->user_email ).'" size="25" disabled="disabled" /> <input class="disabled" id="url" name="url" title="'.__( 'Website' ).'" value="'.esc_attr( $user->user_url ).'" size="40" disabled="disabled" /></p>';
+		if(!is_numeric($open_email)){
+			$fields['comment_notes_after'] = '<p><a title="'.__('Edit My Profile').'" href="'.get_edit_user_link($user->ID).'?from='.esc_url($_SERVER["REQUEST_URI"]).'">'.$GLOBALS['open_str']['open_social_edit_profile'].'</a></p><style>#'.$fields['id_submit'].'{display:none !important;}</style>';
+		}else{
+			$fields['comment_notes_after'] .= '<p><input class="disabled" disabled="disabled" type="checkbox" '.checked(esc_attr( $open_email ),1,false).' /> '.$GLOBALS['open_str']['open_social_email_text2'].' <a href="'.get_edit_user_link($user->ID).'?from='.esc_url($_SERVER["REQUEST_URI"]).'">'.__('Edit My Profile').'</a></p>';
+		}
+	}
+	return $fields;
+}
+
+//profile update
+add_action('personal_options_update', 'open_social_update_options');
+function open_social_update_options($user_id) {
+    if( current_user_can('edit_user',$user_id) ) update_user_meta($user_id, 'open_email', isset($_POST['open_email'])?1:0);
+}
+
+//back link
+if(isset($_GET['updated']) || isset($_GET['from'])) add_action('admin_notices', 'open_social_edit_profile_note');
+function open_social_edit_profile_note() {
+	if( isset($_GET['from']) ) $_SESSION['from'] = stripos($_GET['from'],'http')===0?$_GET['from']:(home_url().$_GET['from']);
+	$from = isset($_SESSION['from']) ? $_SESSION['from'] : home_url();
+	echo '<div class="updated fade""><p><strong><a href="'.esc_url($from).'">'.__('&laquo; Back').': '.esc_url($from).'</a></strong></p></div>';
+}
+
 //login form
-$osop = get_option('osop');
 if($osop && isset($osop['show_login_page']) && $osop['show_login_page']==1) add_action('login_form', 'open_social_login_form');
 if($osop && isset($osop['show_login_form']) && $osop['show_login_form']==1) add_action('comment_form_top', 'open_social_login_form');
 if($osop && isset($osop['show_login_form']) && $osop['show_login_form']==2) add_action('comment_form', 'open_social_login_form');
@@ -890,6 +1099,9 @@ function open_social_login_form($login_type='') {
 		if(defined("RR_AKEY")&&RR_AKEY) $html .= open_login_button_show('renren',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['renren'],$GLOBALS['open_str']['login']),RR_BACK);
 		if(defined("KX_AKEY")&&KX_AKEY) $html .= open_login_button_show('kaixin',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['kaixin'],$GLOBALS['open_str']['login']),KX_BACK);
 		if(defined("XM_AKEY")&&XM_AKEY) $html .= open_login_button_show('xiaomi',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['xiaomi'],$GLOBALS['open_str']['login']),XM_BACK);
+		if(defined("CD_AKEY")&&CD_AKEY) $html .= open_login_button_show('csdn',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['csdn'],$GLOBALS['open_str']['login']),CD_BACK);
+		if(defined("OC_AKEY")&&OC_AKEY) $html .= open_login_button_show('oschina',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['oschina'],$GLOBALS['open_str']['login']),OC_BACK);
+		if(defined("FB_AKEY")&&FB_AKEY) $html .= open_login_button_show('facebook',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['facebook'],$GLOBALS['open_str']['login']),FB_BACK);
 		$html .= '</div>';
 		echo $html;
 	}
@@ -914,38 +1126,39 @@ function open_social_share_form($content) {
 
 //hide user option
 add_action('admin_head','open_social_hide_option');
-function open_social_hide_option(){
+function open_social_hide_option( ){
 	if(!is_user_logged_in()) return;
 	$current_user = wp_get_current_user();
-	$m = $current_user->user_email;
-	$open_type = get_user_meta($current_user -> ID, 'open_type', true);
-	if(!current_user_can('manage_options') && $open_type && (strpos($m,'@t.qq.com')||strpos($m,'@weibo.com')||strpos($m,'@baidu.com')||strpos($m,'@douban.com')||strpos($m,'@renren.com')||strpos($m,'@kaixin.com')||strpos($m,'@xiaomi.com')) ){
-		//not admin, had bound, have fake email
+	$open_type = get_user_meta( $current_user->ID, 'open_type', true);
+	if(!current_user_can('manage_options') && $open_type ){//not admin, had been bound
 		echo "<script>jQuery(document).ready(function($){
+				$('table.form-table:eq(0)').hide();
+				$('table.form-table:eq(4)').hide();
+				$('h3:eq(3)').hide();
 				$('#wpfooter').hide();
 				$('#wp-admin-bar-wp-logo').hide();
 				$('#collapse-menu').hide();
 				$('#screen-meta-links').hide();
-				$('h3:not(:eq(2))').hide();
-				$('table.form-table:not(:eq(2))').hide();
-				//if(/updated=1/.test(window.location.href))setTimeout(function(){location.href='/';},1200);
 			});</script>";
 	}
 }
 
 //binding
-add_action('personal_options', 'open_social_bind_options');
-function open_social_bind_options() {
+add_action('profile_personal_options', 'open_social_bind_options');
+function open_social_bind_options( $user ) {
 	$user_id = get_current_user_id();
-	if(isset($_GET['user_id']) && $user_id!=$_GET['user_id']) return;
-	echo '<tr><th scope="row"></th><td>';
-	$open_type = get_user_meta($user_id, 'open_type', true);
+	if(isset($_GET['user_id']) && $user_id!=$_GET['user_id']) return;//prevent cross-user editing
+	echo '<table class="form-table"><tr valign="top"><th scope="row">'.$GLOBALS['open_str']['setting_menu'].'</th><td>';
+	$open_type = get_user_meta( $user->ID, 'open_type', true);
+    $open_email = get_user_meta( $user->ID, 'open_email', true);
 	if ($open_type) {
-		echo '<input class="button-primary" type="button" onclick=\'window.open("'.home_url('/').'?connect='.$open_type.'&action=unbind", "xmOpenWindow","width=500,height=350,menubar=0,scrollbars=1,resizable=1,status=1,titlebar=0,toolbar=0,location=0");return false;\' value="'.str_replace('%OPEN_TYPE%',strtoupper($open_type),$GLOBALS['open_str']['unbind']).'"/> ';
+		echo '<p><input class="button-primary" type="button" onclick=\'location.href="'.home_url('/').'?connect='.$open_type.'&action=unbind"\' value="'.str_replace('%OPEN_TYPE%',strtoupper($open_type),$GLOBALS['open_str']['unbind']).'"/></p>';
 	} else {
 		open_social_login_form('bind');
 	} 
-	echo '</td></tr>';
+	$osop = get_option('osop');
+    if($osop && isset($osop['extend_comment_email']) && $osop['extend_comment_email']==1) echo '<p><label for="open_email"><input type="checkbox" value="1" id="open_email" name="open_email" '.checked(esc_attr( $open_email ),1,false).' />'.$GLOBALS['open_str']['open_social_email_text2'].'</label></p>';
+	echo '</td></tr></table>';
 } 
 
 //script & style
@@ -983,9 +1196,71 @@ function open_social_hide($atts, $content=""){
 	return $output;
 }
 
+//email notification
+if($osop && isset($osop['extend_comment_email']) && $osop['extend_comment_email']==1) add_action('wp_insert_comment','open_social_comment_email',99,2);
+function open_social_comment_email($comment_id, $comment_object) {
+    if ($comment_object->comment_parent > 0) {
+        $comment_parent = get_comment($comment_object->comment_parent);
+		$user_id = $comment_parent->user_id;
+		if(!$user_id)return;//user only
+	    $open_email = get_user_meta( $user_id, 'open_email', true );
+		if(!$open_email)return;//user checked only
+		$email = get_userdata($user_id)->user_email;//$comment_parent->comment_author_email;
+        $content = $GLOBALS['open_str']['open_social_email_hello'].' '.$comment_parent->comment_author.',<br><br>';
+		$content .= $comment_object->comment_content . '<br><em>---- ';
+		$content .= '<a href="'.esc_attr( $comment_object->comment_author_url ).'">'.$comment_object->comment_author . '</a>';
+		$content .= '('.esc_attr( $comment_object->comment_author_email ).') # ';
+		$content .= '<a href="'.get_permalink($comment_parent->comment_post_ID).'">'.get_the_title($comment_parent->comment_post_ID).'</a></em><br><br>';
+		$content .= $GLOBALS['open_str']['open_social_email_text1'].': <a href="'.get_comment_link( $comment_parent->comment_ID ).'">'.get_comment_link( $comment_parent->comment_ID ).'</a>';
+        $headers  = "MIME-Version: 1.0\r\nContent-type: text/html; charset=UTF-8\r\n";
+        wp_mail($email,'['.get_option('blogname').'] '.$GLOBALS['open_str']['open_social_email_title'],$content,$headers);
+    }
+}
+
+//color tag
+if($osop && isset($osop['extend_color_tag']) && $osop['extend_color_tag']==1){
+	add_filter('wp_tag_cloud', 'os_colorCloud', 1);
+	function os_colorCloud($text) {
+		$text = preg_replace_callback('|<a (.+?)>|i','os_colorCloudCallback', $text);
+		return $text;
+	}
+	function os_colorCloudCallback($matches) {
+		$text = $matches[1];
+		$color = dechex(rand(0,16777215));
+		$pattern = '/style=(\'|\")(.*)(\'|\")/i';
+		$text = preg_replace($pattern, "style=\"color:#{$color};$2\"", $text);
+		return "<a $text>";
+	}
+}
+
+//show nickname
+if($osop && isset($osop['extend_show_nickname']) && $osop['extend_show_nickname']==1){
+	add_filter('manage_users_columns', 'os_show_user_nickname_column');
+	add_action('manage_users_custom_column', 'os_show_user_nickname_column_content', 20, 3);
+	add_filter('manage_users_sortable_columns', 'os_user_sortable_columns');
+	function os_show_user_nickname_column($columns) {
+		unset($columns['name']);
+		$columns['nickname'] = __('Nickname');
+		$columns['registered'] = __('Registered');
+		return $columns;
+	}
+	function os_show_user_nickname_column_content($value, $column_name, $user_id) {
+		$user = get_userdata( $user_id );
+		if ( 'nickname' == $column_name ) return $user->nickname;
+		if ( 'registered' == $column_name ) return $user->user_registered;
+		return $value;
+	}
+	function os_user_sortable_columns( $columns ) {
+		$columns['nickname'] = 'name';
+		$columns['registered'] = 'registered';
+	    return $columns;
+	}
+}
+
 //widget
 add_action('widgets_init', create_function('', 'return register_widget("open_social_login_widget");'));
 add_action('widgets_init', create_function('', 'return register_widget("open_social_share_widget");'));
+add_action('widgets_init', create_function('', 'return register_widget("open_social_float_widget");'));
 
 class open_social_login_widget extends WP_Widget {
     function open_social_login_widget() {
@@ -1003,20 +1278,27 @@ class open_social_login_widget extends WP_Widget {
 			$renren = esc_attr($instance['renren']);
 			$kaixin = esc_attr($instance['kaixin']);
 			$xiaomi = esc_attr($instance['xiaomi']);
+			$csdn = esc_attr($instance['csdn']);
+			$oschina = esc_attr($instance['oschina']);
+			$facebook = esc_attr($instance['facebook']);
 		} else {
 			$title = '';
-		    $qq = $sina = $baidu = $google = $live = $douban = $renren = $kaixin = $xiaomi = 1;
+		    $qq = $sina = $baidu = $google = $live = $douban = $renren = $kaixin = $xiaomi = $csdn = $oshina = $facebook = 1;
 		}
-		echo '<p><label for="'.$this->get_field_id( 'title' ).'">'.__( 'Title:' ).'</label><input class="widefat" id="'.$this->get_field_id( 'title' ).'" name="'.$this->get_field_name( 'title' ).'" type="text" value="'.esc_attr( $title ).'" /></p>';
-		echo '<p><input id="'.$this->get_field_id('qq').'" name="'.$this->get_field_name('qq').'" type="checkbox" value="1" '.checked( '1', $qq, false).' /> <label for="'.$this->get_field_id('qq').'">'.$GLOBALS['open_str']['qq'].'</label> ';
-		echo '<input id="'.$this->get_field_id('sina').'" name="'.$this->get_field_name('sina').'" type="checkbox" value="1" '.checked( '1', $sina, false).' /> <label for="'.$this->get_field_id('sina').'">'.$GLOBALS['open_str']['sina'].'</label> ';
-		echo '<input id="'.$this->get_field_id('baidu').'" name="'.$this->get_field_name('baidu').'" type="checkbox" value="1" '.checked( '1', $baidu, false).' /> <label for="'.$this->get_field_id('baidu').'">'.$GLOBALS['open_str']['baidu'].'</label></p>';
-		echo '<p><input id="'.$this->get_field_id('google').'" name="'.$this->get_field_name('google').'" type="checkbox" value="1" '.checked( '1', $google, false).' /> <label for="'.$this->get_field_id('google').'">'.$GLOBALS['open_str']['google'].'</label> ';
-		echo '<input id="'.$this->get_field_id('live').'" name="'.$this->get_field_name('live').'" type="checkbox" value="1" '.checked( '1', $live, false).' /> <label for="'.$this->get_field_id('live').'">'.$GLOBALS['open_str']['live'].'</label> ';
-		echo '<input id="'.$this->get_field_id('douban').'" name="'.$this->get_field_name('douban').'" type="checkbox" value="1" '.checked( '1', $douban, false).' /> <label for="'.$this->get_field_id('douban').'">'.$GLOBALS['open_str']['douban'].'</label></p>';
-		echo '<p><input id="'.$this->get_field_id('renren').'" name="'.$this->get_field_name('renren').'" type="checkbox" value="1" '.checked( '1', $renren, false).' /> <label for="'.$this->get_field_id('renren').'">'.$GLOBALS['open_str']['renren'].'</label> ';
-		echo '<input id="'.$this->get_field_id('kaixin').'" name="'.$this->get_field_name('kaixin').'" type="checkbox" value="1" '.checked( '1', $kaixin, false).' /> <label for="'.$this->get_field_id('kaixin').'">'.$GLOBALS['open_str']['kaixin'].'</label> ';
-		echo '<input id="'.$this->get_field_id('xiaomi').'" name="'.$this->get_field_name('xiaomi').'" type="checkbox" value="1" '.checked( '1', $xiaomi, false).' /> <label for="'.$this->get_field_id('xiaomi').'">'.$GLOBALS['open_str']['xiaomi'].'</label></p>';
+		$html = '<p><label for="'.$this->get_field_id( 'title' ).'">'.__( 'Title:' ).'</label><input class="widefat" id="'.$this->get_field_id( 'title' ).'" name="'.$this->get_field_name( 'title' ).'" type="text" value="'.esc_attr( $title ).'" /></p>';
+		$html .= '<p><input id="'.$this->get_field_id('qq').'" name="'.$this->get_field_name('qq').'" type="checkbox" value="1" '.checked( '1', $qq, false).' /> <label for="'.$this->get_field_id('qq').'">'.$GLOBALS['open_str']['qq'].'</label> ';
+		$html .= '<input id="'.$this->get_field_id('sina').'" name="'.$this->get_field_name('sina').'" type="checkbox" value="1" '.checked( '1', $sina, false).' /> <label for="'.$this->get_field_id('sina').'">'.$GLOBALS['open_str']['sina'].'</label> ';
+		$html .= '<input id="'.$this->get_field_id('baidu').'" name="'.$this->get_field_name('baidu').'" type="checkbox" value="1" '.checked( '1', $baidu, false).' /> <label for="'.$this->get_field_id('baidu').'">'.$GLOBALS['open_str']['baidu'].'</label></p>';
+		$html .= '<p><input id="'.$this->get_field_id('google').'" name="'.$this->get_field_name('google').'" type="checkbox" value="1" '.checked( '1', $google, false).' /> <label for="'.$this->get_field_id('google').'">'.$GLOBALS['open_str']['google'].'</label> ';
+		$html .= '<input id="'.$this->get_field_id('live').'" name="'.$this->get_field_name('live').'" type="checkbox" value="1" '.checked( '1', $live, false).' /> <label for="'.$this->get_field_id('live').'">'.$GLOBALS['open_str']['live'].'</label> ';
+		$html .= '<input id="'.$this->get_field_id('douban').'" name="'.$this->get_field_name('douban').'" type="checkbox" value="1" '.checked( '1', $douban, false).' /> <label for="'.$this->get_field_id('douban').'">'.$GLOBALS['open_str']['douban'].'</label></p>';
+		$html .= '<p><input id="'.$this->get_field_id('renren').'" name="'.$this->get_field_name('renren').'" type="checkbox" value="1" '.checked( '1', $renren, false).' /> <label for="'.$this->get_field_id('renren').'">'.$GLOBALS['open_str']['renren'].'</label> ';
+		$html .= '<input id="'.$this->get_field_id('kaixin').'" name="'.$this->get_field_name('kaixin').'" type="checkbox" value="1" '.checked( '1', $kaixin, false).' /> <label for="'.$this->get_field_id('kaixin').'">'.$GLOBALS['open_str']['kaixin'].'</label> ';
+		$html .= '<input id="'.$this->get_field_id('xiaomi').'" name="'.$this->get_field_name('xiaomi').'" type="checkbox" value="1" '.checked( '1', $xiaomi, false).' /> <label for="'.$this->get_field_id('xiaomi').'">'.$GLOBALS['open_str']['xiaomi'].'</label></p>';
+		$html .= '<p><input id="'.$this->get_field_id('csdn').'" name="'.$this->get_field_name('csdn').'" type="checkbox" value="1" '.checked( '1', $csdn, false).' /> <label for="'.$this->get_field_id('csdn').'">'.$GLOBALS['open_str']['csdn'].'</label> ';
+		$html .= '<input id="'.$this->get_field_id('oschina').'" name="'.$this->get_field_name('oschina').'" type="checkbox" value="1" '.checked( '1', $oschina, false).' /> <label for="'.$this->get_field_id('oschina').'">'.$GLOBALS['open_str']['oschina'].'</label> ';
+		$html .= '<input id="'.$this->get_field_id('facebook').'" name="'.$this->get_field_name('facebook').'" type="checkbox" value="1" '.checked( '1', $facebook, false).' /> <label for="'.$this->get_field_id('facebook').'">'.$GLOBALS['open_str']['facebook'].'</label></p>';
+		echo $html;
 	}
 	function update($new_instance, $old_instance) {
         $instance = $old_instance;
@@ -1030,6 +1312,9 @@ class open_social_login_widget extends WP_Widget {
         $instance['renren'] = strip_tags($new_instance['renren']);
         $instance['kaixin'] = strip_tags($new_instance['kaixin']);
         $instance['xiaomi'] = strip_tags($new_instance['xiaomi']);
+        $instance['csdn'] = strip_tags($new_instance['csdn']);
+        $instance['oschina'] = strip_tags($new_instance['oschina']);
+        $instance['facebook'] = strip_tags($new_instance['facebook']);
         return $instance;
 	}
 	function widget($args, $instance) {
@@ -1043,33 +1328,40 @@ class open_social_login_widget extends WP_Widget {
 		$live = $instance['live'];
 		$douban = $instance['douban'];
 		$renren = $instance['renren'];
-		$kaixin= $instance['kaixin'];
-		$xiaomi= $instance['xiaomi'];
-		echo $before_widget;
-		if ( $title ) echo '<h3 class="widget-title">'.$title.'</h3>';
-		echo '<div class="textwidget">';
+		$kaixin = $instance['kaixin'];
+		$xiaomi = $instance['xiaomi'];
+		$csdn = $instance['csdn'];
+		$oschina = $instance['oschina'];
+		$facebook = $instance['facebook'];
+		$html = $before_widget;
+		if ( $title ) $html .= '<h3 class="widget-title">'.$title.'</h3>';
+		$html .= '<div class="textwidget">';
+		$html .= '<div class="open_social_box">';
 		if(is_user_logged_in()){
 			$current_user = wp_get_current_user();
-			$m = $current_user->user_email;
-			echo '<a href="'.(current_user_can('manage_options')?admin_url():get_edit_user_link($current_user->ID)).'">'.get_avatar($current_user->ID).'</a><br/>';
-			if(strpos($m,'@t.qq.com')||strpos($m,'@weibo.com')||strpos($m,'@baidu.com')||strpos($m,'@douban.com')||strpos($m,'@renren.com')||strpos($m,'@kaixin.com')||strpos($m,'@xiaomi.com')) echo '<a href="'.get_edit_user_link($current_user->ID).'">'.$GLOBALS['open_str']['edit_fake_email'].'</a><br/>';
-			echo '<a href="'.$current_user->user_url.'" target="_blank">'.$current_user->display_name.'</a>';
-			echo ' (<a href="'.wp_logout_url($_SERVER['REQUEST_URI']).'">'.__('Log Out').'</a>)';
+			$email = $current_user->user_email;
+			$html .= '<a href="'.(current_user_can('manage_options')?admin_url():(get_edit_user_link($current_user->ID)).'?from='.esc_url($_SERVER["REQUEST_URI"])).'">'.get_avatar($current_user->ID).'</a><br/>';
+			$html .= '<a href="'.$current_user->user_url.'" target="_blank" title="'.__( 'Website' ).'">'.$current_user->display_name.'</a>';
+			$html .= ' (<a href="'.get_edit_user_link($current_user->ID).'?from='.esc_url($_SERVER["REQUEST_URI"]).'" title="'.__('Edit My Profile').'">'.$email.'</a>)';
+			$html .= ' (<a href="'.wp_logout_url($_SERVER['REQUEST_URI']).'">'.__('Log Out').'</a>)';
 		}else{
-			echo '<div class="open_social_box">';
-			if(defined("QQ_AKEY") && QQ_AKEY && $qq) echo open_login_button_show('qq',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['qq'],$GLOBALS['open_str']['login']),QQ_BACK);
-			if(defined("WB_AKEY") && WB_AKEY && $sina) echo open_login_button_show('sina',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['sina'],$GLOBALS['open_str']['login']),WB_BACK);
-			if(defined("BD_AKEY") && BD_AKEY && $baidu) echo open_login_button_show('baidu',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['baidu'],$GLOBALS['open_str']['login']),BD_BACK);
-			if(defined("GG_AKEY") && GG_AKEY && $google) echo open_login_button_show('google',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['google'],$GLOBALS['open_str']['login']),GG_BACK);
-			if(defined("WL_AKEY") && WL_AKEY && $live) echo open_login_button_show('live',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['live'],$GLOBALS['open_str']['login']),WL_BACK);
-			if(defined("DB_AKEY") && DB_AKEY && $douban) echo open_login_button_show('douban',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['douban'],$GLOBALS['open_str']['login']),DB_BACK);
-			if(defined("RR_AKEY") && RR_AKEY && $renren) echo open_login_button_show('renren',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['renren'],$GLOBALS['open_str']['login']),RR_BACK);
-			if(defined("KX_AKEY") && KX_AKEY && $kaixin) echo open_login_button_show('kaixin',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['kaixin'],$GLOBALS['open_str']['login']),KX_BACK);
-			if(defined("XM_AKEY") && XM_AKEY && $xiaomi) echo open_login_button_show('xiaomi',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['xiaomi'],$GLOBALS['open_str']['login']),XM_BACK);
-			echo '</div>';
+			if(defined("QQ_AKEY") && QQ_AKEY && $qq) $html .= open_login_button_show('qq',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['qq'],$GLOBALS['open_str']['login']),QQ_BACK);
+			if(defined("WB_AKEY") && WB_AKEY && $sina) $html .= open_login_button_show('sina',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['sina'],$GLOBALS['open_str']['login']),WB_BACK);
+			if(defined("BD_AKEY") && BD_AKEY && $baidu) $html .= open_login_button_show('baidu',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['baidu'],$GLOBALS['open_str']['login']),BD_BACK);
+			if(defined("GG_AKEY") && GG_AKEY && $google) $html .= open_login_button_show('google',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['google'],$GLOBALS['open_str']['login']),GG_BACK);
+			if(defined("WL_AKEY") && WL_AKEY && $live) $html .= open_login_button_show('live',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['live'],$GLOBALS['open_str']['login']),WL_BACK);
+			if(defined("DB_AKEY") && DB_AKEY && $douban) $html .= open_login_button_show('douban',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['douban'],$GLOBALS['open_str']['login']),DB_BACK);
+			if(defined("RR_AKEY") && RR_AKEY && $renren) $html .= open_login_button_show('renren',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['renren'],$GLOBALS['open_str']['login']),RR_BACK);
+			if(defined("KX_AKEY") && KX_AKEY && $kaixin) $html .= open_login_button_show('kaixin',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['kaixin'],$GLOBALS['open_str']['login']),KX_BACK);
+			if(defined("XM_AKEY") && XM_AKEY && $xiaomi) $html .= open_login_button_show('xiaomi',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['xiaomi'],$GLOBALS['open_str']['login']),XM_BACK);
+			if(defined("CD_AKEY") && CD_AKEY && $csdn) $html .= open_login_button_show('csdn',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['csdn'],$GLOBALS['open_str']['login']),CD_BACK);
+			if(defined("OC_AKEY") && OC_AKEY && $oschina) $html .= open_login_button_show('oschina',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['oschina'],$GLOBALS['open_str']['login']),OC_BACK);
+			if(defined("FB_AKEY") && FB_AKEY && $facebook) $html .= open_login_button_show('facebook',str_replace('%OPEN_TYPE%',$GLOBALS['open_str']['facebook'],$GLOBALS['open_str']['login']),FB_BACK);
 		}
-		echo '</div>';
-		echo $after_widget;
+		$html .= '</div>';
+		$html .= '</div>';
+		$html .= $after_widget;
+		echo $html;
 	}
 }
 
@@ -1095,18 +1387,19 @@ class open_social_share_widget extends WP_Widget {
 			$title = '';
 		    $weibo = $qzone = $qqt = $youdao = $email = $qq = $weixin = $google = $twitter = $facebook = $switcher = 1;
 		}
-		echo '<p><label for="'.$this->get_field_id( 'title' ).'">'.__( 'Title:' ).'</label><input class="widefat" id="'.$this->get_field_id( 'title' ).'" name="'.$this->get_field_name( 'title' ).'" type="text" value="'.esc_attr( $title ).'" /></p>';
-		echo '<p><input id="'.$this->get_field_id('weibo').'" name="'.$this->get_field_name('weibo').'" type="checkbox" value="1" '.checked( '1', $weibo, false).' /> <label for="'.$this->get_field_id('weibo').'">'.$GLOBALS['open_str']['share_weibo'].'</label> ';
-		echo '<input id="'.$this->get_field_id('qzone').'" name="'.$this->get_field_name('qzone').'" type="checkbox" value="1" '.checked( '1', $qzone, false).' /> <label for="'.$this->get_field_id('qzone').'">'.$GLOBALS['open_str']['share_qzone'].'</label> ';
-		echo '<input id="'.$this->get_field_id('qqt').'" name="'.$this->get_field_name('qqt').'" type="checkbox" value="1" '.checked( '1', $qqt, false).' /> <label for="'.$this->get_field_id('qqt').'">'.$GLOBALS['open_str']['share_qqt'].'</label> ';
-		echo '<input id="'.$this->get_field_id('youdao').'" name="'.$this->get_field_name('youdao').'" type="checkbox" value="1" '.checked( '1', $youdao, false).' /> <label for="'.$this->get_field_id('youdao').'">'.$GLOBALS['open_str']['share_youdao'].'</label></p>';
-		echo '<p><input id="'.$this->get_field_id('email').'" name="'.$this->get_field_name('email').'" type="checkbox" value="1" '.checked( '1', $email, false).' /> <label for="'.$this->get_field_id('email').'">'.$GLOBALS['open_str']['share_email'].'</label> ';
-		echo '<input id="'.$this->get_field_id('qq').'" name="'.$this->get_field_name('qq').'" type="checkbox" value="1" '.checked( '1', $qq, false).' /> <label for="'.$this->get_field_id('qq').'">'.$GLOBALS['open_str']['share_qq'].'</label> ';
-		echo '<input id="'.$this->get_field_id('weixin').'" name="'.$this->get_field_name('weixin').'" type="checkbox" value="1" '.checked( '1', $weixin, false).' /> <label for="'.$this->get_field_id('weixin').'">'.$GLOBALS['open_str']['share_weixin'].'</label> ';
-		echo '<input id="'.$this->get_field_id('google').'" name="'.$this->get_field_name('google').'" type="checkbox" value="1" '.checked( '1', $google, false).' /> <label for="'.$this->get_field_id('google').'">'.$GLOBALS['open_str']['share_google'].'</label></p>';
-		echo '<p><input id="'.$this->get_field_id('twitter').'" name="'.$this->get_field_name('twitter').'" type="checkbox" value="1" '.checked( '1', $twitter, false).' /> <label for="'.$this->get_field_id('twitter').'">'.$GLOBALS['open_str']['share_twitter'].'</label> ';
-		echo '<input id="'.$this->get_field_id('facebook').'" name="'.$this->get_field_name('facebook').'" type="checkbox" value="1" '.checked( '1', $facebook, false).' /> <label for="'.$this->get_field_id('facebook').'">'.$GLOBALS['open_str']['share_facebook'].'</label> ';
-		echo '<input id="'.$this->get_field_id('switcher').'" name="'.$this->get_field_name('switcher').'" type="checkbox" value="1" '.checked( '1', $switcher, false).' /> <label for="'.$this->get_field_id('switcher').'">'.$GLOBALS['open_str']['language_switch'].'</label></p>';
+		$html = '<p><label for="'.$this->get_field_id( 'title' ).'">'.__( 'Title:' ).'</label><input class="widefat" id="'.$this->get_field_id( 'title' ).'" name="'.$this->get_field_name( 'title' ).'" type="text" value="'.esc_attr( $title ).'" /></p>';
+		$html .= '<p><input id="'.$this->get_field_id('weibo').'" name="'.$this->get_field_name('weibo').'" type="checkbox" value="1" '.checked( '1', $weibo, false).' /> <label for="'.$this->get_field_id('weibo').'">'.$GLOBALS['open_str']['share_weibo'].'</label> ';
+		$html .= '<input id="'.$this->get_field_id('qzone').'" name="'.$this->get_field_name('qzone').'" type="checkbox" value="1" '.checked( '1', $qzone, false).' /> <label for="'.$this->get_field_id('qzone').'">'.$GLOBALS['open_str']['share_qzone'].'</label> ';
+		$html .= '<input id="'.$this->get_field_id('qqt').'" name="'.$this->get_field_name('qqt').'" type="checkbox" value="1" '.checked( '1', $qqt, false).' /> <label for="'.$this->get_field_id('qqt').'">'.$GLOBALS['open_str']['share_qqt'].'</label> ';
+		$html .= '<input id="'.$this->get_field_id('youdao').'" name="'.$this->get_field_name('youdao').'" type="checkbox" value="1" '.checked( '1', $youdao, false).' /> <label for="'.$this->get_field_id('youdao').'">'.$GLOBALS['open_str']['share_youdao'].'</label></p>';
+		$html .= '<p><input id="'.$this->get_field_id('email').'" name="'.$this->get_field_name('email').'" type="checkbox" value="1" '.checked( '1', $email, false).' /> <label for="'.$this->get_field_id('email').'">'.$GLOBALS['open_str']['share_email'].'</label> ';
+		$html .= '<input id="'.$this->get_field_id('qq').'" name="'.$this->get_field_name('qq').'" type="checkbox" value="1" '.checked( '1', $qq, false).' /> <label for="'.$this->get_field_id('qq').'">'.$GLOBALS['open_str']['share_qq'].'</label> ';
+		$html .= '<input id="'.$this->get_field_id('weixin').'" name="'.$this->get_field_name('weixin').'" type="checkbox" value="1" '.checked( '1', $weixin, false).' /> <label for="'.$this->get_field_id('weixin').'">'.$GLOBALS['open_str']['share_weixin'].'</label> ';
+		$html .= '<input id="'.$this->get_field_id('google').'" name="'.$this->get_field_name('google').'" type="checkbox" value="1" '.checked( '1', $google, false).' /> <label for="'.$this->get_field_id('google').'">'.$GLOBALS['open_str']['share_google'].'</label></p>';
+		$html .= '<p><input id="'.$this->get_field_id('twitter').'" name="'.$this->get_field_name('twitter').'" type="checkbox" value="1" '.checked( '1', $twitter, false).' /> <label for="'.$this->get_field_id('twitter').'">'.$GLOBALS['open_str']['share_twitter'].'</label> ';
+		$html .= '<input id="'.$this->get_field_id('facebook').'" name="'.$this->get_field_name('facebook').'" type="checkbox" value="1" '.checked( '1', $facebook, false).' /> <label for="'.$this->get_field_id('facebook').'">'.$GLOBALS['open_str']['share_facebook'].'</label> ';
+		$html .= '<input id="'.$this->get_field_id('switcher').'" name="'.$this->get_field_name('switcher').'" type="checkbox" value="1" '.checked( '1', $switcher, false).' /> <label for="'.$this->get_field_id('switcher').'">'.$GLOBALS['open_str']['language_switch'].'</label></p>';
+		echo $html;
 	}
 	function update($new_instance, $old_instance) {
         $instance = $old_instance;
@@ -1140,35 +1433,48 @@ class open_social_share_widget extends WP_Widget {
 		$facebook = $instance['facebook'];
 		$switcher = $instance['switcher'];
 		$osop = get_option('osop');
-		echo $before_widget;
-		if ( $title ) echo '<h3 class="widget-title">'.$title.'</h3>';
-		echo '<div class="textwidget">';
-		echo '<div class="open_social_box">';
-		if($weibo) echo open_share_button_show('weibo',str_replace('%SHARE_TYPE%',$GLOBALS['open_str']['share_weibo'],$GLOBALS['open_str']['share']),"http://v.t.sina.com.cn/share/share.php?url=%URL%&title=%TITLE%&appkey=".WB_AKEY."&ralateUid=".$osop['share_sina_user']."&language=zh_cn&searchPic=true");
-		if($qzone) echo open_share_button_show('qzone',str_replace('%SHARE_TYPE%',$GLOBALS['open_str']['share_qzone'],$GLOBALS['open_str']['share']),"http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=%URL%&title=%TITLE%&desc=&summary=&site=");
-		if($qqt) echo open_share_button_show('qqt',str_replace('%SHARE_TYPE%',$GLOBALS['open_str']['share_qqt'],$GLOBALS['open_str']['share']),"http://share.v.t.qq.com/index.php?c=share&amp;a=index&url=%URL%&title=%TITLE%&appkey=".$osop['share_qqt_appkey']);
-		if($youdao) echo open_share_button_show('youdao',str_replace('%SHARE_TYPE%',$GLOBALS['open_str']['share_youdao'],$GLOBALS['open_str']['share']),"http://note.youdao.com/memory/?url=%URL%&title=%TITLE%&sumary=&pic=&product=");
-		if($weixin) echo open_share_button_show('weixin',str_replace('%SHARE_TYPE%',$GLOBALS['open_str']['share_weixin'],$GLOBALS['open_str']['share']),"http://chart.apis.google.com/chart?chs=400x400&cht=qr&chld=L|5&chl=%URL%");
-		if($email && $osop['share_qq_email']) echo open_share_button_show('email',$GLOBALS['open_str']['share_email'],"http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=".$osop['share_qq_email']);
-		if($qq && $osop['share_qq_talk']) echo open_share_button_show('qq',$GLOBALS['open_str']['share_qq'],$osop['share_qq_talk']);
-		if($google) echo open_share_button_show('google',$GLOBALS['open_str']['share_google'],"http://translate.google.com.hk/translate?hl=zh-CN&sl=en&tl=zh-CN&u=%URL%");
-		if($twitter) echo open_share_button_show('twitter',str_replace('%SHARE_TYPE%',$GLOBALS['open_str']['share_twitter'],$GLOBALS['open_str']['share']),"http://twitter.com/home/?status=%TITLE%:%URL%");
-		if($facebook) echo open_share_button_show('facebook',str_replace('%SHARE_TYPE%',$GLOBALS['open_str']['share_facebook'],$GLOBALS['open_str']['share']),"http://www.facebook.com/sharer.php?u=%URL%&amp;t=%TITLE%");
-		if($switcher){
+		$html = $before_widget;
+		if ( $title ) $html .= '<h3 class="widget-title">'.$title.'</h3>';
+		$html .= '<div class="textwidget">';
+		$html .= '<div id="open_social_share_box" class="open_social_box">';
+		if($weibo) $html .= open_share_button_show('weibo',str_replace('%SHARE_TYPE%',$GLOBALS['open_str']['share_weibo'],$GLOBALS['open_str']['share']),"http://v.t.sina.com.cn/share/share.php?url=%URL%&title=%TITLE%&appkey=".WB_AKEY."&ralateUid=".$osop['share_sina_user']."&language=zh_cn&searchPic=true");
+		if($qzone) $html .= open_share_button_show('qzone',str_replace('%SHARE_TYPE%',$GLOBALS['open_str']['share_qzone'],$GLOBALS['open_str']['share']),"http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=%URL%&title=%TITLE%&desc=&summary=&site=");
+		if($qqt) $html .= open_share_button_show('qqt',str_replace('%SHARE_TYPE%',$GLOBALS['open_str']['share_qqt'],$GLOBALS['open_str']['share']),"http://share.v.t.qq.com/index.php?c=share&amp;a=index&url=%URL%&title=%TITLE%&appkey=".$osop['share_qqt_appkey']);
+		if($youdao) $html .= open_share_button_show('youdao',str_replace('%SHARE_TYPE%',$GLOBALS['open_str']['share_youdao'],$GLOBALS['open_str']['share']),"http://note.youdao.com/memory/?url=%URL%&title=%TITLE%&sumary=&pic=&product=");
+		if($weixin) $html .= open_share_button_show('weixin',str_replace('%SHARE_TYPE%',$GLOBALS['open_str']['share_weixin'],$GLOBALS['open_str']['share']),"http://chart.apis.google.com/chart?chs=400x400&cht=qr&chld=L|5&chl=%URL%");
+		if($email && $osop['share_qq_email']) $html .= open_share_button_show('email',$GLOBALS['open_str']['share_email'],"http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=".$osop['share_qq_email']);
+		if($qq && $osop['share_qq_talk']) $html .= open_share_button_show('qq',$GLOBALS['open_str']['share_qq'],$osop['share_qq_talk']);
+		if($google) $html .= open_share_button_show('google',$GLOBALS['open_str']['share_google'],"http://translate.google.com.hk/translate?hl=zh-CN&sl=en&tl=zh-CN&u=%URL%");
+		if($twitter) $html .= open_share_button_show('twitter',str_replace('%SHARE_TYPE%',$GLOBALS['open_str']['share_twitter'],$GLOBALS['open_str']['share']),"http://twitter.com/home/?status=%TITLE%:%URL%");
+		if($facebook) $html .= open_share_button_show('facebook',str_replace('%SHARE_TYPE%',$GLOBALS['open_str']['share_facebook'],$GLOBALS['open_str']['share']),"http://www.facebook.com/sharer.php?u=%URL%&amp;t=%TITLE%");
+		if($osop['extend_lang_switcher'] && $switcher){
 			if( get_locale() != 'en_US' ){
-				echo open_tool_button_show('en','User Language: English',"?open_lang=en_US");
+				$html .= open_tool_button_show('en','User Language: English',"?open_lang=en_US");
 			}else if(WPLANG=='zh_CN'){
-				echo open_tool_button_show('cn',$GLOBALS['open_str']['language_switch'].' '.WPLANG,"?open_lang=".WPLANG);
+				$html .= open_tool_button_show('cn',$GLOBALS['open_str']['language_switch'].' '.WPLANG,"?open_lang=".WPLANG);
 			}else if(WPLANG!=''){
-				echo open_lang_button_show(WPLANG,$GLOBALS['open_str']['language_switch'].' '.WPLANG,"?open_lang=".WPLANG);			
+				$html .= open_lang_button_show(WPLANG,$GLOBALS['open_str']['language_switch'].' '.WPLANG,"?open_lang=".WPLANG);			
 			}else if(isset($_SESSION['WPLANG_LOCALE'])){
-				echo open_lang_button_show($_SESSION['WPLANG_LOCALE'],$GLOBALS['open_str']['language_switch'].' '.$_SESSION['WPLANG_LOCALE'],"?open_lang=".$_SESSION['WPLANG_LOCALE']);			
+				$html .= open_lang_button_show($_SESSION['WPLANG_LOCALE'],$GLOBALS['open_str']['language_switch'].' '.$_SESSION['WPLANG_LOCALE'],"?open_lang=".$_SESSION['WPLANG_LOCALE']);			
 			}
 		}
-		echo '</div>';
-		echo '</div>';
-		echo $after_widget;
+		$html .= '</div>';
+		$html .= '</div>';
+		$html .= $after_widget;
+		echo $html;
 	}
 }	
 
+class open_social_float_widget extends WP_Widget {
+    function open_social_float_widget() {
+        parent::WP_Widget(false, $name = $GLOBALS['open_str']['widget_float_title'], array( 'description' => $GLOBALS['open_str']['widget_float_desc'], ) );
+    }
+	function widget($args, $instance) {
+		$html = '<div id="open_social_float_button">';
+		$html .= "<div class='os_float_button float_icon_top' id='open_social_float_button_top'></div>";
+		$html .= "<div class='os_float_button float_icon_comment' id='open_social_float_button_comment'></div>";
+		$html .= '</div>';
+		echo $html;
+	}
+}
 ?>

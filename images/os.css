@@ -98,11 +98,23 @@ body .ui-tooltip {
 .login_icon_xiaomi{
 	background-position: 0px -924px;
 }
+.login_icon_csdn{
+	background-position: 0px -967px;
+}
+.login_icon_oschina{
+	background-position: 0px -1009px;
+}
 
 .share_box {
 	clear: both;
 	width: 250px;
 }
+
+.share_box_fixed {
+	position: fixed;
+	top: 32px;
+}
+
 .share_button { 
     background:url(share_button.png) no-repeat transparent; 
 	width: 20px;
@@ -199,12 +211,6 @@ body .ui-tooltip {
 .share_icon_chrome{
 	background-position: 0px -810px;
 }
-.share_icon_top{
-	background-position: 0px -840px;
-}
-.share_icon_comment{
-	background-position: 0px -882px;
-}
 
 .lang_button { 
 	width: 20px;
@@ -224,4 +230,33 @@ body .ui-tooltip {
 	margin-bottom: 20px;
 	margin-left: 5px;
 	border-left: 2px solid gray;
+}
+
+.os_float_button { 
+    background:url(share_button.png) no-repeat transparent; 
+	width: 32px;
+	height: 32px;
+	line-height: 32px;
+	padding-right: 5px;
+	cursor:pointer;
+	display:inline-block;
+	display:-moz-inline-stack;
+	zoom:1;
+	*display:inline;
+} 
+
+.float_icon_top{
+	background-position: 0px -840px;
+}
+.float_icon_comment{
+	background-position: 0px -882px;
+}
+
+#open_social_float_button {
+	position: fixed;
+	bottom: 38px;
+	width: 35px;
+	height: 90px;
+	margin-left: -70px;
+	display: none;
 }

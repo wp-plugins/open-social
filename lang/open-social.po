@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Open Social for China package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Open Social for China 1.1.2\n"
+"Project-Id-Version: Open Social for China 1.2.0\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/open-social\n"
-"POT-Creation-Date: 2014-01-08 03:27:47+00:00\n"
+"POT-Creation-Date: 2014-03-31 16:18:47+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -16,7 +16,7 @@ msgstr ""
 msgid "QQ"
 msgstr ""
 
-#: open-social.php:23 open-social.php:33
+#: open-social.php:23 open-social.php:44
 msgid "Sina"
 msgstr ""
 
@@ -45,107 +45,99 @@ msgid "Kaixin001"
 msgstr ""
 
 #: open-social.php:30
-msgid "Login with %OPEN_TYPE%"
+msgid "XiaoMi"
 msgstr ""
 
 #: open-social.php:31
-msgid "Unbind with %OPEN_TYPE%"
+msgid "CSDN"
 msgstr ""
 
 #: open-social.php:32
-msgid "Share with %SHARE_TYPE%"
+msgid "OSChina"
+msgstr ""
+
+#: open-social.php:33
+msgid "163"
 msgstr ""
 
 #: open-social.php:34
-msgid "QQZone"
+msgid "360"
 msgstr ""
 
 #: open-social.php:35
-msgid "QQWeiBo"
+msgid "Taobao"
 msgstr ""
 
-#: open-social.php:36
-msgid "YoudaoNote"
-msgstr ""
-
-#: open-social.php:37
-msgid "Email to Me"
-msgstr ""
-
-#: open-social.php:38
-msgid "Chat with Me"
-msgstr ""
-
-#: open-social.php:39
-msgid "WeiXin"
-msgstr ""
-
-#: open-social.php:40
-msgid "Google Translation"
-msgstr ""
-
-#: open-social.php:41
-msgid "Twitter"
-msgstr ""
-
-#: open-social.php:42
+#: open-social.php:36 open-social.php:53
 msgid "Facebook"
 msgstr ""
 
-#: open-social.php:43 open-social.php:656
-msgid "Settings"
+#: open-social.php:37 open-social.php:52
+msgid "Twitter"
 msgstr ""
 
-#: open-social.php:44
-msgid "Open Social Setting"
+#: open-social.php:38
+msgid "Instagram"
 msgstr ""
 
-#: open-social.php:45
-msgid "Language Switcher"
+#: open-social.php:39
+msgid "Github"
 msgstr ""
 
-#: open-social.php:46
+#: open-social.php:40
 msgid "CALLBACK"
 msgstr ""
 
+#: open-social.php:41
+msgid "Login with %OPEN_TYPE%"
+msgstr ""
+
+#: open-social.php:42
+msgid "Unbind with %OPEN_TYPE%"
+msgstr ""
+
+#: open-social.php:43
+msgid "Share with %SHARE_TYPE%"
+msgstr ""
+
+#: open-social.php:45
+msgid "QQZone"
+msgstr ""
+
+#: open-social.php:46
+msgid "QQWeiBo"
+msgstr ""
+
 #: open-social.php:47
-msgid "Open Social Login"
+msgid "YoudaoNote"
 msgstr ""
 
 #: open-social.php:48
-msgid "Howdy"
+msgid "Email to Me"
 msgstr ""
 
 #: open-social.php:49
-msgid "Display your Open Social login button"
+msgid "Chat with Me"
 msgstr ""
 
 #: open-social.php:50
-msgid "Open Social Share"
+msgid "WeiXin"
 msgstr ""
 
 #: open-social.php:51
-msgid "Connect"
-msgstr ""
-
-#: open-social.php:52
-msgid "Display your Open Social share button"
-msgstr ""
-
-#: open-social.php:53
-msgid "This account has been bound by other user."
+msgid "Google Translation"
 msgstr ""
 
 #: open-social.php:54
-msgid "You can only bind to one account at a time."
+msgid "Open Social"
 msgstr ""
 
 #: open-social.php:55
-msgid "Your EMAIL has been registered by other user."
+msgid "Account Setting"
 msgstr ""
 
 #: open-social.php:56
-msgid "Account Setting"
+msgid "Language Switcher"
 msgstr ""
 
 #: open-social.php:57
@@ -161,7 +153,7 @@ msgid "Buy me a drink"
 msgstr ""
 
 #: open-social.php:60
-msgid "Or leave me a link."
+msgid "Or leave me a link"
 msgstr ""
 
 #: open-social.php:61
@@ -169,74 +161,170 @@ msgid "Or give me Five"
 msgstr ""
 
 #: open-social.php:62
-msgid "Login Buttons"
+msgid "Open Social Login"
 msgstr ""
 
 #: open-social.php:63
-msgid "Before Comment Form"
+msgid "Howdy"
 msgstr ""
 
 #: open-social.php:64
-msgid "After Comment Form"
+msgid "Display your Open Social login button"
 msgstr ""
 
 #: open-social.php:65
-msgid "None"
+msgid "Open Social Share"
 msgstr ""
 
 #: open-social.php:66
-msgid "Login Page"
+msgid "Connect"
 msgstr ""
 
 #: open-social.php:67
-msgid "Share Button"
+msgid "Display your Open Social share button"
 msgstr ""
 
 #: open-social.php:68
-msgid "After Blog Content"
+msgid "Floating Button"
 msgstr ""
 
 #: open-social.php:69
-msgid "Sina Weibo related UserID"
+msgid "Some floating useful buttons"
 msgstr ""
 
 #: open-social.php:70
-msgid "QQ Weibo Share AppKey"
+msgid "This account has been bound by other user."
 msgstr ""
 
 #: open-social.php:71
-msgid "QQ EmailMe Code"
+msgid "You can only bind to one account at a time."
 msgstr ""
 
 #: open-social.php:72
-msgid "QQ ContactMe Link"
+msgid "Your EMAIL has been registered by other user."
 msgstr ""
 
 #: open-social.php:73
-msgid "Auto delete Configuration Above after Uninstallation. NOT RECOMMENDED!"
+msgid "Login Buttons"
 msgstr ""
 
 #: open-social.php:74
-msgid "UnFake Your Email"
+msgid "Before comment form"
 msgstr ""
 
 #: open-social.php:75
-msgid "XiaoMi"
+msgid "After comment form"
 msgstr ""
 
 #: open-social.php:76
-msgid "Login to Display"
+msgid "None"
 msgstr ""
 
-#: open-social.php:716 open-social.php:725
+#: open-social.php:77
+msgid "Login page"
+msgstr ""
+
+#: open-social.php:78
+msgid "Share Button"
+msgstr ""
+
+#: open-social.php:79
+msgid "After post content"
+msgstr ""
+
+#: open-social.php:80
+msgid "Sina weibo related UserID"
+msgstr ""
+
+#: open-social.php:81
+msgid "QQ weibo share AppKey"
+msgstr ""
+
+#: open-social.php:82
+msgid "QQ EmailMe code"
+msgstr ""
+
+#: open-social.php:83
+msgid "QQ ContactMe link"
+msgstr ""
+
+#: open-social.php:84
+msgid "Delete configuration above after plugin deleted"
+msgstr ""
+
+#: open-social.php:85
+msgid "Login to check this hidden content out"
+msgstr ""
+
+#: open-social.php:86
+msgid "Hello"
+msgstr ""
+
+#: open-social.php:87
+msgid "New reply to your comment"
+msgstr ""
+
+#: open-social.php:88
+msgid "Go check it out"
+msgstr ""
+
+#: open-social.php:89
+msgid "Receive reply email notification"
+msgstr ""
+
+#: open-social.php:90
+msgid "Extensions"
+msgstr ""
+
+#: open-social.php:91
+msgid "Colorful tagcloud links"
+msgstr ""
+
+#: open-social.php:92
+msgid "Show nickname in users list"
+msgstr ""
+
+#: open-social.php:93
+msgid "Please update your profile before posting a comment, thx."
+msgstr ""
+
+#: open-social.php:788
+msgid "Settings"
+msgstr ""
+
+#: open-social.php:857 open-social.php:868
 msgid "Widgets"
 msgstr ""
 
-#: open-social.php:1009 open-social.php:1095
+#: open-social.php:1061
+msgid "Email"
+msgstr ""
+
+#: open-social.php:1061 open-social.php:1344
+msgid "Website"
+msgstr ""
+
+#: open-social.php:1063 open-social.php:1065 open-social.php:1345
+msgid "Edit My Profile"
+msgstr ""
+
+#: open-social.php:1082
+msgid "&laquo; Back"
+msgstr ""
+
+#: open-social.php:1243
+msgid "Nickname"
+msgstr ""
+
+#: open-social.php:1244
+msgid "Registered"
+msgstr ""
+
+#: open-social.php:1288 open-social.php:1390
 msgid "Title:"
 msgstr ""
 
-#: open-social.php:1056
+#: open-social.php:1346
 msgid "Log Out"
 msgstr ""
 

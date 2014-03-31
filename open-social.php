@@ -2,10 +2,10 @@
 /**
  * Plugin Name: Open Social for China
  * Plugin URI: http://www.xiaomac.com/201311150.html
- * Description: Allow to Login or Share with social networks (specially in china) like QQ, Sina WeiBo, Baidu, Google, Live, DouBan, RenRen, KaiXin. NO 3rd-party!
+ * Description: Allow to Login or Share with SNS like QQ, Sina WeiBo, Baidu, Google, Live, DouBan, RenRen, KaiXin, XiaoMi, CSDN, Facebook, etc. NO 3rd-party!
  * Author: Afly
  * Author URI: http://www.xiaomac.com/
- * Version: 1.1.5
+ * Version: 1.2.0
  * License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * Text Domain: open-social
  * Domain Path: /lang

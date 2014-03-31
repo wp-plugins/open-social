@@ -4,8 +4,8 @@ Contributors: playes
 Donate link: https://me.alipay.com/playes
 Tags: china, chinese, afly, social, login, connect, qq, sina, weibo, baidu, google, live, douban, renren, kaixin001, openid, xiaomi, QQ登陆, 新浪微博, 百度, 谷歌, 豆瓣, 人人网, 开心网, 登录, 连接, 注册, 分享, 小米
 Requires at least: 3.0
-Tested up to: 3.8
-Stable tag: 1.1.5
+Tested up to: 3.8.1
+Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,28 +13,27 @@ Login/Share with social networks (mainly in China): QQ, Sina, Baidu, Google, Liv
 
 == Description ==
 
-**Open Social Login/Share for China 国内社交网站登陆及分享**
-
 Allow to Login or Share with social networks (mainly in china) like QQ, Sina WeiBo, Baidu, Google, Live, DouBan, RenRen, KaiXin, XiaoMi. No API! NO Registration! NO 3rd-party! **Show and Post** will be the Next.
 
-More information please visit my site: [www.xiaomac.com](http://www.xiaomac.com/).
+More information: [www.xiaomac.com](http://www.xiaomac.com/).
 
-可用社交网站（特别是国内）如腾讯QQ、新浪微博、百度、谷歌、微软LIVE、豆瓣、人人网、开心网、小米绑定登录或分享的一个插件，无第三方平台、无接口文件冗余、无任何多余脚本加载、带昵称网址头像等、可设置右侧小工具；设置简单，绿色低碳。
+可用国内社交网站：腾讯QQ、新浪微博、百度、豆瓣、人人网、开心网、小米、CSDN、OSChina 绑定登录或分享的一个插件。
+无第三方平台、无接口文件冗余、无任何多余脚本加载、带昵称网址头像等、可设置右侧小工具；设置简单，绿色低碳。
+————国外的目前支持：谷歌、微软LIVE、脸书，会考虑陆续添加完善。
 
 适合人群：**不喜第三方平台接入、不喜任何一个多余脚本、不喜任何一行多余代码、有一定手动折腾能力**。
 
-游客点击登陆按钮（如QQ），登陆并授权后，系统会自动在后台新建一个用户：
+流程说明：游客点击登陆按钮（如QQ），登陆QQ并确认授权后，系统会自动在后台新建一个用户并以注册用户的身份自动登陆网站：
 
-*   用户名：QQ+OpenID（如：QQ123123123，用户唯一而且不会改变）
-*   密码：系统自动随机生成（理论上用户不会用到后台或密码，他们直接使用QQ号码登陆。目前可以进入资料页，后面打算屏蔽）
-*   昵称：QQ昵称（不限）
-*   角色：为系统默认新建（默认为订阅者）
-*   邮箱：OpenID#t.qq.com（因接口无法取得用户真实QQ号或邮箱，此邮箱为虚假的，仅为标识或筛选用）
-*   主页：t.qq.com/WeiBoID（如果有开通腾讯微博的话，否则为空）
-*   头像：会自动沿用QQ的头像
-*   工具条：默认屏蔽（尽量不对用户提供后台，他们只是管理评论和有自己的真像而已）
+* 用户名：QQ+OpenID（如：QQ123123123，用户唯一而且不会改变）
+* 密码：系统自动随机生成
+* 昵称：QQ昵称（不限）
+* 角色：为系统默认新建（默认为订阅者）
+* 邮箱：OpenID#t.qq.com（因接口无法取得用户真实QQ号或邮箱，此邮箱为虚假的，仅为标识或筛选用）
+* 主页：t.qq.com/WeiBoID（如果有开通腾讯微博的话，否则为空）
+* 头像：会自动沿用QQ的头像
 
-更多信息可查看: [www.xiaomac.com](http://www.xiaomac.com/)，小站刚起步，可以的话给我留个链接，谢谢了：）
+更多信息可查看: [www.xiaomac.com](http://www.xiaomac.com/)，小站刚起步，觉得插件好用给我留个链接吧，谢谢了：）
 
 == Installation ==
 
@@ -64,13 +63,33 @@ also:
 
 通常是网站后台站点地址域名跟第三方设置的CALLBACK域名不一直所致，注意：带不带WWW带不带斜杠都需要统一。其他问题可留言交流。
 
+= 为什么脸书无法登陆？ =
+
+代码确认没问题的了。但是脸书推特需要空间网络支持，目前大多数虚拟空间都不支持的。做这个东东只是一个尝试吧，而且也希望有国外的朋友共同探讨。
+
+= 为什么邮件通知没有效果？ =
+
+这个也是需要空间支持邮件函数的支持的。否则可以安装邮件插件。
+
 == Screenshots ==
 
 1. Sidebar
 2. Widgets
-3. Setting
+3. Setting1: General Setting
+4. Setting2: Account Setting
+5. Setting3: Profile Option
+6. Comment Form
 
 == Changelog ==
+
+= 1.2.0 =
+* 新增CSDN/OSChina/Facebook登陆
+* 登陆方式弃用弹窗彻底改为跳转更稳定
+* 新增评论回复邮件通知功能并带总开关
+* 完善用户个人资料页的配置和整合度
+* 增加了几个实用扩展功能和开关选项
+* 添加了顶部和评论两个滚动小按钮
+* 优化代码和规范修正一些翻译小错误
 
 = 1.1.5 =
 * 登陆页面以设置的callback参数为准避免混淆问题

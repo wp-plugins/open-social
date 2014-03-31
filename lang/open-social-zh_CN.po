@@ -2,13 +2,13 @@
 # This file is distributed under the same license as the Open Social for China package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Open Social for China 1.1.2\n"
+"Project-Id-Version: Open Social for China 1.2.0\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/open-social\n"
-"POT-Creation-Date: 2014-01-08 03:27:47+00:00\n"
+"POT-Creation-Date: 2014-03-31 16:18:47+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2014-01-08 11:46+0800\n"
+"PO-Revision-Date: 2014-04-01 01:27+0800\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: zh_CN\n"
@@ -18,7 +18,7 @@ msgstr ""
 msgid "QQ"
 msgstr "腾讯QQ"
 
-#: open-social.php:23 open-social.php:33
+#: open-social.php:23 open-social.php:44
 msgid "Sina"
 msgstr "新浪微博"
 
@@ -47,108 +47,100 @@ msgid "Kaixin001"
 msgstr "开心网"
 
 #: open-social.php:30
-msgid "Login with %OPEN_TYPE%"
-msgstr "使用%OPEN_TYPE%登陆"
+msgid "XiaoMi"
+msgstr "小米"
 
 #: open-social.php:31
-msgid "Unbind with %OPEN_TYPE%"
-msgstr "取消%OPEN_TYPE%的登陆绑定"
+msgid "CSDN"
+msgstr "CSDN"
 
 #: open-social.php:32
-msgid "Share with %SHARE_TYPE%"
-msgstr "分享到 %SHARE_TYPE%"
+msgid "OSChina"
+msgstr "开源中国"
+
+#: open-social.php:33
+msgid "163"
+msgstr "网易"
 
 #: open-social.php:34
-msgid "QQZone"
-msgstr "QQ空间"
+msgid "360"
+msgstr "360"
 
 #: open-social.php:35
-msgid "QQWeiBo"
-msgstr "腾讯微博"
+msgid "Taobao"
+msgstr "淘宝"
 
-#: open-social.php:36
-msgid "YoudaoNote"
-msgstr "有道云笔记"
-
-#: open-social.php:37
-msgid "Email to Me"
-msgstr "给我发邮件"
-
-#: open-social.php:38
-msgid "Chat with Me"
-msgstr "给我发消息"
-
-#: open-social.php:39
-msgid "WeiXin"
-msgstr "微信"
-
-#: open-social.php:40
-msgid "Google Translation"
-msgstr "谷歌翻译"
-
-#: open-social.php:41
-msgid "Twitter"
-msgstr "推特"
-
-#: open-social.php:42
+#: open-social.php:36 open-social.php:53
 msgid "Facebook"
 msgstr "脸书"
 
-#: open-social.php:43 open-social.php:656
-msgid "Settings"
-msgstr "设置"
+#: open-social.php:37 open-social.php:52
+msgid "Twitter"
+msgstr "推特"
 
-#: open-social.php:44
-msgid "Open Social Setting"
-msgstr "社交网站设置"
+#: open-social.php:38
+msgid "Instagram"
+msgstr "Instagram"
 
-#: open-social.php:45
-msgid "Language Switcher"
-msgstr "语言切换"
+#: open-social.php:39
+msgid "Github"
+msgstr "Github"
 
-#: open-social.php:46
+#: open-social.php:40
 msgid "CALLBACK"
 msgstr "回调地址"
 
+#: open-social.php:41
+msgid "Login with %OPEN_TYPE%"
+msgstr "使用%OPEN_TYPE%登陆"
+
+#: open-social.php:42
+msgid "Unbind with %OPEN_TYPE%"
+msgstr "取消%OPEN_TYPE%的登陆绑定"
+
+#: open-social.php:43
+msgid "Share with %SHARE_TYPE%"
+msgstr "分享到 %SHARE_TYPE%"
+
+#: open-social.php:45
+msgid "QQZone"
+msgstr "QQ空间"
+
+#: open-social.php:46
+msgid "QQWeiBo"
+msgstr "腾讯微博"
+
 #: open-social.php:47
-msgid "Open Social Login"
-msgstr "社交网站登陆"
+msgid "YoudaoNote"
+msgstr "有道云笔记"
 
 #: open-social.php:48
-msgid "Howdy"
-msgstr "你好"
+msgid "Email to Me"
+msgstr "给我发邮件"
 
 #: open-social.php:49
-msgid "Display your Open Social login button"
-msgstr "显示社交网站登陆按钮"
+msgid "Chat with Me"
+msgstr "给我发消息"
 
 #: open-social.php:50
-msgid "Open Social Share"
-msgstr "社交网站分享"
+msgid "WeiXin"
+msgstr "微信"
 
 #: open-social.php:51
-msgid "Connect"
-msgstr "连结"
-
-#: open-social.php:52
-msgid "Display your Open Social share button"
-msgstr "显示社交网站分享按钮"
-
-#: open-social.php:53
-msgid "This account has been bound by other user."
-msgstr "此帐号已被其他用户绑定"
+msgid "Google Translation"
+msgstr "谷歌翻译"
 
 #: open-social.php:54
-msgid "You can only bind to one account at a time."
-msgstr "你一次只能绑定一个帐号"
+msgid "Open Social"
+msgstr "Open Social"
 
 #: open-social.php:55
-msgid "Your EMAIL has been registered by other user."
-msgstr "你的邮箱已被其他用户注册使用"
-
-#: open-social.php:56
 msgid "Account Setting"
 msgstr "帐号配置"
+
+#: open-social.php:56
+msgid "Language Switcher"
+msgstr "语言切换"
 
 #: open-social.php:57
 msgid "About this plugin"
@@ -163,7 +155,7 @@ msgid "Buy me a drink"
 msgstr "请我喝一杯"
 
 #: open-social.php:60
-msgid "Or leave me a link."
+msgid "Or leave me a link"
 msgstr "或者帮我挂个链接"
 
 #: open-social.php:61
@@ -171,74 +163,170 @@ msgid "Or give me Five"
 msgstr "或者给我投个票"
 
 #: open-social.php:62
+msgid "Open Social Login"
+msgstr "Open Social 登陆"
+
+#: open-social.php:63
+msgid "Howdy"
+msgstr "你好"
+
+#: open-social.php:64
+msgid "Display your Open Social login button"
+msgstr "显示你的 Open Social 登陆按钮"
+
+#: open-social.php:65
+msgid "Open Social Share"
+msgstr "Open Social 分享"
+
+#: open-social.php:66
+msgid "Connect"
+msgstr "连结"
+
+#: open-social.php:67
+msgid "Display your Open Social share button"
+msgstr "显示你的 Open Social 分享按钮"
+
+#: open-social.php:68
+msgid "Floating Button"
+msgstr "浮动按钮"
+
+#: open-social.php:69
+msgid "Some floating useful buttons"
+msgstr "一些有用的 Open Social 浮动按钮"
+
+#: open-social.php:70
+msgid "This account has been bound by other user."
+msgstr "此帐号已被其他用户绑定"
+
+#: open-social.php:71
+msgid "You can only bind to one account at a time."
+msgstr "你一次只能绑定一个帐号"
+
+#: open-social.php:72
+msgid "Your EMAIL has been registered by other user."
+msgstr "你的邮箱已被其他用户注册使用"
+
+#: open-social.php:73
 msgid "Login Buttons"
 msgstr "登陆按钮"
 
-#: open-social.php:63
-msgid "Before Comment Form"
+#: open-social.php:74
+msgid "Before comment form"
 msgstr "评论表单之前"
 
-#: open-social.php:64
-msgid "After Comment Form"
+#: open-social.php:75
+msgid "After comment form"
 msgstr "评论表单之后"
 
-#: open-social.php:65
+#: open-social.php:76
 msgid "None"
 msgstr "不显示"
 
-#: open-social.php:66
-msgid "Login Page"
+#: open-social.php:77
+msgid "Login page"
 msgstr "登陆页面"
 
-#: open-social.php:67
+#: open-social.php:78
 msgid "Share Button"
 msgstr "分享按钮"
 
-#: open-social.php:68
-msgid "After Blog Content"
+#: open-social.php:79
+msgid "After post content"
 msgstr "在博文之后"
 
-#: open-social.php:69
-msgid "Sina Weibo related UserID"
+#: open-social.php:80
+msgid "Sina weibo related UserID"
 msgstr "新浪微博分享默认关联用户"
 
-#: open-social.php:70
-msgid "QQ Weibo Share AppKey"
+#: open-social.php:81
+msgid "QQ weibo share AppKey"
 msgstr "腾讯微博开放平台KEY"
 
-#: open-social.php:71
-msgid "QQ EmailMe Code"
+#: open-social.php:82
+msgid "QQ EmailMe code"
 msgstr "QQ邮箱邮我按钮"
 
-#: open-social.php:72
-msgid "QQ ContactMe Link"
+#: open-social.php:83
+msgid "QQ ContactMe link"
 msgstr "QQ通讯组件链接"
 
-#: open-social.php:73
-msgid "Auto delete Configuration Above after Uninstallation. NOT RECOMMENDED!"
-msgstr "卸载插件时自动删除以上配置信息（不推荐）"
+#: open-social.php:84
+msgid "Delete configuration above after plugin deleted"
+msgstr "当删除插件时自动删除以上配置内容"
 
-#: open-social.php:74
-msgid "UnFake Your Email"
-msgstr "更正邮件地址"
+#: open-social.php:85
+msgid "Login to check this hidden content out"
+msgstr "<i>&lt;!—登陆以查看该隐藏内容—&gt;</i>"
 
-#: open-social.php:75
-msgid "XiaoMi"
-msgstr "小米"
+#: open-social.php:86
+msgid "Hello"
+msgstr "你好"
 
-#: open-social.php:76
-msgid "Login to Display"
-msgstr "<i>&lt;!—登陆以显示该内容—&gt;</i>"
+#: open-social.php:87
+msgid "New reply to your comment"
+msgstr "你的评论有新回复"
 
-#: open-social.php:716 open-social.php:725
+#: open-social.php:88
+msgid "Go check it out"
+msgstr "去看看"
+
+#: open-social.php:89
+msgid "Receive reply email notification"
+msgstr "当评论有回复时接受邮件通知"
+
+#: open-social.php:90
+msgid "Extensions"
+msgstr "扩展功能"
+
+#: open-social.php:91
+msgid "Colorful tagcloud links"
+msgstr "标签云链接随机彩色化"
+
+#: open-social.php:92
+msgid "Show nickname in users list"
+msgstr "在用户列表中显示昵称和注册时间并支持排序"
+
+#: open-social.php:93
+msgid "Please update your profile before posting a comment, thx."
+msgstr "在发表评论前请先更新你的个人资料，谢谢。"
+
+#: open-social.php:788
+msgid "Settings"
+msgstr ""
+
+#: open-social.php:857 open-social.php:868
 msgid "Widgets"
 msgstr ""
 
-#: open-social.php:1009 open-social.php:1095
+#: open-social.php:1061
+msgid "Email"
+msgstr ""
+
+#: open-social.php:1061 open-social.php:1344
+msgid "Website"
+msgstr ""
+
+#: open-social.php:1063 open-social.php:1065 open-social.php:1345
+msgid "Edit My Profile"
+msgstr ""
+
+#: open-social.php:1082
+msgid "&laquo; Back"
+msgstr ""
+
+#: open-social.php:1243
+msgid "Nickname"
+msgstr ""
+
+#: open-social.php:1244
+msgid "Registered"
+msgstr ""
+
+#: open-social.php:1288 open-social.php:1390
 msgid "Title:"
 msgstr ""
 
-#: open-social.php:1056
+#: open-social.php:1346
 msgid "Log Out"
 msgstr ""
 

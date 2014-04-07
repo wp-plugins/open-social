@@ -1,15 +1,15 @@
-=== Open Social for China ===
+=== Open Social ===
 
 Contributors: playes
 Donate link: https://me.alipay.com/playes
 Tags: china, chinese, afly, social, login, connect, qq, sina, weibo, baidu, google, live, douban, renren, kaixin001, openid, xiaomi, QQ登陆, 新浪微博, 百度, 谷歌, 豆瓣, 人人网, 开心网, 登录, 连接, 注册, 分享, 小米
 Requires at least: 3.0
 Tested up to: 3.8.1
-Stable tag: 1.2.0
+Stable tag: 1.3.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Login/Share with social networks (mainly in China): QQ, Sina, Baidu, Google, Live, DouBan, RenRen, KaiXin, XiaoMi. No API, NO Register, NO 3rd-Party!
+Login/Share with social networks: QQ, Sina, Baidu, Google, Live, DouBan, RenRen, KaiXin, XiaoMi. No API, NO Register, NO 3rd-Party!
 
 == Description ==
 
@@ -17,9 +17,12 @@ Allow to Login or Share with social networks (mainly in china) like QQ, Sina Wei
 
 More information: [www.xiaomac.com](http://www.xiaomac.com/).
 
+好消息：以后更新版本妈妈再也不用担心我会丢失帐号配置了。
+坏消息：——这次除外。
+
 可用国内社交网站：腾讯QQ、新浪微博、百度、豆瓣、人人网、开心网、小米、CSDN、OSChina 绑定登录或分享的一个插件。
 无第三方平台、无接口文件冗余、无任何多余脚本加载、带昵称网址头像等、可设置右侧小工具；设置简单，绿色低碳。
-————国外的目前支持：谷歌、微软LIVE、脸书，会考虑陆续添加完善。
+————国外的目前支持：谷歌、微软LIVE、脸书、推特、GitHub，会考虑陆续添加完善。
 
 适合人群：**不喜第三方平台接入、不喜任何一个多余脚本、不喜任何一行多余代码、有一定手动折腾能力**。
 
@@ -63,9 +66,9 @@ also:
 
 通常是网站后台站点地址域名跟第三方设置的CALLBACK域名不一直所致，注意：带不带WWW带不带斜杠都需要统一。其他问题可留言交流。
 
-= 为什么脸书无法登陆？ =
+= 为什么脸书推特等无法登陆？ =
 
-代码确认没问题的了。但是脸书推特需要空间网络支持，目前大多数虚拟空间都不支持的。做这个东东只是一个尝试吧，而且也希望有国外的朋友共同探讨。
+脸书、推特需要空间网络支持，目前大多数虚拟空间都不支持的。做这个东东只是一个尝试，而且也希望有身在国外的朋友共同探讨。
 
 = 为什么邮件通知没有效果？ =
 
@@ -82,8 +85,16 @@ also:
 
 == Changelog ==
 
+= 1.3.0 =
+* 新增 Twitter/Github 登陆
+* 优化配置保存方式防止更新丢失
+* 精简大量代码和删除无关功能
+* 登陆及分享按钮可以配置是否启用
+* 修正头像显示的一些问题
+* 增强了请求函数的兼容性
+
 = 1.2.0 =
-* 新增CSDN/OSChina/Facebook登陆
+* 新增 CSDN/OSChina/Facebook 登陆
 * 登陆方式弃用弹窗彻底改为跳转更稳定
 * 新增评论回复邮件通知功能并带总开关
 * 完善用户个人资料页的配置和整合度

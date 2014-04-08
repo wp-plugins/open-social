@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2014-04-07 16:37+0800\n"
+"PO-Revision-Date: 2014-04-08 11:01+0800\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: zh_CN\n"
@@ -249,7 +249,7 @@ msgstr "QQ通讯组件链接"
 #: open-social.php:83
 msgid ""
 "Delete all configurations on this page after plugin deleted, NOT RECOMMENDED!"
-msgstr "当删除插件时自动删除以上配置内容"
+msgstr "当删除插件时自动删除本页面所有配置内容（不推荐）！"
 
 #: open-social.php:84
 msgid "Login to check this hidden content out"

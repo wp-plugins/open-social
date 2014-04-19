@@ -11,16 +11,19 @@ function share_button_click(link){
 }
 
 jQuery(document).ready(function($){
-    $('.open_social_box').tooltip({ position: { my: "left top+5", at: "left bottom" }, show: { effect: "blind", duration: 200 } });
-	
+    try{
+    	$('.open_social_box').tooltip({ position: { my: "left top+5", at: "left bottom" }, show: { effect: "blind", duration: 200 } });
+    }catch(e){}
 	$("img.avatar[ip*='.']").each(
 		function(){
 			$(this).click(
 				function(){
-					window.open("http://www.baidu.com/#wd="+$(this).attr('ip'));
+					window.open("http://www.baidu.com/s?wd="+$(this).attr('ip'));
 				});
 	});
-	
+	$('.comment-content a,.comments-area a.url').each(
+		function(){$(this).attr('target','_blank');}
+	);
     var float_button = $("#open_social_float_button");
 	if(!$("#respond")[0]) $('#open_social_float_button_comment').hide();
     $(window).scroll(function() {

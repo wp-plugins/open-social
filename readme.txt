@@ -4,8 +4,8 @@ Contributors: playes
 Donate link: https://me.alipay.com/playes
 Tags: china, chinese, afly, social, login, connect, qq, sina, weibo, baidu, google, live, douban, renren, kaixin001, openid, xiaomi, QQ登陆, 新浪微博, 百度, 谷歌, 豆瓣, 人人网, 开心网, 登录, 连接, 注册, 分享, 小米
 Requires at least: 3.0
-Tested up to: 3.8.1
-Stable tag: 1.3.0
+Tested up to: 3.9
+Stable tag: 1.3.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -17,8 +17,7 @@ Allow to Login or Share with social networks (mainly in china) like QQ, Sina Wei
 
 More information: [www.xiaomac.com](http://www.xiaomac.com/).
 
-好消息：以后更新版本妈妈再也不用担心我会丢失帐号配置了。
-坏消息：——这次除外。
+新增转换一款同类插件用户数据的功能，不改变已有数据，完全兼容的。测试中。
 
 可用国内社交网站：腾讯QQ、新浪微博、百度、豆瓣、人人网、开心网、小米、CSDN、OSChina 绑定登录或分享的一个插件。
 无第三方平台、无接口文件冗余、无任何多余脚本加载、带昵称网址头像等、可设置右侧小工具；设置简单，绿色低碳。
@@ -31,7 +30,7 @@ More information: [www.xiaomac.com](http://www.xiaomac.com/).
 * 用户名：QQ+OpenID（如：QQ123123123，用户唯一而且不会改变）
 * 密码：系统自动随机生成
 * 昵称：QQ昵称（不限）
-* 角色：为系统默认新建（默认为订阅者）
+* 角色：订阅者
 * 邮箱：OpenID#t.qq.com（因接口无法取得用户真实QQ号或邮箱，此邮箱为虚假的，仅为标识或筛选用）
 * 主页：t.qq.com/WeiBoID（如果有开通腾讯微博的话，否则为空）
 * 头像：会自动沿用QQ的头像
@@ -84,6 +83,13 @@ also:
 6. Comment Form
 
 == Changelog ==
+
+= 1.3.1 =
+* 新用户默认角色指定为订阅者
+* 新增转换其他同类插件用户数据
+* 脚本加载方式改为可配置并后置
+* 评论中的链接和外链统一为新窗
+* 修正一些小问题
 
 = 1.3.0 =
 * 新增 Twitter/Github 登陆

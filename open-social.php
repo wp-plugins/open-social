@@ -5,7 +5,7 @@
  * Description: Login and Share with social networks: QQ, Sina, Baidu, Google, Live, DouBan, RenRen, KaiXin, XiaoMi, CSDN, OSChina, Facebook, Twitter, Github. No API, NO Register, NO 3rd-Party!
  * Author: Afly
  * Author URI: http://www.xiaomac.com/
- * Version: 1.3.1
+ * Version: 1.3.2
  * License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * Text Domain: open-social
  * Domain Path: /lang
@@ -88,11 +88,13 @@ function open_init() {
 		'open_social_email_text2'	=> __('Receive reply email notification','open-social'),
 		'osop_extend_function'		=> __('Extensions','open-social'),
 		'osop_extend_show_nickname'	=> __('Show nickname in users list','open-social'),
-		'open_social_edit_profile'	=> __('Please update your profile before posting a comment, thx.','open-social'),
+		'open_social_edit_profile'	=> __('Please update your profile /Email|Nickname/ before saying something, thx:)','open-social'),
 		'osop_extend_email_login'	=> __('Allow to login with email address','open-social'),
 		'osop_extend_button_tooltip'	=> __('Add jQuery.tooltip to the buttons','open-social'),
 		'osop_extend_user_transfer'	    => __('Transfer &ltwp-connect&gt users data to be compatible with Open-Social.','open-social'),
 		'osop_extend_user_transfer_ok'	=> __('Users Data Transfer Complete.','open-social'),
+		'osop_proxy_function'			=> __('Proxy','open-social'),
+		'osop_proxy_text'				=> __('Proxy & reverse proxy for Facebook/Twitter/Google','open-social'),
 	);
     $GLOBALS['open_arr'] = array('qq','sina','baidu','google','live','douban','renren','kaixin','xiaomi','csdn','oschina','facebook','twitter','github');
     $GLOBALS['open_share_arr'] = array(
@@ -326,11 +328,13 @@ class GOOGLE_CLASS {
 			'client_secret'=>osop('GOOGLE_SKEY'),
 			'redirect_uri'=>osop('GOOGLE_BACK')
 		);
-		$str = open_connect_http('https://accounts.google.com/o/oauth2/token', http_build_query($params), 'POST');
+        $url = osop('proxy_google_account') ? osop('proxy_google_account') : 'https://accounts.google.com';
+		$str = open_connect_http($url.'/o/oauth2/token', http_build_query($params), 'POST');
 		$_SESSION["access_token"] = $str["access_token"];
 	}
 	function open_new_user(){
-		$user = open_connect_http("https://www.googleapis.com/oauth2/v1/userinfo?access_token=".$_SESSION["access_token"]);
+        $url = osop('proxy_google_api') ? osop('proxy_google_api') : 'https://www.googleapis.com';
+		$user = open_connect_http($url.'/oauth2/v1/userinfo?access_token='.$_SESSION['access_token']);
 		$_SESSION['open_id'] = $user["id"];
 		$_SESSION['open_img'] = $user["picture"];
 		return array(
@@ -601,8 +605,8 @@ class FACEBOOK_CLASS {
 	function open_login() {
 		$params=array(
 			'response_type'=>'code',
-			'client_id'=>osop('FACKBOOK_AKEY'),
-			'redirect_uri'=>osop('FACKBOOK_BACK').'?connect=facebook&action=callback',
+			'client_id'=>osop('FACEBOOK_AKEY'),
+			'redirect_uri'=>osop('FACEBOOK_BACK').'?connect=facebook&action=callback',
 			'state'=>md5(uniqid(rand(), true)),
 			'display'=>'page',
 			'scope'=>'basic_info,email'
@@ -613,17 +617,19 @@ class FACEBOOK_CLASS {
 	function open_callback($code) {
 		$params=array(
 			'code'=>$code,
-			'client_id'=>osop('FACKBOOK_AKEY'),
-			'client_secret'=>osop('FACKBOOK_SKEY'),
-			'redirect_uri'=>osop('FACKBOOK_BACK').'?connect=facebook&action=callback'
+			'client_id'=>osop('FACEBOOK_AKEY'),
+			'client_secret'=>osop('FACEBOOK_SKEY'),
+			'redirect_uri'=>osop('FACEBOOK_BACK').'?connect=facebook&action=callback'
 		);		
-		$str = open_connect_http('https://graph.facebook.com/oauth/access_token?'.http_build_query($params));
+        $url = osop('proxy_facebook') ? osop('proxy_facebook') : 'https://graph.facebook.com';
+		$str = open_connect_http($url.'/oauth/access_token?'.http_build_query($params));
 		$_SESSION['access_token'] = $str['access_token'];
 	}
 	function open_new_user(){
-		$user_img = open_connect_http("https://graph.facebook.com/me/picture?redirect=false&height=100&type=small&width=100");
+        $url = osop('proxy_facebook') ? osop('proxy_facebook') : 'https://graph.facebook.com';
+		$user_img = open_connect_http($url.'/me/picture?redirect=false&height=100&type=small&width=100');
 		$_SESSION['open_img'] = $user_img['data']['url'];	
-		$user = open_connect_http("https://graph.facebook.com/me?access_token=".$_SESSION['access_token']);
+		$user = open_connect_http($url.'/me?access_token='.$_SESSION['access_token']);
 		$_SESSION['open_id'] = $user['id'];
 		return array(
 			'nickname' => $user['username'],
@@ -636,47 +642,62 @@ class FACEBOOK_CLASS {
   
 class TWITTER_CLASS {
 	function open_login() {
-        $now = time();
 		$str = '';
 		$params=array(
 			'oauth_callback'=>osop('TWITTER_BACK').'?connect=twitter&action=callback&code=1',//fix no code return
 			'oauth_consumer_key'=>osop('TWITTER_AKEY'),
-			'oauth_nonce'=>trim(base64_encode($now), '='),
+			'oauth_nonce'=>md5(microtime().mt_rand()),
 			'oauth_signature_method'=>'HMAC-SHA1',
-			'oauth_timestamp'=>$now,
+			'oauth_timestamp'=>time(),
 			'oauth_version'=>'1.0'
 		);
-		foreach ($params as $key => $val) { $str .= '&' . $key . '=' . rawurlencode($val); }
+		foreach ($params as $key => $val) { $str .= '&'.$key.'='.rawurlencode($val); }
         $base = 'GET&'.rawurlencode('https://api.twitter.com/oauth/request_token').'&'.rawurlencode(trim($str, '&'));
-		$sign = base64_encode(hash_hmac('sha1', $base, osop('TWITTER_SKEY').'&', true));
-		$params['oauth_signature'] = $sign;
-		$str = open_connect_http('https://api.twitter.com/oauth/request_token?'.http_build_query($params));
+		$params['oauth_signature'] = base64_encode(hash_hmac('sha1', $base, osop('TWITTER_SKEY').'&', true));
+		$str = '';
+		foreach ($params as $key => $val) { $str .= ' '.$key.'="'.rawurlencode($val).'", '; }
+        $head = array('Authorization: OAuth '.trim($str,', '));
+        $url = osop('proxy_twitter') ? osop('proxy_twitter') : 'https://api.twitter.com';
+		$str = open_connect_http($url.'/oauth/request_token','','',$head);
+		$_SESSION['oauth_token'] = $str['oauth_token'];
 		$_SESSION['oauth_token_secret'] = $str['oauth_token_secret'];
-        header('Location:https://api.twitter.com/oauth/authorize?oauth_token='.$str['oauth_token']);
+        header('Location:https://api.twitter.com/oauth/authenticate?oauth_token='.$_SESSION['oauth_token']);
 		exit();
 	} 
 	function open_callback($code) {
-        $now = time();
 		$str = '';
 		$params=array(
 			'oauth_consumer_key'=>osop('TWITTER_AKEY'),
-			'oauth_nonce'=>trim(base64_encode($now), '='),
+			'oauth_nonce'=>md5(microtime().mt_rand()),
 			'oauth_signature_method'=>'HMAC-SHA1',
-			'oauth_timestamp'=>$now,
-			'oauth_token'=>$_GET['oauth_token'],
+			'oauth_timestamp'=>time(),
+			'oauth_token'=>$_SESSION['oauth_token'],
 			'oauth_version'=>'1.0'
 		);
-		foreach ($params as $key => $val) { $str .= '&' . $key . '=' . rawurlencode($val); }
-        $base = 'GET&'.rawurlencode('https://api.twitter.com/oauth/access_token').'&'.rawurlencode(trim($str, '&'));
-		$sign = base64_encode(hash_hmac('sha1', $base, osop('TWITTER_SKEY').'&'.$_SESSION['oauth_token_secret'], true));
-		$params['oauth_signature'] = $sign;
-		$params['oauth_verifier'] = $_GET['oauth_verifier'];
+		foreach ($params as $key => $val) { $str .= '&'.$key.'='.rawurlencode($val); }
+        $base = 'POST&'.rawurlencode('https://api.twitter.com/oauth/access_token').'&'.rawurlencode(trim($str, '&'));
+		$params['oauth_signature'] = base64_encode(hash_hmac('sha1', $base, osop('TWITTER_SKEY').'&'.$_SESSION['oauth_token_secret'], true));
+		unset($_SESSION['oauth_token']);
 		unset($_SESSION['oauth_token_secret']);
-		$token = open_connect_http('https://api.twitter.com/oauth/access_token?'.http_build_query($params));
+		$str = '';
+		foreach ($params as $key => $val) { $str .= ' '.$key.'="'.rawurlencode($val).'", '; }
+        $head = array('Authorization: OAuth '.trim($str,', '));
+        $url = osop('proxy_twitter') ? osop('proxy_twitter') : 'https://api.twitter.com';
+		$token = open_connect_http($url.'/oauth/access_token','oauth_verifier='.$_GET['oauth_verifier'],'POST',$head);
 		$_SESSION['access_token'] = $token['oauth_token'];
-		//$_SESSION['access_token_secret'] = $token['oauth_token_secret'];
 		$_SESSION['open_id'] = $token['user_id'];
 		$_SESSION['open_name'] = $token['screen_name'];
+		$params['oauth_token'] = $_SESSION['access_token'];
+		$str = '';
+		unset($params['oauth_signature']);
+		foreach ($params as $key => $val) { $str .= '&'.$key.'='.rawurlencode($val); }
+        $base = 'GET&'.rawurlencode('https://api.twitter.com/1.1/account/verify_credentials.json').'&'.rawurlencode(trim($str, '&'));
+		$params['oauth_signature'] = base64_encode(hash_hmac('sha1', $base, osop('TWITTER_SKEY').'&'.$token['oauth_token_secret'], true));
+		$str = '';
+		foreach ($params as $key => $val) { $str .= ' '.$key.'="'.rawurlencode($val).'", '; }
+        $head = array('Authorization: OAuth '.trim($str,', '));
+		$user_img = open_connect_http($url.'/1.1/account/verify_credentials.json','','',$head);
+		$_SESSION['open_img'] = str_replace('_normal','_200x200',$user_img['profile_image_url_https']);
 	}
 	function open_new_user(){
 		$twnu = array(
@@ -822,7 +843,7 @@ function open_connect_api($url, $params=array(), $method='GET'){
 
 function open_connect_http($url, $postfields='', $method='GET', $headers=array()){
 	$ci = curl_init();
-    //curl_setopt($ci, CURLOPT_PROXY, '192.168.1.10:8087');//gae debug for facebook/twitter/
+    if(osop('proxy_server') && preg_match('/facebook.com|twitter.com|google.com/', $url)) curl_setopt($ci, CURLOPT_PROXY, osop('proxy_server'));
 	curl_setopt($ci, CURLOPT_SSL_VERIFYPEER, false); 
     curl_setopt($ci, CURLOPT_SSL_VERIFYHOST, false);
 	curl_setopt($ci, CURLOPT_HEADER, false);
@@ -846,8 +867,10 @@ function open_connect_http($url, $postfields='', $method='GET', $headers=array()
 	$response = trim(trim($response),'&&&START&&&');
 	$json_r = array();
 	$json_r = json_decode($response, true);
-    if(count($json_r)==0) parse_str($response,$json_r);
-    if(count($json_r)==1 && current($json_r)==='') return $response;
+    if(count($json_r)==0){
+        parse_str($response,$json_r);
+        if(count($json_r)==1 && current($json_r)==='') return $response;
+    }
 	return $json_r;
 }
 
@@ -946,6 +969,22 @@ function open_options_page() {
 			<?php if(file_exists(dirname(__FILE__).'/transfer.php')) : ?><label for="osop[extend_user_transfer]"><input name="osop[extend_user_transfer]" id="osop[extend_user_transfer]" type="checkbox" value="1" <?php checked(osop('extend_user_transfer'),1);?> /> <?php echo $GLOBALS['open_str']['osop_extend_user_transfer']?></label> 
 			<a href="http://wordpress.org/plugins/wp-connect/" target="_blank">wp-connect</a><br/><?php endif; ?>
 			<label for="osop[delete_setting]"><input name="osop[delete_setting]" id="osop[delete_setting]" type="checkbox" value="1" <?php checked(osop('delete_setting'),1);?> /> <?php echo $GLOBALS['open_str']['osop_delete_setting']?></label> <br/>
+		</fieldset>
+		</td>
+		</tr>
+		<tr valign="top">
+			<th scope="row"><?php echo $GLOBALS['open_str']['osop_proxy_function']?></th>
+		<td><fieldset>
+			<p><input name="osop[proxy_server]" id="osop[proxy_server]" class="regular-text" placeholder="127.0.0.1:8087" value="<?php echo osop('proxy_server')?>" />
+			<a href="http://www.xiaomac.com/2014081490.html" target="_blank"><?php echo $GLOBALS['open_str']['osop_proxy_text']?></a><br/>
+			<input name="osop[proxy_facebook]" id="osop[proxy_facebook]" class="regular-text" placeholder="https://graph.facebook.com" value="<?php echo osop('proxy_facebook')?>" />
+			<a href="https://graph.facebook.com/" target="_blank">https://graph.facebook.com</a> <br/>
+			<input name="osop[proxy_twitter]" id="osop[proxy_twitter]" class="regular-text" placeholder="https://api.twitter.com" value="<?php echo osop('proxy_twitter')?>" />
+			<a href="https://api.twitter.com/" target="_blank">https://api.twitter.com</a> <br/>
+			<input name="osop[proxy_google_account]" id="osop[proxy_google_account]" class="regular-text" placeholder="https://accounts.google.com" value="<?php echo osop('proxy_google_account')?>" />
+			<a href="https://accounts.google.com/" target="_blank">https://accounts.google.com</a> <br/>
+			<input name="osop[proxy_google_api]" id="osop[proxy_google_api]" class="regular-text" placeholder="https://www.googleapis.com" value="<?php echo osop('proxy_google_api')?>" />
+			<a href="https://www.googleapis.com/" target="_blank">https://www.googleapis.com</a> </p>
 		</fieldset>
 		</td>
 		</tr>

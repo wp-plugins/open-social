@@ -27,7 +27,7 @@ More information: [www.xiaomac.com](http://www.xiaomac.com/).
 
 流程说明：游客点击登陆按钮（如QQ），登陆QQ并确认授权后，系统会自动在后台新建一个用户并以注册用户的身份自动登陆网站：
 
-* 用户名：QQ+OpenID（如：QQ123123123，用户唯一而且不会改变）
+* 帐号：QQ+OpenID（如：QQ123123123，用户唯一而且不会改变）
 * 密码：系统自动随机生成
 * 昵称：QQ昵称（不限）
 * 角色：订阅者
@@ -35,7 +35,7 @@ More information: [www.xiaomac.com](http://www.xiaomac.com/).
 * 主页：t.qq.com/WeiBoID（如果有开通腾讯微博的话，否则为空）
 * 头像：会自动沿用QQ的头像
 
-更多信息可查看: [www.xiaomac.com](http://www.xiaomac.com/)，小站刚起步，觉得插件好用给我留个链接吧，谢谢了：）
+更多信息可查看: [www.xiaomac.com](http://www.xiaomac.com/)，觉得插件好用就帮我挂个链接吧，谢：）
 
 == Installation ==
 
@@ -67,7 +67,7 @@ also:
 
 = 为什么脸书推特等无法登陆？ =
 
-脸书、推特需要空间网络支持，目前大多数虚拟空间都不支持的。做这个东东只是一个尝试，而且也希望有身在国外的朋友共同探讨。
+脸书、推特需要空间网络支持，大多数国内的空间可能都不支持。目前提供了一个设置代理的功能。
 
 = 为什么邮件通知没有效果？ =
 

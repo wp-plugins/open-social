@@ -17,7 +17,7 @@ Allow to Login or Share with social networks (mainly in china) like QQ, Sina Wei
 
 More information: [www.xiaomac.com](http://www.xiaomac.com/).
 
-新增：针对新版WP借用了一个漂亮的ICON（[YOOtheme](http://www.yootheme.com/)）
+新增：针对新版WP借用了一个漂亮的ICON（[YOOtheme](http://www.yootheme.com/)）。
 新增：针对国内环境提供了登陆接口的代理及反向代理的办法，[设置办法](http://www.xiaomac.com/2014081490.html)。
 
 可用国内社交网站：腾讯QQ、新浪微博、百度、豆瓣、人人网、开心网、小米、CSDN、OSChina 绑定登录或分享的一个插件。

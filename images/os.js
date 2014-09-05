@@ -6,8 +6,10 @@ function login_button_click(id,link){
 
 function share_button_click(link){
 	var url = encodeURIComponent(location.href);
-	var title = encodeURIComponent(document.title);
-	window.open(link.replace("%URL%",url).replace("%TITLE%",title),'xmOpenWindow','width=600,height=480,menubar=0,scrollbars=1,resizable=1,status=1,titlebar=0,toolbar=0,location=1');
+	var title = encodeURIComponent(document.title + ': ' + jQuery('article .entry-content').text().replace(/\r|\n|\t| /g,'').substr(0,100));
+	var pic = '';
+	jQuery('article img').each(function(){pic+=(pic?'||':'')+encodeURIComponent(jQuery(this).attr('src'));});
+	window.open(link.replace("%URL%",url).replace("%TITLE%",title).replace("%PIC%",pic),'xmOpenWindow','width=600,height=480,menubar=0,scrollbars=1,resizable=1,status=1,titlebar=0,toolbar=0,location=1');
 }
 
 jQuery(document).ready(function($){

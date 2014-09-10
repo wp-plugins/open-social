@@ -2,14 +2,14 @@
 
 Contributors: playes
 Donate link: https://me.alipay.com/playes
-Tags: china, chinese, afly, social, login, connect, qq, sina, weibo, baidu, google, live, douban, renren, kaixin001, openid, xiaomi, QQ登陆, 新浪微博, 百度, 谷歌, 豆瓣, 人人网, 开心网, 登录, 连接, 注册, 分享, 小米
+Tags: china, chinese, afly, social, login, connect, qq, sina, weibo, baidu, google, live, douban, renren, kaixin001, openid, xiaomi, wechat, QQ登陆, 新浪微博, 百度, 谷歌, 豆瓣, 人人网, 开心网, 登录, 连接, 注册, 分享, 小米, 微信
 Requires at least: 3.0
 Tested up to: 4.0
-Stable tag: 1.4
+Stable tag: 1.4.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Login/Share with social networks: QQ, Sina, Baidu, Google, Live, DouBan, RenRen, KaiXin, XiaoMi. No API, NO Register, NO 3rd-Party!
+Login/Share with social networks: QQ, Sina, Baidu, Google, Live, DouBan, RenRen, KaiXin, XiaoMi, WeChat. No API, NO Register!
 
 == Description ==
 
@@ -17,8 +17,7 @@ Allow to Login or Share with social networks (mainly in china) like QQ, Sina Wei
 
 More information: [www.xiaomac.com](http://www.xiaomac.com/).
 
-新增：针对新版WP借用了一个漂亮的ICON（[YOOtheme](http://www.yootheme.com/)）。
-新增：针对国内环境提供了登陆接口的代理及反向代理的办法，[设置办法](http://www.xiaomac.com/2014081490.html)。
+新增：微信开放平台登陆。
 
 可用国内社交网站：腾讯QQ、新浪微博、百度、豆瓣、人人网、开心网、小米、CSDN、OSChina 绑定登录或分享的一个插件。
 无第三方平台、无接口文件冗余、无任何多余脚本加载、带昵称网址头像等、可设置右侧小工具；设置简单，绿色低碳。
@@ -36,7 +35,9 @@ More information: [www.xiaomac.com](http://www.xiaomac.com/).
 * 主页：t.qq.com/WeiBoID（如果有开通腾讯微博的话，否则为空）
 * 头像：会自动沿用QQ的头像
 
-更多信息可查看: [www.xiaomac.com](http://www.xiaomac.com/)，觉得插件好用就帮我挂个链接吧，谢：）
+更多可查看: [www.xiaomac.com](http://www.xiaomac.com/)，觉得插件好用就帮我挂个链接吧，谢：）
+
+——[ICON来自](http://www.yootheme.com/)、[设置办法](http://www.xiaomac.com/2014081490.html)
 
 == Installation ==
 
@@ -84,6 +85,11 @@ also:
 6. Comment Form
 
 == Changelog ==
+
+= 1.4.1 =
+* 增加微信开放平台登陆（未有帐号）
+* 优化了分享按钮的提示问题
+* 优化了一些体验小问题
 
 = 1.4.0 =
 * 优化分享接口可以自动附加文章批量图片

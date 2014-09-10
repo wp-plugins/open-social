@@ -93,19 +93,19 @@ msgid "Unbind with %OPEN_TYPE%"
 msgstr ""
 
 #: open-social.php:42
-msgid "Share with %SHARE_TYPE%"
+msgid "WeChat"
 msgstr ""
 
 #: open-social.php:44
-msgid "QQZone"
+msgid "Share with QQZone"
 msgstr ""
 
 #: open-social.php:45
-msgid "QQWeiBo"
+msgid "Share with QQWeiBo"
 msgstr ""
 
 #: open-social.php:46
-msgid "YoudaoNote"
+msgid "Share with YoudaoNote"
 msgstr ""
 
 #: open-social.php:47
@@ -117,7 +117,7 @@ msgid "Chat with Me"
 msgstr ""
 
 #: open-social.php:49
-msgid "WeiXin"
+msgid "Share with WeiXin"
 msgstr ""
 
 #: open-social.php:50

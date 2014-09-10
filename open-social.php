@@ -2,10 +2,10 @@
 /**
  * Plugin Name: Open Social for China
  * Plugin URI: http://www.xiaomac.com/201311150.html
- * Description: Login and Share with social networks: QQ, Sina, Baidu, Google, Live, DouBan, RenRen, KaiXin, XiaoMi, CSDN, OSChina, Facebook, Twitter, Github. No API, NO Register, NO 3rd-Party!
+ * Description: Login and Share with social networks: QQ, Sina, Baidu, Google, Live, DouBan, RenRen, KaiXin, XiaoMi, CSDN, OSChina, Facebook, Twitter, Github, WeChat. No API, NO Register!
  * Author: Afly
  * Author URI: http://www.xiaomac.com/
- * Version: 1.4.0
+ * Version: 1.4.1
  * License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * Text Domain: open-social
  * Domain Path: /lang
@@ -37,19 +37,19 @@ function open_init() {
 		'twitter'	=> __('Twitter','open-social'),
 		'instagram'	=> __('Instagram','open-social'),
 		'github'	=> __('Github','open-social'),
+		'wechat'	=> __('WeChat','open-social'),
 		'login' 	=> __('Login with %OPEN_TYPE%','open-social'),
 		'unbind'	=> __('Unbind with %OPEN_TYPE%','open-social'),
-		'share'		=> __('Share with %SHARE_TYPE%','open-social'),
-		'share_weibo'	=> __('Sina','open-social'),
-		'share_qzone'	=> __('QQZone','open-social'),
-		'share_qqt'		=> __('QQWeiBo','open-social'),
-		'share_youdao'	=> __('YoudaoNote','open-social'),
+		'share_weibo'	=> __('Share with Sina','open-social'),
+		'share_qzone'	=> __('Share with QQZone','open-social'),
+		'share_qqt'		=> __('Share with QQWeiBo','open-social'),
+		'share_youdao'	=> __('Share with YoudaoNote','open-social'),
 		'share_email'	=> __('Email to Me','open-social'),
 		'share_qq'		=> __('Chat with Me','open-social'),
-		'share_weixin'	=> __('WeiXin','open-social'),
+		'share_weixin'	=> __('Share with WeiXin','open-social'),
 		'share_google'	=> __('Google Translation','open-social'),
-		'share_twitter'	=> __('Twitter','open-social'),
-		'share_facebook'	=> __('Facebook','open-social'),
+		'share_twitter'	=> __('Share with Twitter','open-social'),
+		'share_facebook'	=> __('Share with Facebook','open-social'),
 		'share_language'	=> __('Language Switcher','open-social'),
 		'setting_menu'		=> __('Open Social','open-social'),
 		'setting_menu_adv'	=> __('Account Setting','open-social'),
@@ -96,7 +96,7 @@ function open_init() {
 		'osop_proxy_function'			=> __('Proxy','open-social'),
 		'osop_proxy_text'				=> __('Proxy & reverse proxy for Facebook/Twitter/Google','open-social'),
 	);
-    $GLOBALS['open_arr'] = array('qq','sina','baidu','google','live','douban','renren','kaixin','xiaomi','csdn','oschina','facebook','twitter','github');
+    $GLOBALS['open_arr'] = array('qq','sina','baidu','google','live','douban','renren','kaixin','xiaomi','csdn','oschina','facebook','twitter','github','wechat');
     $GLOBALS['open_share_arr'] = array(
         'weibo'=>"http://v.t.sina.com.cn/share/share.php?url=%URL%&title=%TITLE%&pic=%PIC%&appkey=".osop('SINA_AKEY')."&ralateUid=".osop('share_sina_user')."&language=zh_cn&searchPic=false",
         'qzone'=>"http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=%URL%&title=%TITLE%&desc=&summary=&site=&pics=%PIC%",
@@ -744,6 +744,44 @@ class GITHUB_CLASS {
 	} 
 } 
 
+class WECHAT_CLASS {
+	function open_login() {
+		$params=array(
+			'response_type'=>'code',
+			'scope'=>'snsapi_login',
+			'state'=>md5(uniqid(rand(), true)),
+			'appid'=>osop('WECHAT_AKEY'),
+			'redirect_uri'=>osop('WECHAT_BACK').'?connect=wechat&action=callback'
+		);
+		header('Location:https://open.weixin.qq.com/connect/qrconnect?'.http_build_query($params));
+		exit();
+	} 
+	function open_callback($code) {
+		$params=array(
+			'grant_type'=>'authorization_code',
+			'code'=>$code,
+			'appid'=>osop('WECHAT_AKEY'),
+			'secret'=>osop('WECHAT_SKEY')
+			//'redirect_uri'=>osop('WECHAT_BACK').'?connect=wechat&action=callback'
+		);
+		$str = open_connect_http('https://api.weixin.qq.com/sns/oauth2/access_token', http_build_query($params), 'POST');
+		echo http_build_query($str);
+		exit();
+		$_SESSION["access_token"] = $str["access_token"];
+		$_SESSION['open_id'] = $str["openid"];
+	}
+	function open_new_user(){
+		$user = open_connect_http("https://api.weixin.qq.com/sns/userinfo?access_token=".$_SESSION["access_token"]."&openid=".$_SESSION['open_id']);
+		$_SESSION['open_img'] = $user['headimgurl'];
+		return array(
+			'nickname' => $user['nickname'],
+			'display_name' => $user['nickname'],
+			'user_url' => '',
+			'user_email' => $_SESSION['open_id'].'@wechat.com'//fake
+		);
+	} 
+} 
+
 function open_close($open_info){
 	wp_die($open_info);
 	exit();
@@ -953,7 +991,7 @@ function open_options_page() {
 			$i = 0;
 			foreach ($GLOBALS['open_share_arr'] as $k=>$v) {
                 echo '<label for="osop[share_'.$k.']"><input name="osop[share_'.$k.']" id="osop[share_'.$k.']" type="checkbox" value="1" '.checked(osop('share_'.$k),1,false).' title="'.__('Enabled').'" />'.$GLOBALS['open_str']['share_'.$k].'</label> ';
-                if(($i+1)%6==0) echo '<br/>';
+                if(($i+1)%4==0) echo '<br/>';
                 $i++;
 			}?>
 		</fieldset>
@@ -1010,7 +1048,8 @@ function open_options_page() {
 		        'oschina'=> array('http://www.oschina.net/openapi/','http://www.oschina.net/openapi/docs'),
 		        'facebook'=> array('https://developers.facebook.com/','https://developers.facebook.com/docs/facebook-login/permissions'),
 		        'twitter'=> array('https://apps.twitter.com/','https://dev.twitter.com/docs/auth/implementing-sign-twitter'),
-		        'github'=> array('https://github.com/settings/applications','https://developer.github.com/v3/oauth/')
+		        'github'=> array('https://github.com/settings/applications','https://developer.github.com/v3/oauth/'),
+		        'wechat'=> array('https://open.weixin.qq.com/cgi-bin/index','https://open.weixin.qq.com/cgi-bin/index')
 		    );
 			foreach ($GLOBALS['open_arr'] as $v) {
 			    $V = strtoupper($v);
@@ -1140,7 +1179,7 @@ function open_social_share_form($content) {
 		$content .= '<div class="open_social_box share_box">';
 		$last = end($GLOBALS['open_share_arr']);
         foreach ($GLOBALS['open_share_arr'] as $k=>$v) {
-		    if(osop('share_'.$k) && $v!=$last) $content .= open_share_button_show($k,str_replace('%SHARE_TYPE%',$GLOBALS['open_str']['share_'.$k],$GLOBALS['open_str']['share']),$v);
+		    if(osop('share_'.$k) && $v!=$last) $content .= open_share_button_show($k,$GLOBALS['open_str']['share_'.$k],$v);
         }
 		$content .= '</div>';
 	}
@@ -1166,9 +1205,9 @@ function open_social_bind_options( $user ) {
 	echo '<table class="form-table"><tr valign="top"><th scope="row">'.$GLOBALS['open_str']['setting_menu'].'</th><td>';
 	$open_type = get_user_meta( $user->ID, 'open_type', true);
     $open_email = get_user_meta( $user->ID, 'open_email', true);
-    if( osop('extend_comment_email',1) ) echo '<p><label for="open_email"><input type="checkbox" value="1" id="open_email" name="open_email" '.checked(esc_attr( $open_email ),1,false).' />'.$GLOBALS['open_str']['open_social_email_text2'].'</label></p>';
+    if( osop('extend_comment_email',1) ) echo '<p><label for="open_email"><input type="checkbox" value="1" id="open_email" name="open_email" '.checked(esc_attr( $open_email ),1,false).' />'.$GLOBALS['open_str']['open_social_email_text2'].'</label><br/><br/></p>';
 	if ($open_type) {
-		echo '<p><input class="button-primary" type="button" onclick=\'location.href="'.home_url('/').'?connect='.$open_type.'&action=unbind"\' value="'.str_replace('%OPEN_TYPE%',strtoupper($open_type),$GLOBALS['open_str']['unbind']).'"/></p>';
+		echo '<p><input class="button-primary" type="button" onclick="confirm(\''.__('Confirm Removal').'\')&&(location.href=\''.home_url('/').'?connect='.$open_type.'&action=unbind\')" value="'.str_replace('%OPEN_TYPE%',strtoupper($open_type),$GLOBALS['open_str']['unbind']).'"/></p>';
 	} else {
 		open_social_login_form('bind');
 	} 
@@ -1351,7 +1390,7 @@ class open_social_share_widget extends WP_Widget {
 		$last = end($GLOBALS['open_share_arr']);
         foreach ($GLOBALS['open_share_arr'] as $k=>$v) {
             if($v!=$last){
-		        if($$k && osop('share_'.$k)) $html .= open_share_button_show($k,str_replace('%SHARE_TYPE%',$GLOBALS['open_str']['share_'.$k],$GLOBALS['open_str']['share']),$v);
+		        if($$k && osop('share_'.$k)) $html .= open_share_button_show($k,$GLOBALS['open_str']['share_'.$k],$v);
             }else{
 		        if($$k && osop('share_'.$k)) $html .= open_tool_button_show($k.'_'.(get_locale()!='en_US'?'en_US':'zh_CN'),$GLOBALS['open_str']['share_'.$k],$v);
             }

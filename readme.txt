@@ -37,7 +37,7 @@ More information: [www.xiaomac.com](http://www.xiaomac.com/).
 
 更多可查看: [www.xiaomac.com](http://www.xiaomac.com/)，觉得插件好用就帮我挂个链接吧，谢：）
 
-——[ICON来自](http://www.yootheme.com/)、[设置办法](http://www.xiaomac.com/2014081490.html)
+————[ICON来自](http://www.yootheme.com/)、[代理设置办法](http://www.xiaomac.com/2014081490.html)
 
 == Installation ==
 

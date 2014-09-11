@@ -97,6 +97,18 @@ msgid "WeChat"
 msgstr ""
 
 #: open-social.php:44
+msgid "Share with Sina"
+msgstr ""
+
+#: open-social.php:44
+msgid "Share with Facebook"
+msgstr ""
+
+#: open-social.php:44
+msgid "Share with Twitter"
+msgstr ""
+
+#: open-social.php:44
 msgid "Share with QQZone"
 msgstr ""
 

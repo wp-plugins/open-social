@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2014-09-10 22:34+0800\n"
+"PO-Revision-Date: 2014-09-11 09:34+0800\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <afly@xiaomac.com>\n"
 "Language: zh_CN\n"
@@ -97,6 +97,18 @@ msgstr "取消%OPEN_TYPE%的登陆绑定"
 #: open-social.php:42
 msgid "WeChat"
 msgstr "微信"
+
+#: open-social.php:44
+msgid "Share with Sina"
+msgstr "分享到新浪微博"
+
+#: open-social.php:44
+msgid "Share with Facebook"
+msgstr "分享到脸书"
+
+#: open-social.php:44
+msgid "Share with Twitter"
+msgstr "分享到推特"
 
 #: open-social.php:44
 msgid "Share with QQZone"

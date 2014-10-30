@@ -5,7 +5,7 @@ Donate link: https://me.alipay.com/playes
 Tags: china, chinese, afly, social, login, connect, qq, sina, weibo, baidu, google, live, douban, renren, kaixin001, openid, xiaomi, wechat, QQ登陆, 新浪微博, 百度, 谷歌, 豆瓣, 人人网, 开心网, 登录, 连接, 注册, 分享, 小米, 微信
 Requires at least: 3.0
 Tested up to: 4.0
-Stable tag: 1.4.1
+Stable tag: 1.5.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,7 +37,7 @@ More information: [www.xiaomac.com](http://www.xiaomac.com/).
 
 更多可查看: [www.xiaomac.com](http://www.xiaomac.com/)，觉得插件好用就帮我挂个链接吧，谢：）
 
-————[ICON来自](http://www.yootheme.com/)、[代理设置办法](http://www.xiaomac.com/2014081490.html)
+——[ICON来自](http://www.yootheme.com/)、[设置办法](http://www.xiaomac.com/2014081490.html)
 
 == Installation ==
 
@@ -48,7 +48,7 @@ More information: [www.xiaomac.com](http://www.xiaomac.com/).
 also:
 
 1. 直接在 WordPress 后台搜索 open social 在线安装，并启用。
-2. 然后在设置页面“社交网站设置”配置几个平台的 APP ID、APP KEY 即可。
+2. 然后在设置页面“社交网站设置”配置几个平台的 App ID、Secret KEY 即可。
 3. 选择显示位置，或拖入小工具 widget。
 4. 卸载也同样方便，直接删除即可，无任何数据库残留！
 
@@ -73,7 +73,11 @@ also:
 
 = 为什么邮件通知没有效果？ =
 
-这个也是需要空间支持邮件函数的支持的。否则可以安装邮件插件。
+这个也是需要空间支持邮件函数的支持的。否则可以安装邮件插件（如 wp-mail-smtp）。
+
+＝ 关闭游客评论的情况下怎么单独开放游客评论？ ＝
+
+编辑任意文章或页面，添加自定义栏目“os_guestbook”，值为 1，该文章即支持游客评论；而且跟登陆评论并不矛盾。
 
 == Screenshots ==
 
@@ -85,6 +89,15 @@ also:
 6. Comment Form
 
 == Changelog ==
+
+= 1.5.0 =
+* 个人用户名允许修改一次
+* 简化帐号及小工具的设置选项
+* 增加几个非常实用的短代码
+* 支持文章单独开放游客评论
+* 游客评论支持反垃圾正则过滤
+* 切换语言功能移到个人资料页
+* 优化了一些细节和样式及翻译
 
 = 1.4.1 =
 * 增加微信开放平台登陆（未有帐号）

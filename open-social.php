@@ -1067,7 +1067,7 @@ function open_options_page() {
 		<a href="https://me.alipay.com/playes" target="_blank"><?php echo $GLOBALS['open_str']['about_alipay']?></a>, 
 		<a href="http://www.xiaomac.com/" target="_blank"><?php echo $GLOBALS['open_str']['about_link']?></a>,  
 		<a href="http://wordpress.org/plugins/open-social/" target="_blank"><?php echo $GLOBALS['open_str']['about_plugin']?></a> :)</p>
-		<p><code>&lt;a href=&quot;http://www.xiaomac.com/&quot; target=&quot;_blank&quot;&gt;XiaoMac&lt;/a&gt;</code></p>
+		<p><code>&lt;a href=&quot;http://www.xiaomac.com/&quot; target=&quot;_blank&quot;&gt;<a href="http://www.xiaomac.com/"  target="_blank">XiaoMac</a>&lt;/a&gt;</code></p>
 	</div>
 	<?php
 } 

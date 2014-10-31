@@ -17,7 +17,7 @@ Allow to Login or Share with social networks (mainly in china) like QQ, Sina Wei
 
 More information: [www.xiaomac.com](http://www.xiaomac.com/).
 
-新增：微信开放平台登陆。
+新增：可改用户名、支持短代码。
 
 可用国内社交网站：腾讯QQ、新浪微博、百度、豆瓣、人人网、开心网、小米、CSDN、OSChina 绑定登录或分享的一个插件。
 无第三方平台、无接口文件冗余、无任何多余脚本加载、带昵称网址头像等、可设置右侧小工具；设置简单，绿色低碳。

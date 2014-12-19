@@ -4,8 +4,8 @@ Contributors: playes
 Donate link: https://me.alipay.com/playes
 Tags: china, chinese, afly, social, login, connect, qq, sina, weibo, baidu, google, live, douban, renren, kaixin001, openid, xiaomi, wechat, QQ登陆, 新浪微博, 百度, 谷歌, 豆瓣, 人人网, 开心网, 登录, 连接, 注册, 分享, 小米, 微信
 Requires at least: 3.0
-Tested up to: 4.0
-Stable tag: 1.5.0
+Tested up to: 4.1
+Stable tag: 1.5.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -17,7 +17,7 @@ Allow to Login or Share with social networks (mainly in china) like QQ, Sina Wei
 
 More information: [www.xiaomac.com](http://www.xiaomac.com/).
 
-新增：可改用户名、支持短代码。
+新增：可屏蔽Gavatar头像（如被墙）。
 
 可用国内社交网站：腾讯QQ、新浪微博、百度、豆瓣、人人网、开心网、小米、CSDN、OSChina 绑定登录或分享的一个插件。
 无第三方平台、无接口文件冗余、无任何多余脚本加载、带昵称网址头像等、可设置右侧小工具；设置简单，绿色低碳。
@@ -97,6 +97,11 @@ also:
 6. Comment Form
 
 == Changelog ==
+
+= 1.5.1 =
+* 可屏蔽Gavatar头像（如被墙）
+* 默认虚假邮箱无法启用邮件通知
+* 修复QQ在线小组件和啤酒链接
 
 = 1.5.0 =
 * 个人用户名允许修改一次

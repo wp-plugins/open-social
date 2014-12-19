@@ -5,7 +5,7 @@
  * Description: Login and Share with social networks: QQ, Sina, Baidu, Google, Live, DouBan, RenRen, KaiXin, XiaoMi, CSDN, OSChina, Facebook, Twitter, Github, WeChat. No API, NO Register!
  * Author: Afly
  * Author URI: http://www.xiaomac.com/
- * Version: 1.5.0
+ * Version: 1.5.1
  * License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * Text Domain: open-social
  * Domain Path: /lang
@@ -54,7 +54,7 @@ function open_init() {
 		'setting_menu'		=> __('Open Social','open-social'),
 		'setting_menu_adv'	=> __('Account Setting','open-social'),
 		'about_info'			=> __('if you like this plugin','open-social'),
-		'about_alipay'			=> __('Buy me a drink','open-social'),
+		'about_alipay'			=> __('Scan me a drink','open-social'),
 		'about_link'			=> __('Or leave me a link','open-social'),
 		'about_plugin'			=> __('Or give me Five','open-social'),
 		'widget_title'			=> __('Open Social Login', 'open-social'),
@@ -77,7 +77,7 @@ function open_init() {
 		'osop_share_sina_user'		=> __('Sina weibo related UserID','open-social'),
 		'osop_share_qqt_appkey'		=> __('QQ weibo share AppKey','open-social'),
 		'osop_share_qq_email'		=> __('QQ EmailMe code','open-social'),
-		'osop_share_qq_talk'		=> __('QQ ContactMe link','open-social'),
+		'osop_share_qq_talk'		=> __('QQ Number for chat online','open-social'),
 		'osop_delete_setting'		=> __('Delete all configurations on this page after plugin deleted, NOT RECOMMENDED!','open-social'),
 		'open_social_hide_text'		=> __('Login to check this hidden content out','open-social'),
 		'open_social_email_hello'	=> __('Hello','open-social'),
@@ -93,6 +93,7 @@ function open_init() {
 		'osop_extend_user_transfer'	    => __('Transfer &ltwp-connect&gt users data to be compatible with Open-Social','open-social'),
 		'osop_extend_user_transfer_ok'	=> __('Users Data Transfer Complete','open-social'),
 		'osop_extend_guest_comment'		=> __('Regexp Anti-SPAM when guest can comment','open-social'),
+		'osop_extend_gravatar_disabled'	=> __('Disable Gravatar with a default blank avatar','open-social'),
 		'osop_proxy_function'			=> __('Proxy','open-social'),
 		'osop_proxy_text'				=> __('Proxy & reverse proxy for Facebook/Twitter/Google','open-social'),
 	);
@@ -104,7 +105,7 @@ function open_init() {
         'youdao'=>"http://note.youdao.com/memory/?url=%URL%&title=%TITLE%&sumary=&pic=%PIC%&product=",
         'weixin'=>"http://chart.googleapis.com/chart?chs=400x400&cht=qr&chld=L|5&chl=%URL%",
         'email'=>"http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=".osop('share_qq_email'),
-        'qq'=>'http://sighttp.qq.com/authd?IDKEY='.osop('share_qq_talk'),
+        'qq'=>'http://wpa.qq.com/msgrd?v=3&uin='.osop('share_qq_talk').'&site='.get_bloginfo('name').'&menu=yes',
         'twitter'=>"http://twitter.com/home/?status=%TITLE%:%URL%",
         'facebook'=>"http://www.facebook.com/sharer.php?u=%URL%&amp;t=%TITLE%",
         'google'=>"http://translate.google.com.hk/translate?hl=".(isset($_SESSION['WPLANG_LOCALE'])?$_SESSION['WPLANG_LOCALE']:'en_US')."&sl=zh-CN&tl=".(isset($_SESSION['WPLANG_LOCALE'])?reset(str_split($_SESSION['WPLANG_LOCALE'],2)):'en')."&u=%URL%"
@@ -173,6 +174,7 @@ function open_social_locale( $lang ) {
 		$languages = explode( ",", $languages );
 		$languages = explode( "-", $languages[0] );
 		$_SESSION['WPLANG_LOCALE'] = strtolower($languages[0]) . '_' . strtoupper($languages[1]);
+		$_SESSION['WPLANG'] = $_SESSION['WPLANG_LOCALE'];
 	}
 	if ( isset( $_GET['open_lang'] ) && strpos($_GET['open_lang'], "_") ) {
 		$_SESSION['WPLANG'] = $_GET['open_lang'];
@@ -998,6 +1000,7 @@ function open_options_page() {
 			<label for="osop[extend_show_nickname]"><input name="osop[extend_show_nickname]" id="osop[extend_show_nickname]" type="checkbox" value="1" <?php checked(osop('extend_show_nickname'),1);?> /> <?php echo $GLOBALS['open_str']['osop_extend_show_nickname']?></label> <br/>
 			<label for="osop[extend_email_login]"><input name="osop[extend_email_login]" id="osop[extend_email_login]" type="checkbox" value="1" <?php checked(osop('extend_email_login'),1);?> /> <?php echo $GLOBALS['open_str']['osop_extend_email_login']?></label> <br/>
 			<label for="osop[extend_button_tooltip]"><input name="osop[extend_button_tooltip]" id="osop[extend_button_tooltip]" type="checkbox" value="1" <?php checked(osop('extend_button_tooltip'),1);?> /> <?php echo $GLOBALS['open_str']['osop_extend_button_tooltip']?></label> <br/>
+			<label for="osop[extend_gravatar_disabled]"><input name="osop[extend_gravatar_disabled]" id="osop[extend_gravatar_disabled]" type="checkbox" value="1" <?php checked(osop('extend_gravatar_disabled'),1);?> /> <?php echo $GLOBALS['open_str']['osop_extend_gravatar_disabled']?></label> <br/>
 			<?php if(file_exists(dirname(__FILE__).'/transfer.php')) : ?><label for="osop[extend_user_transfer]"><input name="osop[extend_user_transfer]" id="osop[extend_user_transfer]" type="checkbox" value="1" <?php checked(osop('extend_user_transfer'),1);?> /> <?php echo $GLOBALS['open_str']['osop_extend_user_transfer']?></label> 
 			<a href="http://wordpress.org/plugins/wp-connect/" target="_blank">wp-connect</a><br/><?php endif; ?>
 			<label for="osop[delete_setting]"><input name="osop[delete_setting]" id="osop[delete_setting]" type="checkbox" value="1" <?php checked(osop('delete_setting'),1);?> /> <?php echo $GLOBALS['open_str']['osop_delete_setting']?></label> <br/>
@@ -1064,10 +1067,10 @@ function open_options_page() {
 	<div class="wrap">
 		<h2><?php echo __('About');?></h2>
 		<p><?php echo $GLOBALS['open_str']['about_info']?>, 
-		<a href="https://me.alipay.com/playes" target="_blank"><?php echo $GLOBALS['open_str']['about_alipay']?></a>, 
+		<a href="http://www.xiaomac.com/201311150.html" target="_blank"><?php echo $GLOBALS['open_str']['about_alipay']?></a>, 
 		<a href="http://www.xiaomac.com/" target="_blank"><?php echo $GLOBALS['open_str']['about_link']?></a>,  
 		<a href="http://wordpress.org/plugins/open-social/" target="_blank"><?php echo $GLOBALS['open_str']['about_plugin']?></a> :)</p>
-		<p><code>&lt;a href=&quot;http://www.xiaomac.com/&quot; target=&quot;_blank&quot;&gt;<a href="http://www.xiaomac.com/"  target="_blank">XiaoMac</a>&lt;/a&gt;</code></p>
+		<p><img width=125 height=125  src="<?php echo plugins_url('/images/alipay.jpg', __FILE__) ?>"/></p>
 	</div>
 	<?php
 } 
@@ -1091,11 +1094,15 @@ function open_get_avatar($avatar, $id_or_email='',$size='80',$default='') {
 		}elseif($open_type=='douban'){
 			$out = 'http://img3.douban.com/icon/ul'.$open_id.'.jpg';//u
 		}elseif($open_type=='xiaomi'){
-			$out = 'http://avatar.bbs.miui.com/data/avatar/'.substr((strlen($open_id)<=8?'0'.$open_id:$open_id),0,-6).'/'.substr($open_id,-6,-4).'/'.substr($open_id,-4,-2).'/'.substr($open_id,-2).'_avatar_middle.jpg';//egg broken
+			$out = 'http://avatar.bbs.miui.com/data/avatar/'.substr((strlen($open_id)<=8?'0'.$open_id:$open_id),0,-6).'/'.substr($open_id,-6,-4).'/'.substr($open_id,-4,-2).'/'.substr($open_id,-2).'_avatar_middle.jpg';//eggs broken
 		}else{
 			$out = get_user_meta($id_or_email, 'open_img', true);
 		}
-		if(isset($open_id) && isset($out)) $avatar = "<img alt='' ip='{$comment_ip}' src='{$out}' class='avatar avatar-{$size}' width='{$size}' />";
+		if(isset($open_id) && isset($out)) return "<img alt='' ip='{$comment_ip}' src='{$out}' class='avatar avatar-{$size}' width='{$size}' />";
+	}
+	if(preg_match('/gravatar\.com/', $avatar) && osop('extend_gravatar_disabled',1)){
+		$default = plugins_url('/images/gravatar.png', __FILE__);
+		$avatar = "<img alt='' ip='{$comment_ip}' src='{$default}?s={$size}' class='avatar avatar-{$size}' width='{$size}' />";
 	}
 	return $avatar;
 }
@@ -1106,7 +1113,7 @@ function open_social_comment_note($fields) {
 		$user = wp_get_current_user();
 	    $open_email = get_user_meta($user->ID, 'open_email', true);
 		$fields['logged_in_as'] .= '<p class="comment-form-email"><input class="disabled" id="email" name="email" title="'.__( 'Email' ).'" value="'.esc_attr( $user->user_email ).'" size="25" disabled="disabled" /> <input class="disabled" id="url" name="url" title="'.__( 'Website' ).'" value="'.esc_attr( $user->user_url ).'" size="40" disabled="disabled" /></p>';
-		if(!is_numeric($open_email)){
+		if(!preg_match('/[a-z]+/', $user->user_login)){//!is_numeric($open_email) && 
 			$fields['comment_notes_after'] = '<p><a title="'.__('Edit My Profile').'" href="'.get_edit_user_link($user->ID).'?from='.esc_url($_SERVER["REQUEST_URI"]).'%23comment">'.$GLOBALS['open_str']['open_social_edit_profile'].'</a></p><style>#'.$fields['id_submit'].'{display:none !important;}</style>';
 		}else{
 			$fields['comment_notes_after'] = '<p>';
@@ -1190,17 +1197,17 @@ function open_social_update_options($user_id) {
 	global $wpdb;
 	$user = wp_get_current_user();
 	if ( !isset($_POST['user_id']) || $user_id != $_POST['user_id'] || !current_user_can('edit_user', $user_id) ) return;
-    update_user_meta($user_id, 'open_email', isset($_POST['open_email'])?1:0);
     if( isset($_POST['user_login']) ){
     	$newname = sanitize_user( $_POST['user_login'] );
     	$oldname = $user->user_login;
-    	if($newname==$oldname) return;
+    	//if($newname==$oldname && preg_match('/[a-z]+/', $newname)) return;
 		if(strlen($newname)>=4 && strlen($newname)<=20 && preg_match('/[a-z]+/', $newname) && preg_match('/^[a-zA-Z0-9]*$/', $newname) && preg_match('/^[A-Z0-9]*$/', $oldname)){
 			if(!username_exists($newname)){
                 $set_newname = $wpdb->prepare("UPDATE $wpdb->users SET user_login = %s WHERE user_login = %s", $newname, $oldname);
                 if( false !== $wpdb->query( $set_newname ) ) {
                     $newarray = array('ID' => $user_id, 'user_nicename' => sanitize_title($newname));
                     if( $oldname == $user->display_name ) $newarray = array_merge($newarray,array('display_name' => $newname));
+                    update_user_meta($user_id, 'open_email', isset($_POST['open_email'])?1:0);
                     wp_update_user($newarray);
                 	$result = '<div class="updated fade"><p><strong>'.sprintf( __( '%s is your new username' ), $newname).'</strong></p></div>';
                 }else{
@@ -1240,7 +1247,11 @@ function open_social_bind_options( $user ) {
 	$html = '<table class="form-table"><tr valign="top"><th scope="row">'.$GLOBALS['open_str']['setting_menu'].'</th><td>';
 	$open_type = get_user_meta( $user->ID, 'open_type', true);
     $open_email = get_user_meta( $user->ID, 'open_email', true);
-    if( osop('extend_comment_email',1) ) $html .= '<p><label for="open_email"><input type="checkbox" value="1" id="open_email" name="open_email" '.checked(esc_attr( $open_email ),1,false).' />'.$GLOBALS['open_str']['open_social_email_text2'].'</label><br/><br/></p>';
+    if( osop('extend_comment_email',1) ){
+		$html .= '<p><label for="open_email"><input type="checkbox"';
+		if(preg_match('/(weibo\.com|t\.qq\.com|baidu\.com|twitter\.com)/', $user->user_email)) $html .= ' class="disabled" disabled="disabled"';
+		$html .= ' value="1" id="open_email" name="open_email" '.checked(esc_attr( $open_email ),1,false).' />'.$GLOBALS['open_str']['open_social_email_text2'].'</label><br/><br/></p>';
+    }
 	if ($open_type) {
 		$html .= '<p><input class="button-primary" type="button" onclick="confirm(\''.__('Confirm Removal').'\')&&(location.href=\''.home_url('/').'?connect='.$open_type.'&action=unbind\')" value="'.str_replace('%OPEN_TYPE%',strtoupper($open_type),$GLOBALS['open_str']['unbind']).'"/> <input class="button-primary" type="button" onclick="location.href=\'?open_lang='.(get_locale()!='en_US'?'en_US':'zh_CN').'\'" value="'.$GLOBALS['open_str']['share_language'].'"/></p>';
 	} else {

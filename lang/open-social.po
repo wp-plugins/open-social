@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Open Social for China package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Open Social for China 1.5.0\n"
+"Project-Id-Version: Open Social for China 1.5.1\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/open-social\n"
-"POT-Creation-Date: 2014-10-30 07:34:59+00:00\n"
+"POT-Creation-Date: 2014-12-19 12:55:28+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -153,7 +153,7 @@ msgid "if you like this plugin"
 msgstr ""
 
 #: open-social.php:57
-msgid "Buy me a drink"
+msgid "Scan me a drink"
 msgstr ""
 
 #: open-social.php:58
@@ -245,7 +245,7 @@ msgid "QQ EmailMe code"
 msgstr ""
 
 #: open-social.php:80
-msgid "QQ ContactMe link"
+msgid "QQ Number for chat online"
 msgstr ""
 
 #: open-social.php:81
@@ -312,90 +312,94 @@ msgid "Regexp Anti-SPAM when guest can comment"
 msgstr ""
 
 #: open-social.php:96
-msgid "Proxy"
+msgid "Disable Gravatar with a default blank avatar"
 msgstr ""
 
 #: open-social.php:97
+msgid "Proxy"
+msgstr ""
+
+#: open-social.php:98
 msgid "Proxy & reverse proxy for Facebook/Twitter/Google"
 msgstr ""
 
-#: open-social.php:926
+#: open-social.php:928
 msgid "Settings"
 msgstr ""
 
-#: open-social.php:959 open-social.php:971
+#: open-social.php:961 open-social.php:973
 msgid "Widgets"
 msgstr ""
 
-#: open-social.php:964
+#: open-social.php:966
 msgid "None"
 msgstr ""
 
-#: open-social.php:985 open-social.php:1054
+#: open-social.php:987 open-social.php:1057
 msgid "Enabled"
 msgstr ""
 
-#: open-social.php:1065
+#: open-social.php:1068
 msgid "About"
 msgstr ""
 
-#: open-social.php:1108
+#: open-social.php:1115
 msgid "Email"
 msgstr ""
 
-#: open-social.php:1108 open-social.php:1181
+#: open-social.php:1115 open-social.php:1188
 msgid "Website"
 msgstr ""
 
-#: open-social.php:1110 open-social.php:1116 open-social.php:1182
+#: open-social.php:1117 open-social.php:1123 open-social.php:1189
 msgid "Edit My Profile"
 msgstr ""
 
-#: open-social.php:1135
+#: open-social.php:1142
 msgid ""
 "<strong>ERROR</strong>: The comment could not be saved. Please try again "
 "later."
 msgstr ""
 
-#: open-social.php:1183
+#: open-social.php:1190
 msgid "Log Out"
 msgstr ""
 
-#: open-social.php:1205
+#: open-social.php:1212
 msgid "%s is your new username"
 msgstr ""
 
-#: open-social.php:1210
+#: open-social.php:1217
 msgid "Sorry, that username already exists!"
 msgstr ""
 
-#: open-social.php:1223
+#: open-social.php:1230
 msgid "&laquo; Back"
 msgstr ""
 
-#: open-social.php:1235
+#: open-social.php:1242
 msgid ""
 "Must be at least 4 characters, letters and numbers only. It cannot be "
 "changed, so choose carefully!"
 msgstr ""
 
-#: open-social.php:1245
+#: open-social.php:1256
 msgid "Confirm Removal"
 msgstr ""
 
-#: open-social.php:1300
+#: open-social.php:1311
 msgid "Username or E-mail:"
 msgstr ""
 
-#: open-social.php:1332
+#: open-social.php:1343
 msgid "Nickname"
 msgstr ""
 
-#: open-social.php:1333
+#: open-social.php:1344
 msgid "Registered"
 msgstr ""
 
-#: open-social.php:1360 open-social.php:1392
+#: open-social.php:1371 open-social.php:1403
 msgid "Title:"
 msgstr ""
 

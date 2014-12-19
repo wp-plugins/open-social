@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2014-12-19 21:04+0800\n"
+"PO-Revision-Date: 2014-12-19 21:11+0800\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <afly@xiaomac.com>\n"
 "Language: zh_CN\n"
@@ -247,8 +247,8 @@ msgid "QQ EmailMe code"
 msgstr "QQ邮箱邮我按钮"
 
 #: open-social.php:80
-msgid "QQ ContactMe link"
-msgstr "QQ通讯组件链接"
+msgid "QQ Number for chat online"
+msgstr "QQ号码可在线聊天"
 
 #: open-social.php:81
 msgid ""

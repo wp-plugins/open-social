@@ -5,7 +5,7 @@
  * Description: Login and Share with social networks: QQ, Sina, Baidu, Google, Live, DouBan, RenRen, KaiXin, XiaoMi, CSDN, OSChina, Facebook, Twitter, Github, WeChat. No API, NO Register!
  * Author: Afly
  * Author URI: http://www.xiaomac.com/
- * Version: 1.5.1
+ * Version: 1.5.2
  * License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * Text Domain: open-social
  * Domain Path: /lang
@@ -42,10 +42,10 @@ function open_init() {
 		'unbind'	=> __('Unbind with %OPEN_TYPE%','open-social'),
 		'share_weibo'	=> __('Share with Sina','open-social'),
 		'share_qzone'	=> __('Share with QQZone','open-social'),
-		'share_qqt'		=> __('Share with QQWeiBo','open-social'),
+		'share_qqt'	=> __('Share with QQWeiBo','open-social'),
 		'share_youdao'	=> __('Share with YoudaoNote','open-social'),
 		'share_email'	=> __('Email to Me','open-social'),
-		'share_qq'		=> __('Chat with Me','open-social'),
+		'share_qq'	=> __('Chat with Me','open-social'),
 		'share_weixin'	=> __('Share with WeiXin','open-social'),
 		'share_google'	=> __('Google Translation','open-social'),
 		'share_twitter'	=> __('Share with Twitter','open-social'),
@@ -60,10 +60,10 @@ function open_init() {
 		'widget_title'			=> __('Open Social Login', 'open-social'),
 		'widget_name'			=> __('Howdy', 'open-social'),
 		'widget_desc'			=> __('Display your Open Social login button', 'open-social'),
-		'widget_share_title'	=> __('Open Social Share', 'open-social'),
+		'widget_share_title'		=> __('Open Social Share', 'open-social'),
 		'widget_share_name'		=> __('Connect', 'open-social'),
 		'widget_share_desc'		=> __('Display your Open Social share button', 'open-social'),
-		'widget_float_title'	=> __('Floating Button', 'open-social'),
+		'widget_float_title'		=> __('Floating Button', 'open-social'),
 		'widget_float_desc'		=> __('Some floating useful buttons', 'open-social'),
 		'err_other_openid'		=> __('This account has been bound by other user.','open-social'),
 		'err_other_user'		=> __('You can only bind to one account at a time.','open-social'),
@@ -103,7 +103,7 @@ function open_init() {
         'qzone'=>"http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=%URL%&title=%TITLE%&desc=&summary=&site=&pics=%PIC%",
         'qqt'=>"http://share.v.t.qq.com/index.php?c=share&amp;a=index&url=%URL%&title=%TITLE%&pic=%PIC%&appkey=".osop('share_qqt_appkey'),
         'youdao'=>"http://note.youdao.com/memory/?url=%URL%&title=%TITLE%&sumary=&pic=%PIC%&product=",
-        'weixin'=>"http://chart.googleapis.com/chart?chs=400x400&cht=qr&chld=L|5&chl=%URL%",
+        'weixin'=>"",
         'email'=>"http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=".osop('share_qq_email'),
         'qq'=>'http://wpa.qq.com/msgrd?v=3&uin='.osop('share_qq_talk').'&site='.get_bloginfo('name').'&menu=yes',
         'twitter'=>"http://twitter.com/home/?status=%TITLE%:%URL%",
@@ -174,20 +174,14 @@ function open_social_locale( $lang ) {
 		$languages = explode( ",", $languages );
 		$languages = explode( "-", $languages[0] );
 		$_SESSION['WPLANG_LOCALE'] = strtolower($languages[0]) . '_' . strtoupper($languages[1]);
-		$_SESSION['WPLANG'] = $_SESSION['WPLANG_LOCALE'];
 	}
 	if ( isset( $_GET['open_lang'] ) && strpos($_GET['open_lang'], "_") ) {
 		$_SESSION['WPLANG'] = $_GET['open_lang'];
 		$back = isset($_SERVER["HTTP_REFERER"]) ? $_SERVER["HTTP_REFERER"] : home_url('/');
 		header('Location:'.$back);
 		exit();
-	} else {
-		if( isset($_SESSION['WPLANG']) && strpos($_SESSION['WPLANG'], "_") ) {
-			return $_SESSION['WPLANG'];
-		} else {
-			$_SESSION['WPLANG'] = $lang;
-			return $lang;
-		}
+	} else if( isset($_SESSION['WPLANG']) && strpos($_SESSION['WPLANG'], "_") ) {
+		return $_SESSION['WPLANG'];
 	} 
 }
 
@@ -239,6 +233,7 @@ class SINA_CLASS {
 		$params=array(
 			'response_type'=>'code',
 			'client_id'=>osop('SINA_AKEY'),
+			'forcelogin'=>'true',
 			'redirect_uri'=>home_url('/').'?connect=sina&action=callback'
 		);
 		header('Location:https://api.weibo.com/oauth2/authorize?'.http_build_query($params));
@@ -605,7 +600,8 @@ class FACEBOOK_CLASS {
 			'redirect_uri'=>home_url('/').'?connect=facebook&action=callback',
 			'state'=>md5(uniqid(rand(), true)),
 			'display'=>'page',
-			'scope'=>'basic_info,email'
+			'auth_type'=>'reauthenticate'
+			//'scope'=>'basic_info,email'
 		);
 		header('Location:https://www.facebook.com/dialog/oauth?'.http_build_query($params));
 		exit();
@@ -616,7 +612,7 @@ class FACEBOOK_CLASS {
 			'client_id'=>osop('FACEBOOK_AKEY'),
 			'client_secret'=>osop('FACEBOOK_SKEY'),
 			'redirect_uri'=>home_url('/').'?connect=facebook&action=callback'
-		);		
+		);
         $url = osop('proxy_facebook') ? osop('proxy_facebook') : 'https://graph.facebook.com';
 		$str = open_connect_http($url.'/oauth/access_token?'.http_build_query($params));
 		$_SESSION['access_token'] = $str['access_token'];
@@ -657,7 +653,7 @@ class TWITTER_CLASS {
 		$str = open_connect_http($url.'/oauth/request_token','','',$head);
 		$_SESSION['oauth_token'] = $str['oauth_token'];
 		$_SESSION['oauth_token_secret'] = $str['oauth_token_secret'];
-        header('Location:https://api.twitter.com/oauth/authenticate?oauth_token='.$_SESSION['oauth_token']);
+        header('Location:https://api.twitter.com/oauth/authenticate?force_login=true&oauth_token='.$_SESSION['oauth_token']);
 		exit();
 	} 
 	function open_callback($code) {
@@ -694,6 +690,10 @@ class TWITTER_CLASS {
         $head = array('Authorization: OAuth '.trim($str,', '));
 		$user_img = open_connect_http($url.'/1.1/account/verify_credentials.json','','',$head);
 		$_SESSION['open_img'] = str_replace('_normal','_200x200',$user_img['profile_image_url_https']);
+		if(strlen($_SESSION['open_id'])<6 || strlen($_SESSION['access_token'])<6){//Twitter: Something is technically wrong
+			header('Location:./');
+			exit();
+		}
 	}
 	function open_new_user(){
 		$twnu = array(
@@ -1043,8 +1043,8 @@ function open_options_page() {
 		        'xiaomi'=> array('http://dev.xiaomi.com/','http://dev.xiaomi.com/doc/'),
 		        'csdn'=> array('http://open.csdn.net/','http://open.csdn.net/wiki'),
 		        'oschina'=> array('http://www.oschina.net/openapi/','http://www.oschina.net/openapi/docs'),
-		        'facebook'=> array('https://developers.facebook.com/','https://developers.facebook.com/docs/facebook-login/permissions'),
-		        'twitter'=> array('https://apps.twitter.com/','https://dev.twitter.com/docs/auth/implementing-sign-twitter'),
+		        'facebook'=> array('https://developers.facebook.com/','https://developers.facebook.com/docs/facebook-login/manually-build-a-login-flow/'),
+		        'twitter'=> array('https://apps.twitter.com/','https://dev.twitter.com/web/sign-in/implementing'),
 		        'github'=> array('https://github.com/settings/applications','https://developer.github.com/v3/oauth/'),
 		        'wechat'=> array('https://open.weixin.qq.com/cgi-bin/index','https://open.weixin.qq.com/cgi-bin/index')
 		    );
@@ -1113,7 +1113,7 @@ function open_social_comment_note($fields) {
 		$user = wp_get_current_user();
 	    $open_email = get_user_meta($user->ID, 'open_email', true);
 		$fields['logged_in_as'] .= '<p class="comment-form-email"><input class="disabled" id="email" name="email" title="'.__( 'Email' ).'" value="'.esc_attr( $user->user_email ).'" size="25" disabled="disabled" /> <input class="disabled" id="url" name="url" title="'.__( 'Website' ).'" value="'.esc_attr( $user->user_url ).'" size="40" disabled="disabled" /></p>';
-		if(!preg_match('/[a-z]+/', $user->user_login)){//!is_numeric($open_email) && 
+		if(!is_numeric($open_email)){// && !preg_match('/[a-z]+/', $user->user_login)
 			$fields['comment_notes_after'] = '<p><a title="'.__('Edit My Profile').'" href="'.get_edit_user_link($user->ID).'?from='.esc_url($_SERVER["REQUEST_URI"]).'%23comment">'.$GLOBALS['open_str']['open_social_edit_profile'].'</a></p><style>#'.$fields['id_submit'].'{display:none !important;}</style>';
 		}else{
 			$fields['comment_notes_after'] = '<p>';
@@ -1176,6 +1176,9 @@ function open_social_share_html() {
 	foreach ($GLOBALS['open_share_arr'] as $k=>$v) {
 		if(osop('share_'.$k)) $html .= open_share_button_show($k,$GLOBALS['open_str']['share_'.$k],$v);
 	}
+	if(osop('share_weixin')){
+		$html .= '<div class="open_social_qrcode" onclick="jQuery(this).hide();"></div>';
+	}
 	$html .= '</div>';
 	return $html;
 }
@@ -1192,22 +1195,22 @@ function open_social_profile_html(){
 }
 
 //profile setting
-add_action('personal_options_update', 'open_social_update_options');
+add_action('personal_options_update', 'open_social_update_options',99,1);
 function open_social_update_options($user_id) {
 	global $wpdb;
 	$user = wp_get_current_user();
-	if ( !isset($_POST['user_id']) || $user_id != $_POST['user_id'] || !current_user_can('edit_user', $user_id) ) return;
+	if( !isset($_POST['user_id']) || $user_id != $_POST['user_id'] || !current_user_can('edit_user', $user_id) ) return;
+	update_user_meta($user_id, 'open_email', isset($_POST['open_email'])?1:0);
     if( isset($_POST['user_login']) ){
     	$newname = sanitize_user( $_POST['user_login'] );
     	$oldname = $user->user_login;
-    	//if($newname==$oldname && preg_match('/[a-z]+/', $newname)) return;
+    	if($newname == $oldname) return;
 		if(strlen($newname)>=4 && strlen($newname)<=20 && preg_match('/[a-z]+/', $newname) && preg_match('/^[a-zA-Z0-9]*$/', $newname) && preg_match('/^[A-Z0-9]*$/', $oldname)){
 			if(!username_exists($newname)){
                 $set_newname = $wpdb->prepare("UPDATE $wpdb->users SET user_login = %s WHERE user_login = %s", $newname, $oldname);
                 if( false !== $wpdb->query( $set_newname ) ) {
                     $newarray = array('ID' => $user_id, 'user_nicename' => sanitize_title($newname));
                     if( $oldname == $user->display_name ) $newarray = array_merge($newarray,array('display_name' => $newname));
-                    update_user_meta($user_id, 'open_email', isset($_POST['open_email'])?1:0);
                     wp_update_user($newarray);
                 	$result = '<div class="updated fade"><p><strong>'.sprintf( __( '%s is your new username' ), $newname).'</strong></p></div>';
                 }else{
@@ -1268,8 +1271,8 @@ add_action( 'admin_enqueue_scripts', 'open_social_style' );
 function open_social_style() {
 	wp_register_style( 'open_social_css', plugins_url('/images/os.css', __FILE__) );
 	wp_enqueue_style( 'open_social_css' );
-    wp_register_script( 'open_social_js', plugins_url('/images/os.js', __FILE__), osop('extend_button_tooltip',1) ? array( 'jquery','jquery-ui-tooltip' ) : array(), '', true );
-	wp_enqueue_script( 'open_social_js');
+	wp_enqueue_script( 'open_social_js', plugins_url('/images/os.js', __FILE__), osop('extend_button_tooltip',1) ? array( 'jquery','jquery-ui-tooltip' ) : array(), '', true );
+	if(osop('share_weixin')) wp_enqueue_script('jquery.qrcode', 'http://cdn.bootcss.com/jquery.qrcode/1.0/jquery.qrcode.min.js', array('jquery'));
 }
 function open_login_button_show($icon_type,$icon_title,$icon_link){
 	return "<div class=\"login_button login_icon_$icon_type\" onclick=\"login_button_click('$icon_type','$icon_link')\" title=\"$icon_title\"></div>";

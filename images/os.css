@@ -12,6 +12,9 @@
 body .ui-tooltip {
 	border-width: 2px;
 }
+.ui-helper-hidden-accessible {
+	display: none !important;
+}
 
 .login_box {
 	clear: both;
@@ -268,5 +271,10 @@ body .ui-tooltip {
 	width: 35px;
 	height: 90px;
 	margin-left: -70px;
+	display: none;
+}
+
+.open_social_qrcode {
+	padding-top: 20px;
 	display: none;
 }

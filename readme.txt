@@ -4,8 +4,8 @@ Contributors: playes
 Donate link: https://me.alipay.com/playes
 Tags: china, chinese, afly, social, login, connect, qq, sina, weibo, baidu, google, live, douban, renren, kaixin001, openid, xiaomi, wechat, QQ登陆, 新浪微博, 百度, 谷歌, 豆瓣, 人人网, 开心网, 登录, 连接, 注册, 分享, 小米, 微信
 Requires at least: 3.0
-Tested up to: 4.2
-Stable tag: 1.5.2
+Tested up to: 4.2.1
+Stable tag: 1.5.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -97,6 +97,9 @@ also:
 6. Comment Form
 
 == Changelog ==
+
+= 1.5.3 =
+* 修复语言（对应后台管理员设置的网站语言；个人在资料页设置的只对自己有效；不跟浏览器语言有关——函数不熟，希望能一劳永逸啦：）
 
 = 1.5.2 =
 * 更新微信二维码生成

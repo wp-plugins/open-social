@@ -5,7 +5,7 @@
  * Description: Login and Share with social networks: QQ, Sina, Baidu, Google, Live, DouBan, RenRen, KaiXin, XiaoMi, CSDN, OSChina, Facebook, Twitter, Github, WeChat. No API, NO Register!
  * Author: Afly
  * Author URI: http://www.xiaomac.com/
- * Version: 1.5.2
+ * Version: 1.5.3
  * License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * Text Domain: open-social
  * Domain Path: /lang
@@ -182,7 +182,9 @@ function open_social_locale( $lang ) {
 		exit();
 	} else if( isset($_SESSION['WPLANG']) && strpos($_SESSION['WPLANG'], "_") ) {
 		return $_SESSION['WPLANG'];
-	} 
+	} else {
+		return $lang;
+	}
 }
 
 //CLASSES
